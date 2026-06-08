@@ -379,7 +379,11 @@ async function handleFormSubmit(e) {
       successEl.classList.remove('hidden');
     } else {
       const data = await res.json().catch(() => ({}));
-      showError(data.error || 'Failed to send. Please try again.');
+      let errMsg = data.error || 'Failed to send. Please try again.';
+      if (res.status === 500 || res.status === 503) {
+        errMsg += `<br/><a href="mailto:mohansaini8772532@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}" style="color:#818CF8;text-decoration:underline;font-weight:600;display:inline-block;margin-top:8px;">Click here to send directly via Email</a>`;
+      }
+      showError(errMsg);
       resetButton();
     }
   } catch {
@@ -390,7 +394,7 @@ async function handleFormSubmit(e) {
     successEl.classList.remove('hidden');
   }
 }
-function showError(msg) { const el=document.getElementById('form-error'); el.textContent=msg; el.classList.remove('hidden'); }
+function showError(msg) { const el=document.getElementById('form-error'); el.innerHTML=msg; el.classList.remove('hidden'); }
 function resetButton() { const btn=document.getElementById('submit-btn'); btn.disabled=false; btn.innerHTML=`<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg> Send Message`; }
 function resetForm() { document.getElementById('contact-form').classList.remove('hidden'); document.getElementById('form-success').classList.add('hidden'); document.getElementById('contact-form').reset(); resetButton(); }
 window.resetForm = resetForm;
