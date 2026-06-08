@@ -17,8 +17,8 @@ const app  = express();
 const PORT = process.env.PORT || 3000;
 
 // ── Read credentials ──
-const EMAIL_USER = process.env.EMAIL_USER;
-const EMAIL_PASS = process.env.EMAIL_PASS;
+const EMAIL_USER = process.env.EMAIL_USER ? process.env.EMAIL_USER.trim() : undefined;
+const EMAIL_PASS = process.env.EMAIL_PASS ? process.env.EMAIL_PASS.trim() : undefined;
 
 // ── Warn clearly if credentials are missing ──
 if (!EMAIL_USER || !EMAIL_PASS) {
