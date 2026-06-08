@@ -167,8 +167,8 @@ app.get('*', (_req, res) => {
 });
 
 // ── Start ──
-const server = app.listen(PORT, () => {
-  console.log(`\n🚀  Portfolio server → http://localhost:${PORT}`);
+const server = app.listen(PORT, '0.0.0.0', () => {
+  console.log(`\n🚀  Portfolio server → http://0.0.0.0:${PORT}`);
   console.log(`    Email user : ${EMAIL_USER  || '⚠️  NOT SET (add to .env)'}`);
   console.log(`    Email pass : ${EMAIL_PASS  ? '✅ Set' : '⚠️  NOT SET (add to .env)'}\n`);
 });
