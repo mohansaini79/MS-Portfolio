@@ -19,13 +19,20 @@ const PORT = process.env.PORT || 3000;
 // ── Read credentials ──
 const EMAIL_USER = process.env.EMAIL_USER ? process.env.EMAIL_USER.trim() : undefined;
 const EMAIL_PASS = process.env.EMAIL_PASS ? process.env.EMAIL_PASS.trim() : undefined;
+// Brevo SMTP relay (works on Railway — Gmail SMTP is blocked by cloud platforms)
+const BREVO_USER = process.env.BREVO_USER ? process.env.BREVO_USER.trim() : undefined;
+const BREVO_PASS = process.env.BREVO_PASS ? process.env.BREVO_PASS.trim() : undefined;
+// Use Brevo if available, otherwise fall back to Gmail
+const SMTP_USER = BREVO_USER || EMAIL_USER;
+const SMTP_PASS = BREVO_PASS || EMAIL_PASS;
+const USING_BREVO = !!BREVO_USER;
 
 // ── Warn clearly if credentials are missing ──
-if (!EMAIL_USER || !EMAIL_PASS) {
+if (!SMTP_USER || !SMTP_PASS) {
   console.warn('\n⚠️  ─────────────────────────────────────────────────');
-  console.warn('   EMAIL_USER or EMAIL_PASS not found in .env file.');
-  console.warn('   Contact form will return an error until you set them.');
-  console.warn('   ➜  Copy .env.example → .env and fill in your values.');
+  console.warn('   Email credentials not found.');
+  console.warn('   Add BREVO_USER + BREVO_PASS in Railway Variables tab.');
+  console.warn('   (Gmail SMTP is blocked on Railway — use Brevo instead)');
   console.warn('─────────────────────────────────────────────────────\n');
 }
 
@@ -34,33 +41,34 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
-// ── Nodemailer transporter — explicit SMTP (works on Railway/cloud) ──
+// ── Nodemailer transporter — Brevo SMTP relay (Railway-compatible) ──
+// Railway blocks Gmail SMTP. Brevo relay works on all cloud platforms.
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
+  host: USING_BREVO ? 'smtp-relay.brevo.com' : 'smtp.gmail.com',
   port: 587,
-  secure: false,         // STARTTLS on port 587 (not SSL 465)
-  requireTLS: true,
-  auth: { user: EMAIL_USER, pass: EMAIL_PASS },
-  connectionTimeout: 15000,
-  greetingTimeout:   10000,
-  socketTimeout:     15000,
-  tls: { rejectUnauthorized: false },  // allow Railway's outbound TLS
+  secure: false,
+  auth: { user: SMTP_USER, pass: SMTP_PASS },
+  connectionTimeout: 20000,
+  greetingTimeout:   15000,
+  socketTimeout:     20000,
 });
 
+console.log(`📧  Email via: ${USING_BREVO ? 'Brevo relay ✅' : 'Gmail SMTP (may be blocked on Railway ⚠️)'}`);
+
 // Verify credentials at startup
-if (EMAIL_USER && EMAIL_PASS) {
+if (SMTP_USER && SMTP_PASS) {
   transporter.verify().then(() => {
     console.log('✅  SMTP connection verified — ready to send emails');
   }).catch(err => {
     console.warn('⚠️   SMTP verify failed:', err.message);
-    console.warn('    ➜  Make sure Gmail App Password is correct & 2FA is ON');
+    if (!USING_BREVO) console.warn('    ➜  Railway blocks Gmail SMTP. Add BREVO_USER + BREVO_PASS variables.');
   });
 }
 
 // ── Contact API route ──
 app.post('/api/contact', async (req, res) => {
   // Guard: credentials must be set
-  if (!EMAIL_USER || !EMAIL_PASS) {
+  if (!SMTP_USER || !SMTP_PASS) {
     return res.status(503).json({
       error: 'Email service not configured. Please contact the site owner directly at mohansaini8772532@gmail.com',
     });
@@ -81,8 +89,8 @@ app.post('/api/contact', async (req, res) => {
 
   // ── Mail to owner ──
   const ownerMail = {
-    from: `"Portfolio Contact" <${EMAIL_USER}>`,
-    to:   EMAIL_USER,
+    from: `"Portfolio Contact" <${SMTP_USER}>`,
+    to:   EMAIL_USER,   // always deliver to Gmail inbox
     replyTo: email,
     subject: `[Portfolio] ${subject} — from ${name}`,
     html: `
@@ -113,7 +121,7 @@ app.post('/api/contact', async (req, res) => {
 
   // ── Auto-reply to sender ──
   const autoReply = {
-    from: `"Mohan Saini" <${EMAIL_USER}>`,
+    from: `"Mohan Saini" <${SMTP_USER}>`,
     to:   email,
     subject: `Got your message, ${name}! I'll be in touch soon. 🤝`,
     html: `
