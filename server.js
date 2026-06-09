@@ -34,22 +34,26 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
-// ── Nodemailer transporter — persistent pool (created once at startup) ──
+// ── Nodemailer transporter — explicit SMTP (works on Railway/cloud) ──
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  pool: true,          // reuse SMTP connection — much faster
-  maxConnections: 3,
-  maxMessages: 100,
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false,         // STARTTLS on port 587 (not SSL 465)
+  requireTLS: true,
   auth: { user: EMAIL_USER, pass: EMAIL_PASS },
+  connectionTimeout: 15000,
+  greetingTimeout:   10000,
+  socketTimeout:     15000,
+  tls: { rejectUnauthorized: false },  // allow Railway's outbound TLS
 });
 
-// Verify credentials at startup so you know immediately if .env is wrong
+// Verify credentials at startup
 if (EMAIL_USER && EMAIL_PASS) {
   transporter.verify().then(() => {
     console.log('✅  SMTP connection verified — ready to send emails');
   }).catch(err => {
     console.warn('⚠️   SMTP verify failed:', err.message);
-    console.warn('    Check EMAIL_USER / EMAIL_PASS in your .env file');
+    console.warn('    ➜  Make sure Gmail App Password is correct & 2FA is ON');
   });
 }
 
@@ -137,11 +141,11 @@ app.post('/api/contact', async (req, res) => {
     `,
   };
 
-  // ── Send both emails in PARALLEL (not sequential) ──
+  // ── Send both emails in PARALLEL (30s timeout for cloud SMTP) ──
   try {
     const sendWithTimeout = (mail) => {
       const timeout = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Email timeout after 8s')), 8000)
+        setTimeout(() => reject(new Error('Email timeout after 30s')), 30000)
       );
       return Promise.race([transporter.sendMail(mail), timeout]);
     };
@@ -159,6 +163,25 @@ app.post('/api/contact', async (req, res) => {
       error: 'Failed to send email. Please try again or email directly at mohansaini8772532@gmail.com',
     });
   }
+});
+
+// ── Resume download — case-insensitive fix for Linux (Railway) ──
+// On Linux, 'Resume.pdf' ≠ 'resume.pdf'. Handle both explicitly.
+app.get('/resume.pdf', (_req, res) => {
+  res.download(path.join(__dirname, 'Resume.pdf'), 'Mohan_Saini_Resume.pdf', (err) => {
+    if (err) {
+      console.error('Resume download error:', err.message);
+      if (!res.headersSent) res.status(404).send('Resume not found');
+    }
+  });
+});
+app.get('/Resume.pdf', (_req, res) => {
+  res.download(path.join(__dirname, 'Resume.pdf'), 'Mohan_Saini_Resume.pdf', (err) => {
+    if (err) {
+      console.error('Resume download error:', err.message);
+      if (!res.headersSent) res.status(404).send('Resume not found');
+    }
+  });
 });
 
 // ── Serve index.html for all other routes ──
