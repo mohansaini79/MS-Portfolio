@@ -200,8 +200,10 @@ app.get('*', (_req, res) => {
 // ── Start ──
 const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`\n🚀  Portfolio server → http://0.0.0.0:${PORT}`);
-  console.log(`    Email user : ${EMAIL_USER  || '⚠️  NOT SET (add to .env)'}`);
-  console.log(`    Email pass : ${EMAIL_PASS  ? '✅ Set' : '⚠️  NOT SET (add to .env)'}\n`);
+  console.log(`    Gmail inbox : ${EMAIL_USER  || '⚠️  NOT SET'}`);
+  console.log(`    Brevo user  : ${BREVO_USER  || '⚠️  NOT SET — add BREVO_USER variable'}`);
+  console.log(`    Brevo pass  : ${BREVO_PASS  ? '✅ Set' : '⚠️  NOT SET — add BREVO_PASS variable'}`);
+  console.log(`    SMTP mode   : ${USING_BREVO ? '✅ Brevo relay (Railway-compatible)' : '⚠️  Gmail (blocked on Railway)'}\n`);
 });
 
 server.on('error', (err) => {
