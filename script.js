@@ -1,6 +1,51 @@
 /* ═══════════════════ script.js ═══════════════════ */
 
 /* ══════════════════════════════════════════════════════
+   THEME TOGGLE — Dark / Light mode
+══════════════════════════════════════════════════════ */
+(function initThemeToggle() {
+  const STORAGE_KEY = 'ms-portfolio-theme';
+  const btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+
+  const tooltipEl = document.getElementById('lamp-tooltip-text');
+
+  function applyTheme(isLight) {
+    document.body.classList.toggle('light-mode', isLight);
+    btn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
+    if (tooltipEl) tooltipEl.textContent = isLight ? 'Light Mode' : 'Dark Mode';
+  }
+
+  // Apply saved preference instantly (before paint)
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved === 'light') {
+    applyTheme(true);
+  } else if (!saved) {
+    // Sync with OS preference if no saved choice
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    if (prefersLight) applyTheme(true);
+  }
+
+  btn.addEventListener('click', () => {
+    const isLight = document.body.classList.toggle('light-mode');
+    localStorage.setItem(STORAGE_KEY, isLight ? 'light' : 'dark');
+    btn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
+    if (tooltipEl) tooltipEl.textContent = isLight ? 'Light Mode' : 'Dark Mode';
+
+    // Trigger lamp swing animation
+    const lampWrap = document.getElementById('lamp-wrap');
+    if (lampWrap) {
+      lampWrap.classList.remove('swinging');
+      void lampWrap.offsetWidth; // force reflow to restart animation
+      lampWrap.classList.add('swinging');
+      lampWrap.addEventListener('animationend', () => {
+        lampWrap.classList.remove('swinging');
+      }, { once: true });
+    }
+  });
+})();
+
+/* ══════════════════════════════════════════════════════
    CUSTOM CURSOR — desktop (pointer: fine) only
 ══════════════════════════════════════════════════════ */
 (function initCursor() {
