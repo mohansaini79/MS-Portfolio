@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mohan Saini — Full Stack Developer &amp; Co-Founder</title>
-  <meta name="description" content="Mohan Saini — Co-Founder &amp; CTO at The Rising Tribe. Full Stack MERN &amp; Python Developer building AI, EdTech, SaaS and scalable web applications." />
-  <meta name="keywords" content="Mohan Saini, Full Stack Developer, MERN, Python, React, Node.js, Portfolio, Co-Founder, CTO" />
+  <meta name="description"
+    content="Mohan Saini — Co-Founder &amp; CTO at The Rising Tribe. Full Stack MERN &amp; Python Developer building AI, EdTech, SaaS and scalable web applications." />
+  <meta name="keywords"
+    content="Mohan Saini, Full Stack Developer, MERN, Python, React, Node.js, Portfolio, Co-Founder, CTO" />
   <meta property="og:title" content="Mohan Saini — Full Stack Developer" />
-  <meta property="og:description" content="Co-Founder &amp; CTO at The Rising Tribe. Building AI, EdTech, SaaS and Scalable Web Applications." />
+  <meta property="og:description"
+    content="Co-Founder &amp; CTO at The Rising Tribe. Building AI, EdTech, SaaS and Scalable Web Applications." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: { sans:['Inter','sans-serif'], mono:['JetBrains Mono','monospace'] },
+          fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
           screens: { xs: '480px' },
         }
       }
@@ -25,10 +31,11 @@
   </script>
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body class="bg-[#060818] text-white font-sans overflow-x-hidden">
 
   <!-- Custom cursor (desktop only) -->
-  <div id="cursor-dot"  aria-hidden="true"></div>
+  <div id="cursor-dot" aria-hidden="true"></div>
   <div id="cursor-ring" aria-hidden="true"></div>
   <div id="cursor-glow" aria-hidden="true"></div>
 
@@ -41,7 +48,8 @@
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
     <div class="absolute inset-0 opacity-[0.022]"
-         style="background-image:linear-gradient(rgba(139,92,246,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,.5) 1px,transparent 1px);background-size:60px 60px;"></div>
+      style="background-image:linear-gradient(rgba(139,92,246,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,.5) 1px,transparent 1px);background-size:60px 60px;">
+    </div>
   </div>
 
   <!-- ══════════════ NAVBAR ══════════════ -->
@@ -49,31 +57,37 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
       <!-- Logo -->
       <a href="#hero" class="flex items-center gap-2.5 group" aria-label="Mohan Saini Home">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center font-bold text-sm font-mono shadow-lg group-hover:scale-105 transition-transform duration-200 flex-shrink-0">MS</div>
+        <div
+          class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center font-bold text-sm font-mono shadow-lg group-hover:scale-105 transition-transform duration-200 flex-shrink-0">
+          MS</div>
         <span class="font-semibold text-white text-sm hidden sm:block tracking-wide">Mohan Saini</span>
       </a>
 
       <!-- Desktop nav -->
       <div class="hidden lg:flex items-center gap-0.5">
-        <a href="#hero"           class="nav-link">Home</a>
-        <a href="#about"          class="nav-link">About</a>
-        <a href="#projects"       class="nav-link">Projects</a>
-        <a href="#experience"     class="nav-link">Experience</a>
-        <a href="#tech"           class="nav-link">Skills</a>
-        <a href="#achievements"   class="nav-link">Achievements</a>
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#tech" class="nav-link">Skills</a>
+        <a href="#achievements" class="nav-link">Achievements</a>
         <a href="#certifications" class="nav-link">Certs</a>
-        <a href="#contact"        class="nav-link">Contact</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </div>
 
       <!-- Right -->
       <div class="flex items-center gap-2.5">
         <a href="resume.pdf" download
-           class="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold text-white border border-purple-500/50 hover:border-purple-400 bg-purple-600/20 hover:bg-purple-600/35 transition-all duration-200 whitespace-nowrap">
-          <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          class="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold text-white border border-purple-500/50 hover:border-purple-400 bg-purple-600/20 hover:bg-purple-600/35 transition-all duration-200 whitespace-nowrap">
+          <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
           Resume
         </a>
         <!-- Burger -->
-        <button id="burger-btn" class="lg:hidden p-2 rounded-lg bg-white/5 border border-white/10 text-white" aria-label="Open menu" aria-expanded="false">
+        <button id="burger-btn" class="lg:hidden p-2 rounded-lg bg-white/5 border border-white/10 text-white"
+          aria-label="Open menu" aria-expanded="false">
           <div class="w-5 h-[14px] flex flex-col justify-between">
             <span class="burger-line block h-0.5 bg-white rounded transition-all duration-300 origin-left"></span>
             <span class="burger-line block h-0.5 bg-white rounded transition-all duration-300"></span>
@@ -87,32 +101,41 @@
   <!-- Mobile menu -->
   <div id="mobile-menu" class="fixed inset-0 z-40 lg:hidden">
     <div id="mobile-overlay" class="mm-overlay absolute inset-0 bg-[#060818]/95 backdrop-blur-xl"></div>
-    <div class="mm-panel absolute right-0 top-0 bottom-0 w-[min(300px,85vw)] bg-[#0c1122]/98 backdrop-blur-xl border-l border-purple-500/20 flex flex-col">
+    <div
+      class="mm-panel absolute right-0 top-0 bottom-0 w-[min(300px,85vw)] bg-[#0c1122]/98 backdrop-blur-xl border-l border-purple-500/20 flex flex-col">
       <!-- Panel header -->
       <div class="flex items-center justify-between px-6 py-5 border-b border-white/5">
         <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center font-bold text-xs font-mono">MS</div>
+          <div
+            class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center font-bold text-xs font-mono">
+            MS</div>
           <span class="font-semibold text-white text-sm">Mohan Saini</span>
         </div>
         <button onclick="closeMobileMenu()" class="mm-close-btn" aria-label="Close menu">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
       </div>
       <!-- Links -->
       <nav class="flex flex-col gap-1 p-4 flex-1 overflow-y-auto">
-        <a href="#hero"           class="mobile-nav-link" onclick="closeMobileMenu()"></span>Home</a>
-        <a href="#about"          class="mobile-nav-link" onclick="closeMobileMenu()"></span>About</a>
-        <a href="#projects"       class="mobile-nav-link" onclick="closeMobileMenu()"></span>Projects</a>
-        <a href="#experience"     class="mobile-nav-link" onclick="closeMobileMenu()"></span>Experience</a>
-        <a href="#tech"           class="mobile-nav-link" onclick="closeMobileMenu()"></span>Skills</a>
-        <a href="#achievements"   class="mobile-nav-link" onclick="closeMobileMenu()"></span>Achievements</a>
+        <a href="#hero" class="mobile-nav-link" onclick="closeMobileMenu()"></span>Home</a>
+        <a href="#about" class="mobile-nav-link" onclick="closeMobileMenu()"></span>About</a>
+        <a href="#projects" class="mobile-nav-link" onclick="closeMobileMenu()"></span>Projects</a>
+        <a href="#experience" class="mobile-nav-link" onclick="closeMobileMenu()"></span>Experience</a>
+        <a href="#tech" class="mobile-nav-link" onclick="closeMobileMenu()"></span>Skills</a>
+        <a href="#achievements" class="mobile-nav-link" onclick="closeMobileMenu()"></span>Achievements</a>
         <a href="#certifications" class="mobile-nav-link" onclick="closeMobileMenu()"></span>Certifications</a>
-        <a href="#contact"        class="mobile-nav-link" onclick="closeMobileMenu()"></span>Contact</a>
+        <a href="#contact" class="mobile-nav-link" onclick="closeMobileMenu()"></span>Contact</a>
       </nav>
       <!-- Resume button -->
       <div class="p-4 border-t border-white/5">
-        <a href="resume.pdf" download class="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        <a href="resume.pdf" download
+          class="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
           Download Resume
         </a>
       </div>
@@ -142,22 +165,24 @@
           </div>
 
           <!-- Name -->
-          <h1 class="font-black text-white leading-[1.05] mb-3"
-              style="font-size:clamp(2.6rem,8vw,5rem)">
+          <h1 class="font-black text-white leading-[1.05] mb-3" style="font-size:clamp(2.6rem,8vw,5rem)">
             Mohan <span class="gradient-text">Saini</span>
           </h1>
 
           <!-- Co-Founder badge -->
           <div class="flex justify-center lg:justify-start mb-4">
-            <a href="https://www.linkedin.com/company/the-rising-tribe-company-tech" target="_blank" rel="noopener noreferrer"
-               class="flex items-center gap-1.5 px-3 py-1.5 rounded-full
+            <a href="https://www.linkedin.com/company/the-rising-tribe-company-tech" target="_blank"
+              rel="noopener noreferrer" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full
                        bg-purple-600/20 border border-purple-500/30 hover:border-purple-400
                        text-xs sm:text-sm font-medium text-purple-300 flex-wrap justify-center
                        transition-all hover:bg-purple-600/30 group">
               <span>🚀</span>
               <span>Co-Founder &amp; CTO at</span>
               <span class="text-purple-400 font-semibold group-hover:text-purple-300">The Rising Tribe</span>
-              <svg class="w-3 h-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              <svg class="w-3 h-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
             </a>
           </div>
 
@@ -184,24 +209,32 @@
               <span class="ml-2 text-[11px] text-gray-500 font-mono">mohan.js</span>
             </div>
             <pre id="typewriter-code"
-                 class="text-[11px] sm:text-xs lg:text-sm font-mono text-emerald-400 whitespace-pre-wrap leading-relaxed min-h-[72px]"><span class="text-gray-600">// Loading...</span></pre>
+              class="text-[11px] sm:text-xs lg:text-sm font-mono text-emerald-400 whitespace-pre-wrap leading-relaxed min-h-[72px]"><span class="text-gray-600">// Loading...</span></pre>
           </div>
 
           <!-- CTA buttons -->
           <div class="flex flex-wrap gap-2.5 justify-center lg:justify-start">
             <a href="#projects"
-               class="btn-primary flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-purple-600 to-blue-600">
-              <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0l-7-7m7 7l-7 7"/></svg>
+              class="btn-primary flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-purple-600 to-blue-600">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0l-7-7m7 7l-7 7" />
+              </svg>
               View Projects
             </a>
             <a href="resume.pdf" download
-               class="flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl text-sm font-semibold text-white border border-purple-500/50 hover:border-purple-400 bg-purple-600/10 hover:bg-purple-600/20 transition-all">
-              <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              class="flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl text-sm font-semibold text-white border border-purple-500/50 hover:border-purple-400 bg-purple-600/10 hover:bg-purple-600/20 transition-all">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
               Resume
             </a>
             <a href="#contact"
-               class="flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl text-sm font-semibold text-gray-300 hover:text-white border border-gray-700 hover:border-gray-500 bg-white/5 hover:bg-white/10 transition-all">
-              <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              class="flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl text-sm font-semibold text-gray-300 hover:text-white border border-gray-700 hover:border-gray-500 bg-white/5 hover:bg-white/10 transition-all">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
               Contact
             </a>
           </div>
@@ -213,11 +246,10 @@
 
             <!-- Glow backdrop -->
             <div class="absolute -inset-4 rounded-3xl blur-2xl opacity-40 pointer-events-none"
-                 style="background:linear-gradient(135deg,rgba(124,58,237,.55),rgba(59,130,246,.35))"></div>
+              style="background:linear-gradient(135deg,rgba(124,58,237,.55),rgba(59,130,246,.35))"></div>
 
             <!-- Big indigo backdrop zone — key screenshot feature -->
-            <div class="absolute -inset-8 rounded-[2.5rem] -z-10"
-                 style="background:linear-gradient(145deg,#0E1240 0%,#101350 50%,#0A0D35 100%);
+            <div class="absolute -inset-8 rounded-[2.5rem] -z-10" style="background:linear-gradient(145deg,#0E1240 0%,#101350 50%,#0A0D35 100%);
                         box-shadow:0 0 120px rgba(124,58,237,.35),0 0 60px rgba(124,58,237,.2);
                         border:1px solid rgba(124,58,237,.18)"></div>
 
@@ -226,29 +258,27 @@
 
             <!-- Card frame -->
             <div class="relative rounded-3xl overflow-hidden"
-                 style="background:rgba(14,16,53,.75);border:1.5px solid rgba(124,58,237,.45);box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 80px rgba(124,58,237,.30)">
+              style="background:rgba(14,16,53,.75);border:1.5px solid rgba(124,58,237,.45);box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 80px rgba(124,58,237,.30)">
 
               <!-- Photo — portrait, shows half body -->
-              <img src="mohan2.jpg"
-                   alt="Mohan Saini — Full Stack Developer &amp; Co-Founder"
-                   class="w-full object-cover block"
-                   style="height:clamp(360px,50vw,560px);object-position:center 10%;"
-                   loading="eager" />
+              <img src="mohan2.jpg" alt="Mohan Saini — Full Stack Developer &amp; Co-Founder"
+                class="w-full object-cover block" style="height:clamp(360px,50vw,560px);object-position:center 10%;"
+                loading="eager" />
 
               <!-- Subtle bottom gradient fade -->
               <div class="absolute inset-0 pointer-events-none"
-                   style="background:linear-gradient(to top, rgba(14,16,53,.65) 0%, transparent 50%)"></div>
+                style="background:linear-gradient(to top, rgba(14,16,53,.65) 0%, transparent 50%)"></div>
 
               <!-- Name tag inside card -->
               <div class="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-8"
-                   style="background:linear-gradient(to top, rgba(8,11,26,.95) 60%, transparent)">
+                style="background:linear-gradient(to top, rgba(8,11,26,.95) 60%, transparent)">
                 <div class="flex items-center justify-between">
                   <div>
                     <p class="text-white font-bold text-sm leading-tight">Mohan Saini</p>
                     <p class="text-purple-400 text-[11px] font-medium">Full Stack Developer</p>
                   </div>
                   <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full"
-                       style="background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.3)">
+                    style="background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.3)">
                     <span class="avail-dot" style="width:6px;height:6px"></span>
                     <span class="text-green-400 text-[10px] font-semibold">Available</span>
                   </div>
@@ -257,27 +287,26 @@
             </div>
 
             <!-- Floating tech icons — repositioned for portrait card -->
-            <div class="floating-tech-icon animate-float"
-                 style="left:-28px;top:18%;animation-delay:0s">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" width="28" height="28" loading="lazy" />
+            <div class="floating-tech-icon animate-float" style="left:-28px;top:18%;animation-delay:0s">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React"
+                width="28" height="28" loading="lazy" />
             </div>
-            <div class="floating-tech-icon animate-float-slow"
-                 style="right:-28px;top:22%;animation-delay:.6s">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js" width="26" height="26" loading="lazy" />
+            <div class="floating-tech-icon animate-float-slow" style="right:-28px;top:22%;animation-delay:.6s">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"
+                alt="Node.js" width="26" height="26" loading="lazy" />
             </div>
-            <div class="floating-tech-icon animate-float-fast"
-                 style="right:-24px;bottom:22%;animation-delay:1.2s">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" width="24" height="24" loading="lazy" />
+            <div class="floating-tech-icon animate-float-fast" style="right:-24px;bottom:22%;animation-delay:1.2s">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+                alt="Python" width="24" height="24" loading="lazy" />
             </div>
-            <div class="floating-tech-icon animate-float"
-                 style="left:-24px;bottom:22%;animation-delay:.3s">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" alt="MongoDB" width="22" height="22" loading="lazy" />
+            <div class="floating-tech-icon animate-float" style="left:-24px;bottom:22%;animation-delay:.3s">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg"
+                alt="MongoDB" width="22" height="22" loading="lazy" />
             </div>
 
             <!-- Code tag badge above card -->
             <div class="absolute px-3 py-1.5 rounded-xl glass-card text-[11px] font-mono text-purple-300
-                        whitespace-nowrap border border-purple-500/20 z-30 hero-badge-top"
-                 style="top:-44px;left:50%">
+                        whitespace-nowrap border border-purple-500/20 z-30 hero-badge-top" style="top:-44px;left:50%">
               &lt;Code. Build. Deploy. Repeat./&gt;
             </div>
           </div>
@@ -315,7 +344,8 @@
             </div>
             <div class="stat-item flex flex-col items-center text-center gap-1 py-1">
               <span class="text-base sm:text-lg">📚</span>
-              <span class="text-[13px] sm:text-base lg:text-lg font-black font-mono gradient-text leading-tight">2023-27</span>
+              <span
+                class="text-[13px] sm:text-base lg:text-lg font-black font-mono gradient-text leading-tight">2023-27</span>
               <span class="text-[10px] sm:text-xs text-gray-500 font-medium">B.Tech CSE</span>
             </div>
           </div>
@@ -336,7 +366,9 @@
     ══════════════════════════════════════════════ -->
     <section id="about" class="relative py-16 sm:py-20 lg:py-24 overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-b from-[#080B1A] via-[#0E1035] to-[#080B1A]"></div>
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-purple-600/25 to-transparent hidden lg:block"></div>
+      <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-purple-600/25 to-transparent hidden lg:block">
+      </div>
 
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header -->
@@ -356,15 +388,20 @@
           <!-- About card -->
           <div class="glass-card p-5 sm:p-6 reveal">
             <div class="flex items-center gap-3 mb-4">
-              <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden border-2 border-purple-500/30 flex-shrink-0">
+              <div
+                class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden border-2 border-purple-500/30 flex-shrink-0">
                 <img src="mohan2.jpg" alt="Mohan Saini" class="w-full h-full object-cover object-top" loading="lazy" />
               </div>
               <div>
                 <h3 class="font-bold text-white text-sm sm:text-base">Mohan Saini</h3>
-                <a href="https://www.linkedin.com/company/the-rising-tribe-company-tech" target="_blank" rel="noopener noreferrer"
-                   class="text-xs text-purple-400 hover:text-purple-300 transition-colors inline-flex items-center gap-1">
+                <a href="https://www.linkedin.com/company/the-rising-tribe-company-tech" target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-xs text-purple-400 hover:text-purple-300 transition-colors inline-flex items-center gap-1">
                   Co-Founder &amp; CTO · The Rising Tribe
-                  <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                  <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
                 </a>
               </div>
             </div>
@@ -393,7 +430,8 @@
                 <div class="text-purple-400 text-xs sm:text-sm font-medium mb-1">Shobhit University Gangoh</div>
                 <div class="flex items-center gap-2 text-gray-500 text-xs flex-wrap">
                   <span>📅</span><span>2023 – 2027</span>
-                  <span class="ml-auto px-2 py-0.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-[10px]">Active</span>
+                  <span
+                    class="ml-auto px-2 py-0.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-[10px]">Active</span>
                 </div>
               </div>
               <!-- 12th -->
@@ -405,7 +443,8 @@
               <!-- 10th -->
               <div class="p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/20">
                 <div class="text-white font-semibold text-xs mb-0.5">Secondary (X)</div>
-                <div class="text-indigo-400 text-xs font-medium mb-0.5">B.H.S Inter College &nbsp;·&nbsp; U.P. BOARD</div>
+                <div class="text-indigo-400 text-xs font-medium mb-0.5">B.H.S Inter College &nbsp;·&nbsp; U.P. BOARD
+                </div>
                 <div class="text-gray-500 text-[11px]">📅 2021</div>
               </div>
               <div class="grid grid-cols-2 gap-3">
@@ -429,42 +468,70 @@
           </h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 max-w-4xl mx-auto">
             <div class="timeline-card glass-card p-4 sm:p-5 reveal" style="border-color:rgba(124,58,237,.28)">
-              <div class="year-badge mb-3" style="background:rgba(124,58,237,.2);color:#7C3AED;border:1px solid rgba(124,58,237,.4)">2023</div>
-              <div class="flex items-center gap-2 mb-2"><span class="text-lg">🎓</span><h3 class="text-sm font-bold text-white">Started B.Tech CSE</h3></div>
+              <div class="year-badge mb-3"
+                style="background:rgba(124,58,237,.2);color:#7C3AED;border:1px solid rgba(124,58,237,.4)">2023</div>
+              <div class="flex items-center gap-2 mb-2"><span class="text-lg">🎓</span>
+                <h3 class="text-sm font-bold text-white">Started B.Tech CSE</h3>
+              </div>
               <p class="text-xs text-gray-400 leading-relaxed">Began CSE at Shobhit University Gangoh</p>
             </div>
-            <div class="timeline-card glass-card p-4 sm:p-5 reveal" style="animation-delay:.08s;border-color:rgba(59,130,246,.28)">
-              <div class="year-badge mb-3" style="background:rgba(59,130,246,.2);color:#3B82F6;border:1px solid rgba(59,130,246,.4)">2025</div>
-              <div class="flex items-center gap-2 mb-2"><span class="text-lg">💻</span><h3 class="text-sm font-bold text-white">Joined Zaalima Development</h3></div>
-              <p class="text-xs text-gray-400 leading-relaxed">Full Stack Developer Intern — production-grade web apps</p>
+            <div class="timeline-card glass-card p-4 sm:p-5 reveal"
+              style="animation-delay:.08s;border-color:rgba(59,130,246,.28)">
+              <div class="year-badge mb-3"
+                style="background:rgba(59,130,246,.2);color:#3B82F6;border:1px solid rgba(59,130,246,.4)">2025</div>
+              <div class="flex items-center gap-2 mb-2"><span class="text-lg">💻</span>
+                <h3 class="text-sm font-bold text-white">Joined Zaalima Development</h3>
+              </div>
+              <p class="text-xs text-gray-400 leading-relaxed">Full Stack Developer Intern — production-grade web apps
+              </p>
             </div>
-            <div class="timeline-card glass-card p-4 sm:p-5 reveal" style="animation-delay:.16s;border-color:rgba(139,92,246,.28)">
-              <div class="year-badge mb-3" style="background:rgba(139,92,246,.2);color:#8B5CF6;border:1px solid rgba(139,92,246,.4)">2025</div>
-              <div class="flex items-center gap-2 mb-2"><span class="text-lg">🚀</span><h3 class="text-sm font-bold text-white">Built SyncSpace &amp; TasteTrail</h3></div>
-              <p class="text-xs text-gray-400 leading-relaxed">Launched SaaS workspace and MERN meal planning platform</p>
+            <div class="timeline-card glass-card p-4 sm:p-5 reveal"
+              style="animation-delay:.16s;border-color:rgba(139,92,246,.28)">
+              <div class="year-badge mb-3"
+                style="background:rgba(139,92,246,.2);color:#8B5CF6;border:1px solid rgba(139,92,246,.4)">2025</div>
+              <div class="flex items-center gap-2 mb-2"><span class="text-lg">🚀</span>
+                <h3 class="text-sm font-bold text-white">Built SyncSpace &amp; TasteTrail</h3>
+              </div>
+              <p class="text-xs text-gray-400 leading-relaxed">Launched SaaS workspace and MERN meal planning platform
+              </p>
             </div>
-            <div class="timeline-card glass-card p-4 sm:p-5 reveal" style="animation-delay:.24s;border-color:rgba(59,130,246,.28)">
-              <div class="year-badge mb-3" style="background:rgba(59,130,246,.2);color:#3B82F6;border:1px solid rgba(59,130,246,.4)">2026</div>
-              <div class="flex items-center gap-2 mb-2"><span class="text-lg">🌍</span><h3 class="text-sm font-bold text-white">Joined Springer Capital (USA)</h3></div>
+            <div class="timeline-card glass-card p-4 sm:p-5 reveal"
+              style="animation-delay:.24s;border-color:rgba(59,130,246,.28)">
+              <div class="year-badge mb-3"
+                style="background:rgba(59,130,246,.2);color:#3B82F6;border:1px solid rgba(59,130,246,.4)">2026</div>
+              <div class="flex items-center gap-2 mb-2"><span class="text-lg">🌍</span>
+                <h3 class="text-sm font-bold text-white">Joined Springer Capital (USA)</h3>
+              </div>
               <p class="text-xs text-gray-400 leading-relaxed">Backend Developer Intern at Springer Capital LLC, USA</p>
             </div>
-            <div class="timeline-card glass-card p-4 sm:p-5 sm:col-span-2 max-w-sm sm:max-w-lg mx-auto w-full reveal" style="animation-delay:.32s;border-color:rgba(124,58,237,.4)">
+            <div class="timeline-card glass-card p-4 sm:p-5 sm:col-span-2 max-w-sm sm:max-w-lg mx-auto w-full reveal"
+              style="animation-delay:.32s;border-color:rgba(124,58,237,.4)">
               <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
-                <div class="year-badge" style="background:rgba(124,58,237,.2);color:#7C3AED;border:1px solid rgba(124,58,237,.4)">2026 · Ongoing</div>
-                <span class="text-[10px] px-2 py-0.5 rounded-full font-bold" style="background:rgba(124,58,237,.15);color:#A78BFA;border:1px solid rgba(124,58,237,.3)">🏢 Startup During Study</span>
+                <div class="year-badge"
+                  style="background:rgba(124,58,237,.2);color:#7C3AED;border:1px solid rgba(124,58,237,.4)">2026 ·
+                  Ongoing</div>
+                <span class="text-[10px] px-2 py-0.5 rounded-full font-bold"
+                  style="background:rgba(124,58,237,.15);color:#A78BFA;border:1px solid rgba(124,58,237,.3)">🏢 Startup
+                  During Study</span>
               </div>
               <div class="flex items-start gap-2.5 mb-2">
                 <span class="text-xl flex-shrink-0">👑</span>
                 <div>
                   <h3 class="text-sm font-bold text-white">Co-Founder &amp; CTO</h3>
-                  <a href="https://www.linkedin.com/company/the-rising-tribe-company-tech" target="_blank" rel="noopener noreferrer"
-                     class="inline-flex items-center gap-1 text-xs text-purple-400 hover:text-purple-300 font-semibold mt-0.5 transition-colors">
+                  <a href="https://www.linkedin.com/company/the-rising-tribe-company-tech" target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1 text-xs text-purple-400 hover:text-purple-300 font-semibold mt-0.5 transition-colors">
                     The Rising Tribe
-                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
                   </a>
                 </div>
               </div>
-              <p class="text-xs text-gray-400 leading-relaxed">Co-founded a tech startup while in final year B.Tech — leading technology strategy and building scalable AI-powered EdTech products that empower learners across India.</p>
+              <p class="text-xs text-gray-400 leading-relaxed">Co-founded a tech startup while in final year B.Tech —
+                leading technology strategy and building scalable AI-powered EdTech products that empower learners
+                across India.</p>
             </div>
           </div>
         </div>
@@ -484,7 +551,8 @@
           <h2 class="section-h2 text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3">
             What I've <span class="gradient-text">Built</span>
           </h2>
-          <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">7 production-ready applications with real users, real impact.</p>
+          <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">7 production-ready applications with real
+            users, real impact.</p>
         </div>
 
         <!-- Bento grid -->
@@ -493,16 +561,21 @@
           <!-- #01 SugExam — featured / lg:col-span-2 -->
           <div class="lg-span-2 lg:col-span-2 reveal">
             <a href="https://sugexam.live" target="_blank" rel="noopener noreferrer"
-               class="project-card block glass-card p-5 min-h-[190px] flex flex-col group overflow-hidden relative rounded-2xl"
-               style="border-color:rgba(124,58,237,.32)">
-              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-                   style="background:linear-gradient(135deg,rgba(124,58,237,.14),rgba(59,130,246,.09))"></div>
+              class="project-card block glass-card p-5 min-h-[190px] flex flex-col group overflow-hidden relative rounded-2xl"
+              style="border-color:rgba(124,58,237,.32)">
+              <div
+                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
+                style="background:linear-gradient(135deg,rgba(124,58,237,.14),rgba(59,130,246,.09))"></div>
               <div class="relative flex items-center justify-between mb-3">
-                <span class="proj-num" style="background:rgba(124,58,237,.2);color:#7C3AED;border:1px solid rgba(124,58,237,.4)">#01</span>
+                <span class="proj-num"
+                  style="background:rgba(124,58,237,.2);color:#7C3AED;border:1px solid rgba(124,58,237,.4)">#01</span>
                 <div class="flex items-center gap-2">
                   <span class="text-[10px] text-gray-500 font-mono">Mar 2026 – Present</span>
                   <span class="proj-live">
-                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
                     Live
                   </span>
                 </div>
@@ -514,37 +587,53 @@
                   <span class="featured-badge">FEATURED</span>
                 </div>
                 <ul class="text-xs text-gray-400 leading-relaxed space-y-1 list-none">
-                  <li class="flex gap-1.5"><span class="text-purple-500 flex-shrink-0">▸</span>Developed an AI-powered online examination platform used by <strong class="text-gray-300">250+ students</strong> at Shobhit University.</li>
-                  <li class="flex gap-1.5"><span class="text-purple-500 flex-shrink-0">▸</span>Implemented secure authentication, automated AI evaluation, OCR grading, and performance tracking.</li>
+                  <li class="flex gap-1.5"><span class="text-purple-500 flex-shrink-0">▸</span>Developed an AI-powered
+                    online examination platform used by <strong class="text-gray-300">250+ students</strong> at Shobhit
+                    University.</li>
+                  <li class="flex gap-1.5"><span class="text-purple-500 flex-shrink-0">▸</span>Implemented secure
+                    authentication, automated AI evaluation, OCR grading, and performance tracking.</li>
                 </ul>
               </div>
               <div class="relative mt-4 space-y-2">
                 <div class="text-xs text-green-400 font-semibold">👥 250+ Students</div>
                 <div class="flex flex-wrap gap-1.5">
-                  <span class="tech-tag" style="color:#7C3AED;border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.1)">Flask</span>
-                  <span class="tech-tag" style="color:#7C3AED;border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.1)">MongoDB</span>
-                  <span class="tech-tag" style="color:#7C3AED;border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.1)">JWT</span>
-                  <span class="tech-tag" style="color:#7C3AED;border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.1)">Tailwind</span>
-                  <span class="tech-tag" style="color:#7C3AED;border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.1)">OCR</span>
-                  <span class="tech-tag" style="color:#7C3AED;border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.1)">AI Eval</span>
+                  <span class="tech-tag"
+                    style="color:#7C3AED;border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.1)">Flask</span>
+                  <span class="tech-tag"
+                    style="color:#7C3AED;border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.1)">MongoDB</span>
+                  <span class="tech-tag"
+                    style="color:#7C3AED;border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.1)">JWT</span>
+                  <span class="tech-tag"
+                    style="color:#7C3AED;border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.1)">Tailwind</span>
+                  <span class="tech-tag"
+                    style="color:#7C3AED;border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.1)">OCR</span>
+                  <span class="tech-tag"
+                    style="color:#7C3AED;border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.1)">AI Eval</span>
                 </div>
               </div>
-              <div class="absolute -bottom-10 -right-10 w-32 h-32 rounded-full opacity-0 group-hover:opacity-25 transition-opacity duration-500 blur-2xl" style="background:#7C3AED"></div>
+              <div
+                class="absolute -bottom-10 -right-10 w-32 h-32 rounded-full opacity-0 group-hover:opacity-25 transition-opacity duration-500 blur-2xl"
+                style="background:#7C3AED"></div>
             </a>
           </div>
 
           <!-- #02 SmartCV -->
           <div class="reveal" style="animation-delay:.08s">
             <a href="https://www.smartcv.dev" target="_blank" rel="noopener noreferrer"
-               class="project-card block glass-card p-5 min-h-[190px] flex flex-col group overflow-hidden relative rounded-2xl h-full"
-               style="border-color:rgba(59,130,246,.32)">
-              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-                   style="background:linear-gradient(135deg,rgba(59,130,246,.14),rgba(124,58,237,.09))"></div>
+              class="project-card block glass-card p-5 min-h-[190px] flex flex-col group overflow-hidden relative rounded-2xl h-full"
+              style="border-color:rgba(59,130,246,.32)">
+              <div
+                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
+                style="background:linear-gradient(135deg,rgba(59,130,246,.14),rgba(124,58,237,.09))"></div>
               <div class="relative flex items-center justify-between mb-3">
-                <span class="proj-num" style="background:rgba(59,130,246,.2);color:#3B82F6;border:1px solid rgba(59,130,246,.4)">#02</span>
+                <span class="proj-num"
+                  style="background:rgba(59,130,246,.2);color:#3B82F6;border:1px solid rgba(59,130,246,.4)">#02</span>
                 <div class="flex items-center gap-2">
                   <span class="text-[10px] text-gray-500 font-mono">Apr 2026 – Present</span>
-                  <span class="proj-live"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg> Live</span>
+                  <span class="proj-live"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg> Live</span>
                 </div>
               </div>
               <div class="relative flex-1">
@@ -554,110 +643,172 @@
                   <span class="featured-badge">FEATURED</span>
                 </div>
                 <ul class="text-xs text-gray-400 leading-relaxed space-y-1">
-                  <li class="flex gap-1.5"><span class="text-blue-500 flex-shrink-0">▸</span>Built an AI-powered resume builder used by <strong class="text-gray-300">50+ users</strong> for creating ATS-friendly resumes.</li>
-                  <li class="flex gap-1.5"><span class="text-blue-500 flex-shrink-0">▸</span>Enabled resume generation, optimization, and PDF export using AI-driven suggestions.</li>
+                  <li class="flex gap-1.5"><span class="text-blue-500 flex-shrink-0">▸</span>Built an AI-powered resume
+                    builder used by <strong class="text-gray-300">50+ users</strong> for creating ATS-friendly resumes.
+                  </li>
+                  <li class="flex gap-1.5"><span class="text-blue-500 flex-shrink-0">▸</span>Enabled resume generation,
+                    optimization, and PDF export using AI-driven suggestions.</li>
                 </ul>
               </div>
               <div class="relative mt-3 space-y-2">
                 <div class="text-xs text-green-400 font-semibold">👥 50+ Users</div>
                 <div class="flex flex-wrap gap-1.5">
-                  <span class="tech-tag" style="color:#3B82F6;border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.1)">HTML</span>
-                  <span class="tech-tag" style="color:#3B82F6;border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.1)">Tailwind</span>
-                  <span class="tech-tag" style="color:#3B82F6;border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.1)">Groq AI</span>
-                  <span class="tech-tag" style="color:#3B82F6;border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.1)">MongoDB</span>
-                  <span class="tech-tag" style="color:#3B82F6;border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.1)">OAuth</span>
+                  <span class="tech-tag"
+                    style="color:#3B82F6;border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.1)">HTML</span>
+                  <span class="tech-tag"
+                    style="color:#3B82F6;border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.1)">Tailwind</span>
+                  <span class="tech-tag"
+                    style="color:#3B82F6;border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.1)">Groq AI</span>
+                  <span class="tech-tag"
+                    style="color:#3B82F6;border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.1)">MongoDB</span>
+                  <span class="tech-tag"
+                    style="color:#3B82F6;border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.1)">OAuth</span>
                 </div>
               </div>
-              <div class="absolute -bottom-10 -right-10 w-32 h-32 rounded-full opacity-0 group-hover:opacity-25 transition-opacity duration-500 blur-2xl" style="background:#3B82F6"></div>
+              <div
+                class="absolute -bottom-10 -right-10 w-32 h-32 rounded-full opacity-0 group-hover:opacity-25 transition-opacity duration-500 blur-2xl"
+                style="background:#3B82F6"></div>
             </a>
           </div>
 
           <!-- #03 TaskFlow -->
           <div class="reveal" style="animation-delay:.12s">
             <a href="https://task-flow-app-sepia.vercel.app/dashboard" target="_blank" rel="noopener noreferrer"
-               class="project-card block glass-card p-5 min-h-[170px] flex flex-col group overflow-hidden relative rounded-2xl h-full"
-               style="border-color:rgba(139,92,246,.32)">
-              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-                   style="background:linear-gradient(135deg,rgba(139,92,246,.14),rgba(99,102,241,.09))"></div>
+              class="project-card block glass-card p-5 min-h-[170px] flex flex-col group overflow-hidden relative rounded-2xl h-full"
+              style="border-color:rgba(139,92,246,.32)">
+              <div
+                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
+                style="background:linear-gradient(135deg,rgba(139,92,246,.14),rgba(99,102,241,.09))"></div>
               <div class="relative flex items-center justify-between mb-3">
-                <span class="proj-num" style="background:rgba(139,92,246,.2);color:#8B5CF6;border:1px solid rgba(139,92,246,.4)">#03</span>
-                <span class="proj-live"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg> Live</span>
+                <span class="proj-num"
+                  style="background:rgba(139,92,246,.2);color:#8B5CF6;border:1px solid rgba(139,92,246,.4)">#03</span>
+                <span class="proj-live"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg> Live</span>
               </div>
               <div class="relative flex-1">
-                <div class="flex items-center gap-2 mb-2"><span class="text-xl">⚡</span><h3 class="text-sm font-bold text-white">TaskFlow</h3></div>
-                <p class="text-xs text-gray-400 leading-relaxed line-clamp-3 group-hover:text-gray-300 transition-colors">MERN productivity platform with task management, real-time tracking, analytics.</p>
+                <div class="flex items-center gap-2 mb-2"><span class="text-xl">⚡</span>
+                  <h3 class="text-sm font-bold text-white">TaskFlow</h3>
+                </div>
+                <p
+                  class="text-xs text-gray-400 leading-relaxed line-clamp-3 group-hover:text-gray-300 transition-colors">
+                  MERN productivity platform with task management, real-time tracking, analytics.</p>
               </div>
               <div class="flex flex-wrap gap-1.5 mt-3">
-                <span class="tech-tag" style="color:#8B5CF6;border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.1)">MERN</span>
-                <span class="tech-tag" style="color:#8B5CF6;border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.1)">Analytics</span>
-                <span class="tech-tag" style="color:#8B5CF6;border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.1)">JWT</span>
+                <span class="tech-tag"
+                  style="color:#8B5CF6;border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.1)">MERN</span>
+                <span class="tech-tag"
+                  style="color:#8B5CF6;border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.1)">Analytics</span>
+                <span class="tech-tag"
+                  style="color:#8B5CF6;border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.1)">JWT</span>
               </div>
-              <div class="absolute -bottom-10 -right-10 w-32 h-32 rounded-full opacity-0 group-hover:opacity-25 transition-opacity duration-500 blur-2xl" style="background:#8B5CF6"></div>
+              <div
+                class="absolute -bottom-10 -right-10 w-32 h-32 rounded-full opacity-0 group-hover:opacity-25 transition-opacity duration-500 blur-2xl"
+                style="background:#8B5CF6"></div>
             </a>
           </div>
 
           <!-- #04 Chatlet -->
           <div class="reveal" style="animation-delay:.16s">
             <a href="https://my-chatlet-app-1.onrender.com/chat" target="_blank" rel="noopener noreferrer"
-               class="project-card block glass-card p-5 min-h-[170px] flex flex-col group overflow-hidden relative rounded-2xl h-full"
-               style="border-color:rgba(6,182,212,.32)">
-              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-                   style="background:linear-gradient(135deg,rgba(6,182,212,.14),rgba(59,130,246,.09))"></div>
+              class="project-card block glass-card p-5 min-h-[170px] flex flex-col group overflow-hidden relative rounded-2xl h-full"
+              style="border-color:rgba(6,182,212,.32)">
+              <div
+                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
+                style="background:linear-gradient(135deg,rgba(6,182,212,.14),rgba(59,130,246,.09))"></div>
               <div class="relative flex items-center justify-between mb-3">
-                <span class="proj-num" style="background:rgba(6,182,212,.2);color:#06B6D4;border:1px solid rgba(6,182,212,.4)">#04</span>
-                <span class="proj-live"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg> Live</span>
+                <span class="proj-num"
+                  style="background:rgba(6,182,212,.2);color:#06B6D4;border:1px solid rgba(6,182,212,.4)">#04</span>
+                <span class="proj-live"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg> Live</span>
               </div>
               <div class="relative flex-1">
-                <div class="flex items-center gap-2 mb-2"><span class="text-xl">💬</span><h3 class="text-sm font-bold text-white">Chatlet</h3></div>
-                <p class="text-xs text-gray-400 leading-relaxed line-clamp-3 group-hover:text-gray-300 transition-colors">Flask real-time chat with Google OAuth, Socket.IO and Cloudinary media sharing.</p>
+                <div class="flex items-center gap-2 mb-2"><span class="text-xl">💬</span>
+                  <h3 class="text-sm font-bold text-white">Chatlet</h3>
+                </div>
+                <p
+                  class="text-xs text-gray-400 leading-relaxed line-clamp-3 group-hover:text-gray-300 transition-colors">
+                  Flask real-time chat with Google OAuth, Socket.IO and Cloudinary media sharing.</p>
               </div>
               <div class="flex flex-wrap gap-1.5 mt-3">
-                <span class="tech-tag" style="color:#06B6D4;border-color:rgba(6,182,212,.4);background:rgba(6,182,212,.1)">Flask</span>
-                <span class="tech-tag" style="color:#06B6D4;border-color:rgba(6,182,212,.4);background:rgba(6,182,212,.1)">Socket.IO</span>
-                <span class="tech-tag" style="color:#06B6D4;border-color:rgba(6,182,212,.4);background:rgba(6,182,212,.1)">Cloudinary</span>
+                <span class="tech-tag"
+                  style="color:#06B6D4;border-color:rgba(6,182,212,.4);background:rgba(6,182,212,.1)">Flask</span>
+                <span class="tech-tag"
+                  style="color:#06B6D4;border-color:rgba(6,182,212,.4);background:rgba(6,182,212,.1)">Socket.IO</span>
+                <span class="tech-tag"
+                  style="color:#06B6D4;border-color:rgba(6,182,212,.4);background:rgba(6,182,212,.1)">Cloudinary</span>
               </div>
-              <div class="absolute -bottom-10 -right-10 w-32 h-32 rounded-full opacity-0 group-hover:opacity-25 transition-opacity duration-500 blur-2xl" style="background:#06B6D4"></div>
+              <div
+                class="absolute -bottom-10 -right-10 w-32 h-32 rounded-full opacity-0 group-hover:opacity-25 transition-opacity duration-500 blur-2xl"
+                style="background:#06B6D4"></div>
             </a>
           </div>
 
           <!-- #05 SyncSpace -->
           <div class="reveal" style="animation-delay:.20s">
             <a href="https://syncspace-websoftware.onrender.com/" target="_blank" rel="noopener noreferrer"
-               class="project-card block glass-card p-5 min-h-[170px] flex flex-col group overflow-hidden relative rounded-2xl h-full"
-               style="border-color:rgba(16,185,129,.32)">
-              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-                   style="background:linear-gradient(135deg,rgba(16,185,129,.14),rgba(20,184,166,.09))"></div>
+              class="project-card block glass-card p-5 min-h-[170px] flex flex-col group overflow-hidden relative rounded-2xl h-full"
+              style="border-color:rgba(16,185,129,.32)">
+              <div
+                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
+                style="background:linear-gradient(135deg,rgba(16,185,129,.14),rgba(20,184,166,.09))"></div>
               <div class="relative flex items-center justify-between mb-3">
-                <span class="proj-num" style="background:rgba(16,185,129,.2);color:#10B981;border:1px solid rgba(16,185,129,.4)">#05</span>
-                <span class="proj-live"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg> Live</span>
+                <span class="proj-num"
+                  style="background:rgba(16,185,129,.2);color:#10B981;border:1px solid rgba(16,185,129,.4)">#05</span>
+                <span class="proj-live"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg> Live</span>
               </div>
               <div class="relative flex-1">
-                <div class="flex items-center gap-2 mb-2"><span class="text-xl">🤝</span><h3 class="text-sm font-bold text-white">SyncSpace</h3></div>
-                <p class="text-xs text-gray-400 leading-relaxed line-clamp-3 group-hover:text-gray-300 transition-colors">Collaborative SaaS workspace with Kanban, real-time chat, file sharing and JWT auth.</p>
+                <div class="flex items-center gap-2 mb-2"><span class="text-xl">🤝</span>
+                  <h3 class="text-sm font-bold text-white">SyncSpace</h3>
+                </div>
+                <p
+                  class="text-xs text-gray-400 leading-relaxed line-clamp-3 group-hover:text-gray-300 transition-colors">
+                  Collaborative SaaS workspace with Kanban, real-time chat, file sharing and JWT auth.</p>
               </div>
               <div class="flex flex-wrap gap-1.5 mt-3">
-                <span class="tech-tag" style="color:#10B981;border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.1)">MERN</span>
-                <span class="tech-tag" style="color:#10B981;border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.1)">Socket.IO</span>
-                <span class="tech-tag" style="color:#10B981;border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.1)">JWT</span>
+                <span class="tech-tag"
+                  style="color:#10B981;border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.1)">MERN</span>
+                <span class="tech-tag"
+                  style="color:#10B981;border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.1)">Socket.IO</span>
+                <span class="tech-tag"
+                  style="color:#10B981;border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.1)">JWT</span>
               </div>
-              <div class="absolute -bottom-10 -right-10 w-32 h-32 rounded-full opacity-0 group-hover:opacity-25 transition-opacity duration-500 blur-2xl" style="background:#10B981"></div>
+              <div
+                class="absolute -bottom-10 -right-10 w-32 h-32 rounded-full opacity-0 group-hover:opacity-25 transition-opacity duration-500 blur-2xl"
+                style="background:#10B981"></div>
             </a>
           </div>
 
           <!-- #06 TasteTrail -->
           <div class="reveal" style="animation-delay:.24s">
             <a href="https://tastetrail-web-app.onrender.com/" target="_blank" rel="noopener noreferrer"
-               class="project-card block glass-card p-4 sm:p-5 min-h-[155px] flex flex-col group overflow-hidden relative rounded-2xl h-full"
-               style="border-color:rgba(245,158,11,.32)">
+              class="project-card block glass-card p-4 sm:p-5 min-h-[155px] flex flex-col group overflow-hidden relative rounded-2xl h-full"
+              style="border-color:rgba(245,158,11,.32)">
               <div class="relative flex items-center justify-between mb-3">
-                <span class="proj-num" style="background:rgba(245,158,11,.2);color:#F59E0B;border:1px solid rgba(245,158,11,.4)">#06</span>
-                <span class="proj-live"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg> Live</span>
+                <span class="proj-num"
+                  style="background:rgba(245,158,11,.2);color:#F59E0B;border:1px solid rgba(245,158,11,.4)">#06</span>
+                <span class="proj-live"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg> Live</span>
               </div>
-              <div class="flex items-center gap-2 mb-2"><span class="text-lg">🍽️</span><h3 class="text-sm font-bold text-white">TasteTrail</h3></div>
-              <p class="text-xs text-gray-400 leading-relaxed flex-1 line-clamp-2 group-hover:text-gray-300 transition-colors">MERN meal planning platform with recipe management and shopping lists.</p>
+              <div class="flex items-center gap-2 mb-2"><span class="text-lg">🍽️</span>
+                <h3 class="text-sm font-bold text-white">TasteTrail</h3>
+              </div>
+              <p
+                class="text-xs text-gray-400 leading-relaxed flex-1 line-clamp-2 group-hover:text-gray-300 transition-colors">
+                MERN meal planning platform with recipe management and shopping lists.</p>
               <div class="flex flex-wrap gap-1.5 mt-2">
-                <span class="tech-tag" style="color:#F59E0B;border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.1)">MERN</span>
-                <span class="tech-tag" style="color:#F59E0B;border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.1)">MongoDB</span>
+                <span class="tech-tag"
+                  style="color:#F59E0B;border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.1)">MERN</span>
+                <span class="tech-tag"
+                  style="color:#F59E0B;border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.1)">MongoDB</span>
               </div>
             </a>
           </div>
@@ -665,18 +816,29 @@
           <!-- #07 Rainbow PDF -->
           <div class="reveal" style="animation-delay:.28s">
             <a href="https://therainbowpdfconverter.tiiny.site/" target="_blank" rel="noopener noreferrer"
-               class="project-card block glass-card p-4 sm:p-5 min-h-[155px] flex flex-col group overflow-hidden relative rounded-2xl h-full"
-               style="border-color:rgba(236,72,153,.32)">
+              class="project-card block glass-card p-4 sm:p-5 min-h-[155px] flex flex-col group overflow-hidden relative rounded-2xl h-full"
+              style="border-color:rgba(236,72,153,.32)">
               <div class="relative flex items-center justify-between mb-3">
-                <span class="proj-num" style="background:rgba(236,72,153,.2);color:#EC4899;border:1px solid rgba(236,72,153,.4)">#07</span>
-                <span class="proj-live"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg> Live</span>
+                <span class="proj-num"
+                  style="background:rgba(236,72,153,.2);color:#EC4899;border:1px solid rgba(236,72,153,.4)">#07</span>
+                <span class="proj-live"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg> Live</span>
               </div>
-              <div class="flex items-center gap-2 mb-2"><span class="text-lg">🌈</span><h3 class="text-sm font-bold text-white">Rainbow PDF Converter</h3></div>
-              <p class="text-xs text-gray-400 leading-relaxed flex-1 line-clamp-2 group-hover:text-gray-300 transition-colors">Frontend PDF conversion utility built with HTML, CSS and JavaScript.</p>
+              <div class="flex items-center gap-2 mb-2"><span class="text-lg">🌈</span>
+                <h3 class="text-sm font-bold text-white">Rainbow PDF Converter</h3>
+              </div>
+              <p
+                class="text-xs text-gray-400 leading-relaxed flex-1 line-clamp-2 group-hover:text-gray-300 transition-colors">
+                Frontend PDF conversion utility built with HTML, CSS and JavaScript.</p>
               <div class="flex flex-wrap gap-1.5 mt-2">
-                <span class="tech-tag" style="color:#EC4899;border-color:rgba(236,72,153,.4);background:rgba(236,72,153,.1)">HTML</span>
-                <span class="tech-tag" style="color:#EC4899;border-color:rgba(236,72,153,.4);background:rgba(236,72,153,.1)">CSS</span>
-                <span class="tech-tag" style="color:#EC4899;border-color:rgba(236,72,153,.4);background:rgba(236,72,153,.1)">JS</span>
+                <span class="tech-tag"
+                  style="color:#EC4899;border-color:rgba(236,72,153,.4);background:rgba(236,72,153,.1)">HTML</span>
+                <span class="tech-tag"
+                  style="color:#EC4899;border-color:rgba(236,72,153,.4);background:rgba(236,72,153,.1)">CSS</span>
+                <span class="tech-tag"
+                  style="color:#EC4899;border-color:rgba(236,72,153,.4);background:rgba(236,72,153,.1)">JS</span>
               </div>
             </a>
           </div>
@@ -685,8 +847,11 @@
         <!-- GitHub CTA -->
         <div class="text-center mt-8 sm:mt-10 reveal">
           <a href="https://github.com/mohansaini79/" target="_blank" rel="noopener noreferrer"
-             class="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl text-sm font-semibold text-white border border-purple-500/40 hover:border-purple-400 bg-purple-600/10 hover:bg-purple-600/20 transition-all hover:shadow-lg hover:shadow-purple-500/20 hover:-translate-y-0.5">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            class="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl text-sm font-semibold text-white border border-purple-500/40 hover:border-purple-400 bg-purple-600/10 hover:bg-purple-600/20 transition-all hover:shadow-lg hover:shadow-purple-500/20 hover:-translate-y-0.5">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+            </svg>
             View All on GitHub
           </a>
         </div>
@@ -705,79 +870,113 @@
           <h2 class="section-h2 text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3">
             My <span class="gradient-text">Toolkit</span>
           </h2>
-          <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">Technologies I use to build fast, scalable, modern applications.</p>
+          <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">Technologies I use to build fast, scalable,
+            modern applications.</p>
         </div>
         <div class="tech-grid grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-3 sm:gap-4">
           <!-- 14 tech cards -->
-          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal" style="animation-delay:0s">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
+          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal"
+            style="animation-delay:0s">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React"
+              width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
             <span class="text-[11px] sm:text-xs text-gray-300 font-medium">React</span>
             <span class="text-[9px] sm:text-[10px] text-gray-600">Frontend</span>
           </div>
-          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal" style="animation-delay:.04s">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
+          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal"
+            style="animation-delay:.04s">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"
+              alt="Node.js" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
             <span class="text-[11px] sm:text-xs text-gray-300 font-medium">Node.js</span>
             <span class="text-[9px] sm:text-[10px] text-gray-600">Backend</span>
           </div>
-          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal" style="animation-delay:.08s">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" alt="MongoDB" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
+          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal"
+            style="animation-delay:.08s">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg"
+              alt="MongoDB" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
             <span class="text-[11px] sm:text-xs text-gray-300 font-medium">MongoDB</span>
             <span class="text-[9px] sm:text-[10px] text-gray-600">Database</span>
           </div>
-          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal" style="animation-delay:.12s">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original-wordmark.svg" alt="Express.js" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" style="filter:brightness(0) invert(1)" />
+          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal"
+            style="animation-delay:.12s">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original-wordmark.svg"
+              alt="Express.js" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10"
+              style="filter:brightness(0) invert(1)" />
             <span class="text-[11px] sm:text-xs text-gray-300 font-medium">Express</span>
             <span class="text-[9px] sm:text-[10px] text-gray-600">Backend</span>
           </div>
-          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal" style="animation-delay:.16s">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
+          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal"
+            style="animation-delay:.16s">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python"
+              width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
             <span class="text-[11px] sm:text-xs text-gray-300 font-medium">Python</span>
             <span class="text-[9px] sm:text-[10px] text-gray-600">Language</span>
           </div>
-          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal" style="animation-delay:.20s">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original-wordmark.svg" alt="Flask" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" style="filter:brightness(0) invert(1)" />
+          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal"
+            style="animation-delay:.20s">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original-wordmark.svg"
+              alt="Flask" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10"
+              style="filter:brightness(0) invert(1)" />
             <span class="text-[11px] sm:text-xs text-gray-300 font-medium">Flask</span>
             <span class="text-[9px] sm:text-[10px] text-gray-600">Backend</span>
           </div>
-          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal" style="animation-delay:.24s">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/socketio/socketio-original.svg" alt="Socket.IO" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10 opacity-90" />
+          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal"
+            style="animation-delay:.24s">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/socketio/socketio-original.svg"
+              alt="Socket.IO" width="36" height="36" loading="lazy"
+              class="object-contain w-8 h-8 sm:w-10 sm:h-10 opacity-90" />
             <span class="text-[11px] sm:text-xs text-gray-300 font-medium">Socket.IO</span>
             <span class="text-[9px] sm:text-[10px] text-gray-600">Real-time</span>
           </div>
-          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal" style="animation-delay:.28s">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
+          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal"
+            style="animation-delay:.28s">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
+              alt="Tailwind" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
             <span class="text-[11px] sm:text-xs text-gray-300 font-medium">Tailwind</span>
             <span class="text-[9px] sm:text-[10px] text-gray-600">Styling</span>
           </div>
-          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal" style="animation-delay:.32s">
-            <img src="https://cdn.simpleicons.org/jsonwebtokens/FB015B" alt="JWT" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
+          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal"
+            style="animation-delay:.32s">
+            <img src="https://cdn.simpleicons.org/jsonwebtokens/FB015B" alt="JWT" width="36" height="36" loading="lazy"
+              class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
             <span class="text-[11px] sm:text-xs text-gray-300 font-medium">JWT</span>
             <span class="text-[9px] sm:text-[10px] text-gray-600">Auth</span>
           </div>
-          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal" style="animation-delay:.36s">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" alt="OAuth" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
+          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal"
+            style="animation-delay:.36s">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" alt="OAuth"
+              width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
             <span class="text-[11px] sm:text-xs text-gray-300 font-medium">OAuth</span>
             <span class="text-[9px] sm:text-[10px] text-gray-600">Auth</span>
           </div>
-          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal" style="animation-delay:.40s">
-            <img src="https://cdn.simpleicons.org/cloudinary/3448C5" alt="Cloudinary" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
+          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal"
+            style="animation-delay:.40s">
+            <img src="https://cdn.simpleicons.org/cloudinary/3448C5" alt="Cloudinary" width="36" height="36"
+              loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
             <span class="text-[11px] sm:text-xs text-gray-300 font-medium">Cloudinary</span>
             <span class="text-[9px] sm:text-[10px] text-gray-600">Storage</span>
           </div>
-          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal" style="animation-delay:.44s">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" style="filter:brightness(0) invert(1)" />
+          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal"
+            style="animation-delay:.44s">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub"
+              width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10"
+              style="filter:brightness(0) invert(1)" />
             <span class="text-[11px] sm:text-xs text-gray-300 font-medium">GitHub</span>
             <span class="text-[9px] sm:text-[10px] text-gray-600">DevOps</span>
           </div>
           <!-- Django -->
-          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal" style="animation-delay:.48s">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg" alt="Django" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" style="filter:invert(60%) sepia(50%) saturate(400%) hue-rotate(120deg)" />
+          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal"
+            style="animation-delay:.48s">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg" alt="Django"
+              width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10"
+              style="filter:invert(60%) sepia(50%) saturate(400%) hue-rotate(120deg)" />
             <span class="text-[11px] sm:text-xs text-gray-300 font-medium">Django</span>
             <span class="text-[9px] sm:text-[10px] text-gray-600">Backend</span>
           </div>
           <!-- FastAPI -->
-          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal" style="animation-delay:.52s">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" alt="FastAPI" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
+          <div class="tech-card glass-card p-3 sm:p-4 flex flex-col items-center gap-2 text-center reveal"
+            style="animation-delay:.52s">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg"
+              alt="FastAPI" width="36" height="36" loading="lazy" class="object-contain w-8 h-8 sm:w-10 sm:h-10" />
             <span class="text-[11px] sm:text-xs text-gray-300 font-medium">FastAPI</span>
             <span class="text-[9px] sm:text-[10px] text-gray-600">Backend</span>
           </div>
@@ -797,37 +996,49 @@
           <h2 class="section-h2 text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3">
             My <span class="gradient-text">Experience</span>
           </h2>
-          <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">Internships and roles that shaped my skills and career.</p>
+          <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">Internships and roles that shaped my skills and
+            career.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto">
           <!-- Springer Capital -->
           <div class="experience-card glass-card p-5 sm:p-6 reveal" style="border-color:rgba(59,130,246,.32)">
             <div class="flex items-start gap-3 sm:gap-4 mb-4">
-              <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-xl sm:text-2xl flex-shrink-0">🇺🇸</div>
+              <div
+                class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-xl sm:text-2xl flex-shrink-0">
+                🇺🇸</div>
               <div class="flex-1 min-w-0">
                 <div class="flex items-center gap-2 flex-wrap mb-1">
                   <h3 class="font-bold text-white text-sm sm:text-base">Backend Development Intern</h3>
-                  <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-400 font-bold whitespace-nowrap">Current</span>
+                  <span
+                    class="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-400 font-bold whitespace-nowrap">Current</span>
                 </div>
                 <p class="text-blue-400 text-xs sm:text-sm font-medium">Springer Capital Investments LLC</p>
                 <p class="text-gray-500 text-xs mt-0.5">🌍 USA · Virtual &nbsp;·&nbsp; Jun 2026 – Present</p>
               </div>
             </div>
             <ul class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4 space-y-1.5">
-              <li class="flex gap-2"><span class="text-blue-500 flex-shrink-0 mt-0.5">▸</span>Developed and maintained RESTful APIs using Node.js and Express.js for a financial investment platform.</li>
-              <li class="flex gap-2"><span class="text-blue-500 flex-shrink-0 mt-0.5">▸</span>Integrated MongoDB databases and implemented authentication and data management features.</li>
-              <li class="flex gap-2"><span class="text-blue-500 flex-shrink-0 mt-0.5">▸</span>Optimized backend performance and improved API response efficiency.</li>
+              <li class="flex gap-2"><span class="text-blue-500 flex-shrink-0 mt-0.5">▸</span>Developed and maintained
+                RESTful APIs using Node.js and Express.js for a financial investment platform.</li>
+              <li class="flex gap-2"><span class="text-blue-500 flex-shrink-0 mt-0.5">▸</span>Integrated MongoDB
+                databases and implemented authentication and data management features.</li>
+              <li class="flex gap-2"><span class="text-blue-500 flex-shrink-0 mt-0.5">▸</span>Optimized backend
+                performance and improved API response efficiency.</li>
             </ul>
             <div class="flex flex-wrap gap-1.5 sm:gap-2">
-              <span class="tech-tag">Node.js</span><span class="tech-tag">Express.js</span><span class="tech-tag">MongoDB</span><span class="tech-tag">REST APIs</span><span class="tech-tag">Authentication</span>
+              <span class="tech-tag">Node.js</span><span class="tech-tag">Express.js</span><span
+                class="tech-tag">MongoDB</span><span class="tech-tag">REST APIs</span><span
+                class="tech-tag">Authentication</span>
             </div>
           </div>
 
           <!-- Zaalima -->
-          <div class="experience-card glass-card p-5 sm:p-6 reveal" style="animation-delay:.12s;border-color:rgba(139,92,246,.32)">
+          <div class="experience-card glass-card p-5 sm:p-6 reveal"
+            style="animation-delay:.12s;border-color:rgba(139,92,246,.32)">
             <div class="flex items-start gap-3 sm:gap-4 mb-4">
-              <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-xl sm:text-2xl flex-shrink-0">🇮🇳</div>
+              <div
+                class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-xl sm:text-2xl flex-shrink-0">
+                🇮🇳</div>
               <div class="flex-1 min-w-0">
                 <h3 class="font-bold text-white text-sm sm:text-base mb-1">Full Stack Development Intern</h3>
                 <p class="text-purple-400 text-xs sm:text-sm font-medium">Zaalima Development Pvt. Ltd.</p>
@@ -835,22 +1046,32 @@
               </div>
             </div>
             <ul class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4 space-y-1.5">
-              <li class="flex gap-2"><span class="text-purple-500 flex-shrink-0 mt-0.5">▸</span>Developed and deployed full-stack web applications using modern MERN technologies.</li>
-              <li class="flex gap-2"><span class="text-purple-500 flex-shrink-0 mt-0.5">▸</span>Built responsive user interfaces and integrated backend APIs for real-world live projects.</li>
+              <li class="flex gap-2"><span class="text-purple-500 flex-shrink-0 mt-0.5">▸</span>Developed and deployed
+                full-stack web applications using modern MERN technologies.</li>
+              <li class="flex gap-2"><span class="text-purple-500 flex-shrink-0 mt-0.5">▸</span>Built responsive user
+                interfaces and integrated backend APIs for real-world live projects.</li>
             </ul>
             <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
-              <span class="tech-tag">React</span><span class="tech-tag">Node.js</span><span class="tech-tag">MongoDB</span><span class="tech-tag">Express</span><span class="tech-tag">Tailwind</span>
+              <span class="tech-tag">React</span><span class="tech-tag">Node.js</span><span
+                class="tech-tag">MongoDB</span><span class="tech-tag">Express</span><span
+                class="tech-tag">Tailwind</span>
             </div>
             <div class="flex flex-col gap-1.5">
               <p class="text-[10px] text-gray-600 font-medium uppercase tracking-wide">Live Projects</p>
               <a href="https://syncspace-websoftware.onrender.com/" target="_blank" rel="noopener noreferrer"
-                 class="text-xs text-purple-400 hover:text-purple-300 flex items-center gap-1 transition-colors">
-                <svg class="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                class="text-xs text-purple-400 hover:text-purple-300 flex items-center gap-1 transition-colors">
+                <svg class="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
                 syncspace-websoftware.onrender.com
               </a>
               <a href="https://tastetrail-web-app.onrender.com/" target="_blank" rel="noopener noreferrer"
-                 class="text-xs text-purple-400 hover:text-purple-300 flex items-center gap-1 transition-colors">
-                <svg class="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                class="text-xs text-purple-400 hover:text-purple-300 flex items-center gap-1 transition-colors">
+                <svg class="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
                 tastetrail-web-app.onrender.com
               </a>
             </div>
@@ -877,37 +1098,52 @@
           <div class="achieve-card glass-card p-5 sm:p-6 reveal" style="border-color:rgba(124,58,237,.35)">
             <div class="text-2xl sm:text-3xl mb-3">👑</div>
             <h3 class="font-bold text-white text-sm sm:text-base mb-2">Co-Founder &amp; CTO at The Rising Tribe</h3>
-            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Leading technology vision and building AI-powered EdTech products that empower learners across India.</p>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Leading technology vision and building
+              AI-powered EdTech products that empower learners across India.</p>
           </div>
-          <div class="achieve-card glass-card p-5 sm:p-6 reveal" style="animation-delay:.07s;border-color:rgba(59,130,246,.3)">
+          <div class="achieve-card glass-card p-5 sm:p-6 reveal"
+            style="animation-delay:.07s;border-color:rgba(59,130,246,.3)">
             <div class="text-2xl sm:text-3xl mb-3">🇺🇸</div>
             <h3 class="font-bold text-white text-sm sm:text-base mb-2">Backend Intern — Springer Capital (USA)</h3>
-            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Internship at Springer Capital Investments LLC, USA — built backend APIs for a financial investment platform.</p>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Internship at Springer Capital Investments LLC,
+              USA — built backend APIs for a financial investment platform.</p>
           </div>
-          <div class="achieve-card glass-card p-5 sm:p-6 reveal" style="animation-delay:.14s;border-color:rgba(245,158,11,.3)">
+          <div class="achieve-card glass-card p-5 sm:p-6 reveal"
+            style="animation-delay:.14s;border-color:rgba(245,158,11,.3)">
             <div class="text-2xl sm:text-3xl mb-3">🏆</div>
             <h3 class="font-bold text-white text-sm sm:text-base mb-2">Artpark ProtoDash — IISc Bangalore</h3>
-            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Hackathon at IISc Bangalore — one of India's premier research institutes.</p>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Hackathon at IISc Bangalore — one of India's
+              premier research institutes.</p>
           </div>
-          <div class="achieve-card glass-card p-5 sm:p-6 reveal" style="animation-delay:.21s;border-color:rgba(6,182,212,.3)">
+          <div class="achieve-card glass-card p-5 sm:p-6 reveal"
+            style="animation-delay:.21s;border-color:rgba(6,182,212,.3)">
             <div class="text-2xl sm:text-3xl mb-3">⚡</div>
             <h3 class="font-bold text-white text-sm sm:text-base mb-2">IIT Patna — Frontend Odyssey Challenge</h3>
-            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-3">Developed a responsive web application focusing on modern UI/UX, interactive performance optimization, and user engagement at a national-level frontend hackathon at IIT Patna.</p>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-3">Developed a responsive web application
+              focusing on modern UI/UX, interactive performance optimization, and user engagement at a national-level
+              frontend hackathon at IIT Patna.</p>
             <a href="https://frontend-odyssey.netlify.app" target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 font-medium transition-colors">
-              <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              class="inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 font-medium transition-colors">
+              <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
               frontend-odyssey.netlify.app
             </a>
           </div>
-          <div class="achieve-card glass-card p-5 sm:p-6 reveal" style="animation-delay:.28s;border-color:rgba(16,185,129,.3)">
+          <div class="achieve-card glass-card p-5 sm:p-6 reveal"
+            style="animation-delay:.28s;border-color:rgba(16,185,129,.3)">
             <div class="text-2xl sm:text-3xl mb-3">👥</div>
             <h3 class="font-bold text-white text-sm sm:text-base mb-2">350+ Real Users Across Products</h3>
-            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Built and deployed multiple production applications with real users and real impact.</p>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Built and deployed multiple production
+              applications with real users and real impact.</p>
           </div>
-          <div class="achieve-card glass-card p-5 sm:p-6 reveal" style="animation-delay:.35s;border-color:rgba(139,92,246,.3)">
+          <div class="achieve-card glass-card p-5 sm:p-6 reveal"
+            style="animation-delay:.35s;border-color:rgba(139,92,246,.3)">
             <div class="text-2xl sm:text-3xl mb-3">🚀</div>
             <h3 class="font-bold text-white text-sm sm:text-base mb-2">7+ Full Stack Applications Deployed</h3>
-            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">7+ production-grade apps using MERN, Python, AI and cloud infrastructure.</p>
+            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">7+ production-grade apps using MERN, Python, AI
+              and cloud infrastructure.</p>
           </div>
         </div>
       </div>
@@ -925,38 +1161,68 @@
           <h2 class="section-h2 text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3">
             My <span class="gradient-text">Credentials</span>
           </h2>
-          <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">9+ certifications across AI, web development, DevOps and more.</p>
+          <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">9+ certifications across AI, web development,
+            DevOps and more.</p>
         </div>
-          </div>
-          <div class="achieve-card glass-card p-4 sm:p-5 flex items-start gap-3 sm:gap-4 reveal" style="animation-delay:.10s;border-color:rgba(139,92,246,.3)">
-            <span class="text-xl sm:text-2xl flex-shrink-0">💻</span>
-            <div><h3 class="font-semibold text-white text-xs sm:text-sm mb-1">Web Development Training</h3><p class="text-[10px] sm:text-xs text-gray-500">Zaalima Development &nbsp;·&nbsp; 2025</p></div>
-          </div>
-          <div class="achieve-card glass-card p-4 sm:p-5 flex items-start gap-3 sm:gap-4 reveal" style="animation-delay:.15s;border-color:rgba(245,158,11,.3)">
-            <span class="text-xl sm:text-2xl flex-shrink-0">💡</span>
-            <div><h3 class="font-semibold text-white text-xs sm:text-sm mb-1">Entrepreneurship &amp; Innovation Job Simulation</h3><p class="text-[10px] sm:text-xs text-gray-500">Forage &nbsp;·&nbsp; 2025</p></div>
-          </div>
-          <div class="achieve-card glass-card p-4 sm:p-5 flex items-start gap-3 sm:gap-4 reveal" style="animation-delay:.20s;border-color:rgba(249,115,22,.3)">
-            <span class="text-xl sm:text-2xl flex-shrink-0">🛠️</span>
-            <div><h3 class="font-semibold text-white text-xs sm:text-sm mb-1">Software Development Job Simulation</h3><p class="text-[10px] sm:text-xs text-gray-500">Forage &nbsp;·&nbsp; 2025</p></div>
-          </div>
-          <div class="achieve-card glass-card p-4 sm:p-5 flex items-start gap-3 sm:gap-4 reveal" style="animation-delay:.25s;border-color:rgba(59,130,246,.3)">
-            <span class="text-xl sm:text-2xl flex-shrink-0">🌐</span>
-            <div><h3 class="font-semibold text-white text-xs sm:text-sm mb-1">Full Stack Development with MEAN</h3><p class="text-[10px] sm:text-xs text-gray-500">Nasscom Foundation &nbsp;·&nbsp; 2024</p></div>
-          </div>
-          <div class="achieve-card glass-card p-4 sm:p-5 flex items-start gap-3 sm:gap-4 reveal" style="animation-delay:.30s;border-color:rgba(16,185,129,.3)">
-            <span class="text-xl sm:text-2xl flex-shrink-0">⚙️</span>
-            <div><h3 class="font-semibold text-white text-xs sm:text-sm mb-1">DevOps CI/CD Pipeline Automation</h3><p class="text-[10px] sm:text-xs text-gray-500">Online Certification &nbsp;·&nbsp; 2024</p></div>
-          </div>
-          <div class="achieve-card glass-card p-4 sm:p-5 flex items-start gap-3 sm:gap-4 reveal" style="animation-delay:.35s;border-color:rgba(236,72,153,.3)">
-            <span class="text-xl sm:text-2xl flex-shrink-0">🔢</span>
-            <div><h3 class="font-semibold text-white text-xs sm:text-sm mb-1">CS107 C++ Programming</h3><p class="text-[10px] sm:text-xs text-gray-500">Saylor Academy &nbsp;·&nbsp; 2024</p></div>
-          </div>
-          <div class="achieve-card glass-card p-4 sm:p-5 flex items-start gap-3 sm:gap-4 reveal" style="animation-delay:.40s;border-color:rgba(139,92,246,.3)">
-            <span class="text-xl sm:text-2xl flex-shrink-0">📜</span>
-            <div><h3 class="font-semibold text-white text-xs sm:text-sm mb-1">NIELIT Certification</h3><p class="text-[10px] sm:text-xs text-gray-500">NIELIT &nbsp;·&nbsp; 2024</p></div>
-          </div>
+      </div>
+      <div class="achieve-card glass-card p-4 sm:p-5 flex items-start gap-3 sm:gap-4 reveal"
+        style="animation-delay:.10s;border-color:rgba(139,92,246,.3)">
+        <span class="text-xl sm:text-2xl flex-shrink-0">💻</span>
+        <div>
+          <h3 class="font-semibold text-white text-xs sm:text-sm mb-1">Web Development Training</h3>
+          <p class="text-[10px] sm:text-xs text-gray-500">Zaalima Development &nbsp;·&nbsp; 2025</p>
         </div>
+      </div>
+      <div class="achieve-card glass-card p-4 sm:p-5 flex items-start gap-3 sm:gap-4 reveal"
+        style="animation-delay:.15s;border-color:rgba(245,158,11,.3)">
+        <span class="text-xl sm:text-2xl flex-shrink-0">💡</span>
+        <div>
+          <h3 class="font-semibold text-white text-xs sm:text-sm mb-1">Entrepreneurship &amp; Innovation Job Simulation
+          </h3>
+          <p class="text-[10px] sm:text-xs text-gray-500">Forage &nbsp;·&nbsp; 2025</p>
+        </div>
+      </div>
+      <div class="achieve-card glass-card p-4 sm:p-5 flex items-start gap-3 sm:gap-4 reveal"
+        style="animation-delay:.20s;border-color:rgba(249,115,22,.3)">
+        <span class="text-xl sm:text-2xl flex-shrink-0">🛠️</span>
+        <div>
+          <h3 class="font-semibold text-white text-xs sm:text-sm mb-1">Software Development Job Simulation</h3>
+          <p class="text-[10px] sm:text-xs text-gray-500">Forage &nbsp;·&nbsp; 2025</p>
+        </div>
+      </div>
+      <div class="achieve-card glass-card p-4 sm:p-5 flex items-start gap-3 sm:gap-4 reveal"
+        style="animation-delay:.25s;border-color:rgba(59,130,246,.3)">
+        <span class="text-xl sm:text-2xl flex-shrink-0">🌐</span>
+        <div>
+          <h3 class="font-semibold text-white text-xs sm:text-sm mb-1">Full Stack Development with MEAN</h3>
+          <p class="text-[10px] sm:text-xs text-gray-500">Nasscom Foundation &nbsp;·&nbsp; 2024</p>
+        </div>
+      </div>
+      <div class="achieve-card glass-card p-4 sm:p-5 flex items-start gap-3 sm:gap-4 reveal"
+        style="animation-delay:.30s;border-color:rgba(16,185,129,.3)">
+        <span class="text-xl sm:text-2xl flex-shrink-0">⚙️</span>
+        <div>
+          <h3 class="font-semibold text-white text-xs sm:text-sm mb-1">DevOps CI/CD Pipeline Automation</h3>
+          <p class="text-[10px] sm:text-xs text-gray-500">Online Certification &nbsp;·&nbsp; 2024</p>
+        </div>
+      </div>
+      <div class="achieve-card glass-card p-4 sm:p-5 flex items-start gap-3 sm:gap-4 reveal"
+        style="animation-delay:.35s;border-color:rgba(236,72,153,.3)">
+        <span class="text-xl sm:text-2xl flex-shrink-0">🔢</span>
+        <div>
+          <h3 class="font-semibold text-white text-xs sm:text-sm mb-1">CS107 C++ Programming</h3>
+          <p class="text-[10px] sm:text-xs text-gray-500">Saylor Academy &nbsp;·&nbsp; 2024</p>
+        </div>
+      </div>
+      <div class="achieve-card glass-card p-4 sm:p-5 flex items-start gap-3 sm:gap-4 reveal"
+        style="animation-delay:.40s;border-color:rgba(139,92,246,.3)">
+        <span class="text-xl sm:text-2xl flex-shrink-0">📜</span>
+        <div>
+          <h3 class="font-semibold text-white text-xs sm:text-sm mb-1">NIELIT Certification</h3>
+          <p class="text-[10px] sm:text-xs text-gray-500">NIELIT &nbsp;·&nbsp; 2024</p>
+        </div>
+      </div>
+      </div>
       </div>
     </section>
 
@@ -965,7 +1231,9 @@
     ══════════════════════════════════════════════ -->
     <section id="contact" class="relative py-16 sm:py-20 lg:py-24 overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-b from-[#080B1A] via-[#0E1035] to-[#080B1A]"></div>
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(1000px,90vw)] h-[350px] bg-purple-900/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(1000px,90vw)] h-[350px] bg-purple-900/5 rounded-full blur-3xl pointer-events-none">
+      </div>
 
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-10 sm:mb-12 reveal">
@@ -974,7 +1242,8 @@
           <h2 class="section-h2 text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3">
             Get In <span class="gradient-text">Touch</span>
           </h2>
-          <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">Always open to discussing new projects, collaborations, or just having a great conversation about tech.</p>
+          <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto">Always open to discussing new projects,
+            collaborations, or just having a great conversation about tech.</p>
         </div>
 
         <div class="contact-grid grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10">
@@ -987,64 +1256,100 @@
                 <span class="avail-dot"></span>
                 <span class="text-green-400 font-semibold text-sm">Available for Opportunities</span>
               </div>
-              <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">I'm open to full-time roles, freelance projects, or exciting startup ideas.</p>
+              <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">I'm open to full-time roles, freelance
+                projects, or exciting startup ideas.</p>
             </div>
 
             <!-- Social links -->
             <div class="space-y-2.5 sm:space-y-3">
               <a href="https://www.linkedin.com/in/mohan-saini-2026ms/" target="_blank" rel="noopener noreferrer"
-                 class="social-link glass-card hover:border-blue-500/40 group" style="border-color:rgba(10,102,194,.18)">
-                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all group-hover:scale-105" style="background:rgba(10,102,194,.15);color:#0A66C2">
-                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                class="social-link glass-card hover:border-blue-500/40 group" style="border-color:rgba(10,102,194,.18)">
+                <div
+                  class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all group-hover:scale-105"
+                  style="background:rgba(10,102,194,.15);color:#0A66C2">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
                 </div>
                 <div class="flex-1 min-w-0">
                   <div class="text-[10px] sm:text-xs text-gray-500 font-medium">LinkedIn</div>
                   <div class="text-xs sm:text-sm text-white font-medium truncate">mohan-saini-2026ms</div>
                 </div>
-                <svg class="w-4 h-4 text-gray-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                <svg class="w-4 h-4 text-gray-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
               </a>
 
               <a href="https://github.com/mohansaini79/" target="_blank" rel="noopener noreferrer"
-                 class="social-link glass-card hover:border-white/20 group" style="border-color:rgba(255,255,255,.08)">
-                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all group-hover:scale-105" style="background:rgba(255,255,255,.07);color:#fff">
-                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                class="social-link glass-card hover:border-white/20 group" style="border-color:rgba(255,255,255,.08)">
+                <div
+                  class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all group-hover:scale-105"
+                  style="background:rgba(255,255,255,.07);color:#fff">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                  </svg>
                 </div>
                 <div class="flex-1 min-w-0">
                   <div class="text-[10px] sm:text-xs text-gray-500 font-medium">GitHub</div>
                   <div class="text-xs sm:text-sm text-white font-medium truncate">mohansaini79</div>
                 </div>
-                <svg class="w-4 h-4 text-gray-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                <svg class="w-4 h-4 text-gray-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
               </a>
 
               <a href="mailto:mohansaini8772532@gmail.com"
-                 class="social-link glass-card hover:border-purple-500/35 group" style="border-color:rgba(124,58,237,.18)">
-                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all group-hover:scale-105" style="background:rgba(124,58,237,.15);color:#7C3AED">
-                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                class="social-link glass-card hover:border-purple-500/35 group"
+                style="border-color:rgba(124,58,237,.18)">
+                <div
+                  class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all group-hover:scale-105"
+                  style="background:rgba(124,58,237,.15);color:#7C3AED">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
                 </div>
                 <div class="flex-1 min-w-0">
                   <div class="text-[10px] sm:text-xs text-gray-500 font-medium">Email</div>
                   <div class="text-xs sm:text-sm text-white font-medium truncate">mohansaini8772532@gmail.com</div>
                 </div>
-                <svg class="w-4 h-4 text-gray-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                <svg class="w-4 h-4 text-gray-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
               </a>
 
               <!-- Phone -->
-              <a href="tel:+917983302363"
-                 class="social-link glass-card hover:border-green-500/35 group" style="border-color:rgba(16,185,129,.18)">
-                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all group-hover:scale-105" style="background:rgba(16,185,129,.15);color:#10B981">
-                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              <a href="tel:+917983302363" class="social-link glass-card hover:border-green-500/35 group"
+                style="border-color:rgba(16,185,129,.18)">
+                <div
+                  class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all group-hover:scale-105"
+                  style="background:rgba(16,185,129,.15);color:#10B981">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
                 </div>
                 <div class="flex-1 min-w-0">
                   <div class="text-[10px] sm:text-xs text-gray-500 font-medium">Phone</div>
                   <div class="text-xs sm:text-sm text-white font-medium">+91 7983302363</div>
                 </div>
-                <svg class="w-4 h-4 text-gray-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                <svg class="w-4 h-4 text-gray-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
               </a>
 
               <!-- Location -->
               <div class="social-link glass-card" style="border-color:rgba(245,158,11,.18);cursor:default">
-                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,.15);color:#F59E0B">
-                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style="background:rgba(245,158,11,.15);color:#F59E0B">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
                 </div>
                 <div class="flex-1 min-w-0">
                   <div class="text-[10px] sm:text-xs text-gray-500 font-medium">Location</div>
@@ -1054,11 +1359,13 @@
             </div>
 
             <!-- Resume download -->
-            <a href="resume.pdf" download
-               class="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-semibold text-white
+            <a href="resume.pdf" download class="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-semibold text-white
                       bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500
                       transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/25">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
               Download Resume
             </a>
           </div>
@@ -1075,42 +1382,49 @@
                 <div class="text-4xl sm:text-5xl mb-3">🎉</div>
                 <h4 class="text-lg sm:text-xl font-bold text-white mb-2">Message Sent!</h4>
                 <p class="text-gray-400 text-sm mb-4">Thanks for reaching out! I'll get back to you soon.</p>
-                <button onclick="resetForm()" class="text-sm text-purple-400 hover:text-purple-300 underline">Send another →</button>
+                <button onclick="resetForm()" class="text-sm text-purple-400 hover:text-purple-300 underline">Send
+                  another →</button>
               </div>
 
               <!-- Form -->
               <form id="contact-form" class="space-y-3.5 sm:space-y-4" onsubmit="handleFormSubmit(event)" novalidate>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
                   <div>
-                    <label class="block text-[11px] sm:text-xs text-gray-500 font-medium mb-1.5" for="contact-name">Name *</label>
+                    <label class="block text-[11px] sm:text-xs text-gray-500 font-medium mb-1.5" for="contact-name">Name
+                      *</label>
                     <input id="contact-name" type="text" name="name" required placeholder="Your Name"
-                           class="contact-input" autocomplete="name" />
+                      class="contact-input" autocomplete="name" />
                   </div>
                   <div>
-                    <label class="block text-[11px] sm:text-xs text-gray-500 font-medium mb-1.5" for="contact-email">Email *</label>
+                    <label class="block text-[11px] sm:text-xs text-gray-500 font-medium mb-1.5"
+                      for="contact-email">Email *</label>
                     <input id="contact-email" type="email" name="email" required placeholder="your@email.com"
-                           class="contact-input" autocomplete="email" />
+                      class="contact-input" autocomplete="email" />
                   </div>
                 </div>
                 <div>
-                  <label class="block text-[11px] sm:text-xs text-gray-500 font-medium mb-1.5" for="contact-subject">Subject *</label>
+                  <label class="block text-[11px] sm:text-xs text-gray-500 font-medium mb-1.5"
+                    for="contact-subject">Subject *</label>
                   <input id="contact-subject" type="text" name="subject" required placeholder="What's this about?"
-                         class="contact-input" />
+                    class="contact-input" />
                 </div>
                 <div>
-                  <label class="block text-[11px] sm:text-xs text-gray-500 font-medium mb-1.5" for="contact-message">Message *</label>
-                  <textarea id="contact-message" name="message" required rows="4" placeholder="Tell me about your project or idea..."
-                            class="contact-input resize-none"></textarea>
+                  <label class="block text-[11px] sm:text-xs text-gray-500 font-medium mb-1.5"
+                    for="contact-message">Message *</label>
+                  <textarea id="contact-message" name="message" required rows="4"
+                    placeholder="Tell me about your project or idea..." class="contact-input resize-none"></textarea>
                 </div>
                 <p id="form-error" class="text-red-400 text-xs hidden"></p>
-                <button id="submit-btn" type="submit"
-                        class="w-full py-3 rounded-xl text-sm font-semibold text-white
+                <button id="submit-btn" type="submit" class="w-full py-3 rounded-xl text-sm font-semibold text-white
                                bg-gradient-to-r from-purple-600 to-blue-600
                                hover:from-purple-500 hover:to-blue-500
                                disabled:opacity-50 disabled:cursor-not-allowed
                                transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/25
                                flex items-center justify-center gap-2">
-                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                  </svg>
                   Send Message
                 </button>
               </form>
@@ -1127,24 +1441,39 @@
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center font-bold text-xs font-mono">MS</div>
+          <div
+            class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center font-bold text-xs font-mono">
+            MS</div>
           <span class="text-sm text-gray-500 font-medium">Mohan Saini</span>
         </div>
         <p class="text-xs text-gray-600 text-center order-last sm:order-none">
-          © <span id="footer-year"></span> Mohan Saini · Crafted with <span class="text-purple-400">HTML</span> &amp; <span class="text-blue-400">Tailwind CSS</span>
+          © <span id="footer-year"></span> Mohan Saini · Full-Stack <span class="text-purple-400"></span> &amp;
+          <span class="text-blue-400">Developer</span>
         </p>
         <div class="flex items-center gap-2.5">
           <a href="https://www.linkedin.com/in/mohan-saini-2026ms/" target="_blank" rel="noopener noreferrer"
-             class="w-8 h-8 rounded-lg glass-card flex items-center justify-center text-gray-500 hover:text-blue-400 transition-colors hover:scale-110 hover:shadow-md" aria-label="LinkedIn">
-            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            class="w-8 h-8 rounded-lg glass-card flex items-center justify-center text-gray-500 hover:text-blue-400 transition-colors hover:scale-110 hover:shadow-md"
+            aria-label="LinkedIn">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
           </a>
           <a href="https://github.com/mohansaini79/" target="_blank" rel="noopener noreferrer"
-             class="w-8 h-8 rounded-lg glass-card flex items-center justify-center text-gray-500 hover:text-white transition-colors hover:scale-110 hover:shadow-md" aria-label="GitHub">
-            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            class="w-8 h-8 rounded-lg glass-card flex items-center justify-center text-gray-500 hover:text-white transition-colors hover:scale-110 hover:shadow-md"
+            aria-label="GitHub">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+            </svg>
           </a>
           <a href="mailto:mohansaini8772532@gmail.com"
-             class="w-8 h-8 rounded-lg glass-card flex items-center justify-center text-gray-500 hover:text-purple-400 transition-colors hover:scale-110 hover:shadow-md" aria-label="Email">
-            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            class="w-8 h-8 rounded-lg glass-card flex items-center justify-center text-gray-500 hover:text-purple-400 transition-colors hover:scale-110 hover:shadow-md"
+            aria-label="Email">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
           </a>
         </div>
       </div>
@@ -1152,25 +1481,64 @@
   </footer>
 
   <!-- Back to top -->
-  <button id="back-to-top"
-          class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 w-10 h-10 rounded-full
+  <button id="back-to-top" class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 w-10 h-10 rounded-full
                  bg-gradient-to-br from-purple-600 to-blue-600 text-white
                  flex items-center justify-center
                  shadow-lg shadow-purple-500/30
                  hover:from-purple-500 hover:to-blue-500 hover:scale-110 transition-all duration-300"
-          aria-label="Back to top">
-    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/></svg>
+    aria-label="Back to top">
+    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7" />
+    </svg>
   </button>
 
   <!-- Inline utility styles for reused micro-classes -->
   <style>
-    .year-badge { display:inline-flex;align-items:center;gap:4px;font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:700;padding:3px 8px;border-radius:6px; }
-    .proj-num   { font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:700;padding:3px 8px;border-radius:6px; }
-    .proj-live  { display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7280;transition:color .2s; }
-    .group:hover .proj-live { color:#fff; }
-    .featured-badge { font-size:10px;padding:1px 5px;border-radius:3px;background:rgba(234,179,8,.18);border:1px solid rgba(234,179,8,.28);color:#FBBF24;font-weight:700;white-space:nowrap; }
+    .year-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .proj-num {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .proj-live {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: #6B7280;
+      transition: color .2s;
+    }
+
+    .group:hover .proj-live {
+      color: #fff;
+    }
+
+    .featured-badge {
+      font-size: 10px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      background: rgba(234, 179, 8, .18);
+      border: 1px solid rgba(234, 179, 8, .28);
+      color: #FBBF24;
+      font-weight: 700;
+      white-space: nowrap;
+    }
   </style>
 
   <script src="script.js"></script>
 </body>
+
 </html>
