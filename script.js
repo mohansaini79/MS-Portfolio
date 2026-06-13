@@ -1,7 +1,7 @@
 /* ═══════════════════ script.js ═══════════════════ */
 
 /* ══════════════════════════════════════════════════════
-   THEME TOGGLE — Dark / Light mode
+   THEME TOGGLE — Dark / Light mode  (fluid transitions)
 ══════════════════════════════════════════════════════ */
 (function initThemeToggle() {
   const STORAGE_KEY = 'ms-portfolio-theme';
@@ -10,40 +10,94 @@
 
   const tooltipEl = document.getElementById('lamp-tooltip-text');
 
+  /* ── Expanding light-burst ripple from the lamp dome ────────────────
+     A semi-transparent radial circle grows from the bulb position,
+     revealing the freshly-transitioned theme beneath it.
+  ──────────────────────────────────────────────────────────────────── */
+  function fireThemeRipple(isLight) {
+    const rect  = btn.getBoundingClientRect();
+    const cx    = rect.left + rect.width  / 2;
+    const cy    = rect.top  + rect.height * 0.68; // near dome base
+    const size  = 30;                              // initial diameter px
+    const maxR  = Math.hypot(window.innerWidth, window.innerHeight) * 2.2;
+    const scale = (maxR / size).toFixed(1);
+
+    // Warm amber for → light,  deep violet for → dark
+    const color = isLight
+      ? 'radial-gradient(circle, rgba(255,214,60,.22) 0%, rgba(255,160,20,.08) 38%, transparent 65%)'
+      : 'radial-gradient(circle, rgba(16,10,44,.26)   0%, rgba(28,16,56,.10)   38%, transparent 65%)';
+
+    const el = document.createElement('div');
+    Object.assign(el.style, {
+      position:      'fixed',
+      left:          cx + 'px',
+      top:           cy + 'px',
+      width:         size + 'px',
+      height:        size + 'px',
+      borderRadius:  '50%',
+      background:    color,
+      transform:     'translate(-50%,-50%) scale(1)',
+      pointerEvents: 'none',
+      zIndex:        '99990',
+      willChange:    'transform,opacity',
+    });
+    document.body.appendChild(el);
+
+    // Double rAF ensures the initial state is painted before the
+    // transition fires — prevents the browser from collapsing both frames
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      el.style.transition = `transform .65s cubic-bezier(.2,0,.2,1), opacity .5s ease .15s`;
+      el.style.transform  = `translate(-50%,-50%) scale(${scale})`;
+      el.style.opacity    = '0';
+    }));
+
+    setTimeout(() => el.remove(), 950);
+  }
+
+  /* ── Apply theme without animation (initial page load) ── */
   function applyTheme(isLight) {
     document.body.classList.toggle('light-mode', isLight);
     btn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
     if (tooltipEl) tooltipEl.textContent = isLight ? 'Light Mode' : 'Dark Mode';
   }
 
-  // Apply saved preference instantly (before paint)
+  // Restore saved / OS preference instantly before first paint
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved === 'light') {
     applyTheme(true);
   } else if (!saved) {
-    // Sync with OS preference if no saved choice
-    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-    if (prefersLight) applyTheme(true);
+    if (window.matchMedia('(prefers-color-scheme: light)').matches) applyTheme(true);
   }
 
   btn.addEventListener('click', () => {
+    // Step 1 — Enable smooth CSS transitions on all themed elements
+    document.body.classList.add('theme-switching');
+
+    // Step 2 — Toggle the theme (CSS transitions now fire on the diff)
     const isLight = document.body.classList.toggle('light-mode');
     localStorage.setItem(STORAGE_KEY, isLight ? 'light' : 'dark');
     btn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
     if (tooltipEl) tooltipEl.textContent = isLight ? 'Light Mode' : 'Dark Mode';
 
-    // Trigger lamp swing animation
+    // Step 3 — Expanding light burst from the lamp dome
+    fireThemeRipple(isLight);
+
+    // Step 4 — Lamp swing animation
     const lampWrap = document.getElementById('lamp-wrap');
     if (lampWrap) {
       lampWrap.classList.remove('swinging');
-      void lampWrap.offsetWidth; // force reflow to restart animation
+      void lampWrap.offsetWidth; // force reflow to restart
       lampWrap.classList.add('swinging');
       lampWrap.addEventListener('animationend', () => {
         lampWrap.classList.remove('swinging');
       }, { once: true });
     }
+
+    // Step 5 — Clean up: restore snappy hover behaviour after transitions
+    setTimeout(() => document.body.classList.remove('theme-switching'), 750);
   });
 })();
+
 
 /* ══════════════════════════════════════════════════════
    CUSTOM CURSOR — desktop (pointer: fine) only
