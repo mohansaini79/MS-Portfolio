@@ -14,8 +14,77 @@ html { scroll-behavior: smooth; }
 *, *::before, *::after { box-sizing: border-box; }
 body {
   -webkit-tap-highlight-color: transparent;
-  transition: background-color .4s ease, color .3s ease;
+  transition: background-color .5s ease, color .45s ease;
 }
+
+/* ═══════════════════════════════════════════
+   SMOOTH THEME TRANSITION
+   .theme-switching is added/removed by JS on each toggle.
+   Transitions are scoped to the switch window so hover
+   effects remain instant during normal interaction.
+═══════════════════════════════════════════ */
+
+/* 1. Page shell — background shifts first */
+body.theme-switching {
+  transition: background-color .52s ease, color .45s ease !important;
+}
+body.theme-switching section,
+body.theme-switching footer,
+body.theme-switching #hero,
+body.theme-switching #navbar {
+  transition:
+    background-color .52s ease .02s,
+    background       .52s ease .02s,
+    border-color     .45s ease .02s,
+    box-shadow       .5s  ease .02s !important;
+}
+
+/* 2. Cards & surfaces — slightly delayed */
+body.theme-switching .glass-card {
+  transition:
+    background-color .5s ease .04s,
+    background       .5s ease .04s,
+    border-color     .44s ease .04s,
+    box-shadow       .5s ease  .04s !important;
+}
+
+/* 3. UI components */
+body.theme-switching .nav-link,
+body.theme-switching .mobile-nav-link,
+body.theme-switching .tech-tag,
+body.theme-switching .section-badge,
+body.theme-switching .floating-tech-icon,
+body.theme-switching .contact-input,
+body.theme-switching #back-to-top,
+body.theme-switching .tech-card,
+body.theme-switching .burger-line,
+body.theme-switching .mm-panel,
+body.theme-switching .mm-close-btn,
+body.theme-switching .proj-live,
+body.theme-switching .timeline-card,
+body.theme-switching .experience-card {
+  transition:
+    background-color .48s ease .05s,
+    color            .42s ease .05s,
+    border-color     .44s ease .05s,
+    box-shadow       .48s ease .05s !important;
+}
+
+/* 4. Text — last to shift, most natural */
+body.theme-switching h1, body.theme-switching h2,
+body.theme-switching h3, body.theme-switching h4,
+body.theme-switching p,  body.theme-switching li,
+body.theme-switching label, body.theme-switching strong {
+  transition: color .44s ease .06s !important;
+}
+
+/* 5. Background orbs */
+body.theme-switching .orb-1,
+body.theme-switching .orb-2,
+body.theme-switching .orb-3 {
+  transition: background .65s ease .01s !important;
+}
+
 
 /* ══════════════════════════════════════════════
    CUSTOM CURSOR  (desktop / pointer:fine only)
@@ -272,72 +341,9 @@ body.light-mode .floating-tech-icon img[style*="invert(1)"] {
 }
 
 /* ═══════════════════════════════════════════
-   THEME TOGGLE BUTTON
+   THEME TOGGLE — lamp design lives in light-mode.css
+   (all #theme-toggle rules are there with !important)
 ═══════════════════════════════════════════ */
-#theme-toggle {
-  position: relative;
-  width: 52px; height: 26px;
-  border-radius: 9999px;
-  border: none; cursor: pointer;
-  outline: none;
-  padding: 0;
-  flex-shrink: 0;
-  background: linear-gradient(135deg, #1a0a3c 0%, #2d1a5e 100%);
-  box-shadow: 0 0 0 1.5px rgba(139,92,246,.4), 0 2px 12px rgba(0,0,0,.4);
-  transition: background .4s ease, box-shadow .4s ease, transform .2s cubic-bezier(.34,1.56,.64,1);
-  overflow: hidden;
-}
-#theme-toggle::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(139,92,246,.15) 0%, transparent 100%);
-  border-radius: inherit;
-}
-body.light-mode #theme-toggle {
-  background: linear-gradient(135deg, #e8e0ff 0%, #f3f0ff 100%);
-  box-shadow: 0 0 0 1.5px rgba(124,58,237,.3), 0 2px 12px rgba(124,58,237,.15);
-}
-
-/* Sliding knob */
-#theme-toggle .toggle-knob {
-  position: absolute;
-  top: 3px; left: 3px;
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #A78BFA, #7C3AED);
-  box-shadow: 0 2px 8px rgba(0,0,0,.4);
-  transition: left .35s cubic-bezier(.34,1.56,.64,1), background .35s ease;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px;
-  line-height: 1;
-}
-body.light-mode #theme-toggle .toggle-knob {
-  left: 29px;
-  background: linear-gradient(135deg, #F59E0B, #F97316);
-  box-shadow: 0 2px 10px rgba(249,115,22,.4);
-}
-
-/* Icons inside knob */
-#theme-toggle .icon-moon { display: inline-block; }
-#theme-toggle .icon-sun  { display: none; }
-body.light-mode #theme-toggle .icon-moon { display: none; }
-body.light-mode #theme-toggle .icon-sun  { display: inline-block; }
-
-/* Stars in dark toggle */
-#theme-toggle .toggle-stars {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  overflow: hidden;
-  pointer-events: none;
-}
-#theme-toggle .star {
-  position: absolute;
-  border-radius: 50%;
-  background: #fff;
-  transition: opacity .3s;
-}
-body.light-mode #theme-toggle .star { opacity: 0; }
 
 /* ═══════════════════════════════════════════
    UTILITIES
