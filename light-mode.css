@@ -1,0 +1,223 @@
+/* ═══════════════════════════════════════════════════════════════════
+   light-mode.css — Mohan Saini Portfolio · Light theme
+   Applied whenever the theme toggle adds `body.light-mode`.
+   The dark design in styles.css resolves through CSS custom
+   properties, so this file simply re-declares the token palette and
+   then fine-tunes the few components that use fixed colours.
+   ═══════════════════════════════════════════════════════════════════ */
+
+body.light-mode {
+  color-scheme: light;
+
+  /* Surfaces */
+  --bg0:        #E9EBF6;
+  --bg1:        #F4F5FC;
+  --surface:    rgba(255, 255, 255, 0.78);
+  --surface-2:  rgba(79, 86, 150, 0.06);
+  --surface-3:  rgba(79, 86, 150, 0.035);
+  --press:      rgba(20, 24, 60, 0.06);
+
+  /* Lines */
+  --line:        rgba(94, 102, 160, 0.20);
+  --line-soft:   rgba(94, 102, 160, 0.13);
+  --line-strong: rgba(124, 58, 237, 0.40);
+
+  /* Text */
+  --t1:         #1B1F37;
+  --t2:         #474E6E;
+  --t3:         #62698C;
+  --t4:         #8A90AC;
+
+  /* Shadows — softer for paper */
+  --sh-sm:  0 2px 8px rgba(28, 33, 74, 0.06);
+  --sh-md:  0 16px 44px rgba(28, 33, 74, 0.11);
+  --sh-lg:  0 30px 80px rgba(28, 33, 74, 0.16);
+  --sh-brand: 0 12px 34px rgba(124, 58, 237, 0.24);
+
+  /* Gradients — deeper for contrast on white */
+  --grad: linear-gradient(98deg, #7C3AED 0%, #6D28D9 34%, #5B21B6 60%, #4338CA 80%, #2563EB 100%);
+  --grad-brand: linear-gradient(120deg, #7C3AED 0%, #6D28D9 55%, #4F46E5 100%);
+
+  /* Brand hues — deepen for legible accents on paper */
+  --brand:      #7C3AED;
+  --brand-deep: #6D28D9;
+  --brand-soft: #7C3AED;
+  --indigo:     #4F46E5;
+  --blue:       #2563EB;
+  --cyan:       #0891B2;
+  --green:      #059669;
+
+  background:
+    radial-gradient(1200px 700px at 84% -6%, rgba(124, 58, 237, .07), transparent 60%),
+    radial-gradient(1000px 600px at -8% 30%, rgba(37, 62, 143, .08), transparent 60%),
+    linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 100%);
+  color: var(--t1);
+}
+
+/* Dark-agnostic blobs → gentle pastel wash */
+body.light-mode .orb-1 { background: radial-gradient(circle, rgba(139,92,246,.13) 0%, transparent 62%); }
+body.light-mode .orb-2 { background: radial-gradient(circle, rgba(59,130,246,.11) 0%, transparent 64%); }
+body.light-mode .orb-3 { background: radial-gradient(circle, rgba(167,139,250,.10) 0%, transparent 62%); }
+
+/* Lighter vignette so it doesn't grey the page */
+body.light-mode .aurora::after {
+  background:
+    radial-gradient(140% 90% at 50% -10%, transparent 58%, rgba(233,235,246,.6) 100%),
+    linear-gradient(180deg, rgba(244,245,252,.4), transparent 20%, transparent 82%, rgba(233,235,246,.6));
+}
+
+/* ── Navbar & mobile menu ── */
+body.light-mode .nav-inner { background: rgba(250, 250, 255, 0.78); }
+body.light-mode .navbar-scrolled .nav-inner {
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 12px 34px rgba(28, 33, 74, .14), inset 0 1px 0 rgba(255,255,255,.8);
+}
+body.light-mode .nav-link:hover,
+body.light-mode .nav-link.active { color: var(--t1); }
+body.light-mode .btn-resume { box-shadow: 0 6px 16px rgba(124,58,237,.26), inset 0 1px 0 rgba(255,255,255,.28); }
+
+body.light-mode #mobile-menu > .mm-overlay { background: rgba(30, 40, 80, 0.35); }
+body.light-mode .mm-panel {
+  background: rgba(252, 252, 255, 0.97);
+  border-left-color: rgba(180, 185, 220, 0.6);
+  box-shadow: -8px 0 40px rgba(28,33,100,.12), inset 1px 0 0 rgba(255,255,255,.9);
+}
+body.light-mode .mn-icon {
+  background: rgba(240, 242, 255, 0.9);
+  border-color: rgba(180, 185, 220, 0.5);
+  color: rgba(60, 70, 120, 0.7);
+}
+body.light-mode .mobile-nav-link:hover .mn-icon { color: var(--brand); }
+body.light-mode .mm-foot-link {
+  background: rgba(240, 242, 255, 0.8);
+  border-color: rgba(180, 185, 220, 0.5);
+  color: rgba(60, 70, 120, 0.8);
+}
+body.light-mode .mm-foot-link:hover { background: #fff; color: var(--brand); }
+
+/* ── Resume dropdown (light mode) ── */
+body.light-mode .resume-dropdown {
+  background: rgba(255, 255, 255, 0.97);
+  border-color: rgba(94,102,160,.22);
+  box-shadow: 0 16px 50px rgba(28,33,74,.14), 0 0 30px rgba(124,58,237,.06);
+}
+body.light-mode .rd-label { color: var(--t1); }
+body.light-mode .rd-sub   { color: var(--t4); }
+body.light-mode .rd-item:hover { background: rgba(124,58,237,.07); border-color: rgba(124,58,237,.2); }
+
+/* ── Stat card strip ── */
+body.light-mode .stat {
+  --stat-bg: rgba(255, 255, 255, 0.92);
+  --stat-bg-h: #ffffff;
+}
+body.light-mode .stat-num {
+  background: linear-gradient(120deg, #7C3AED, #6366F1 55%, #0284C7);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Terminal / typewriter becomes a light code surface ── */
+body.light-mode .term {
+  --term-bg: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--sh-md), inset 0 1px 0 rgba(255,255,255,.9);
+}
+body.light-mode .term-body pre { color: #047857; }
+/* script.js injects syntax colours via inline styles — remap for paper */
+body.light-mode #typewriter-code span[style*="#34D399"] { color: #047857 !important; }
+body.light-mode #typewriter-code span[style*="#A78BFA"] { color: #6D28D9 !important; }
+body.light-mode #typewriter-code span[style*="#60A5FA"] { color: #1D4ED8 !important; }
+body.light-mode #typewriter-code span[style*="#6B7280"] { color: #8A90AC !important; }
+
+/* ── Title & subtitle gradient depth ── */
+body.light-mode .hero-subtitle .sub-vio {
+  background: linear-gradient(100deg, #7C3AED, #5B21B6);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+body.light-mode .hero-subtitle .sub-blu {
+  background: linear-gradient(100deg, #3B82F6, #1D4ED8);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+body.light-mode .metric-num {
+  background: linear-gradient(120deg, #6D28D9, var(--acc, #A78BFA));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Portrait keeps its deep frame (image-first) ── */
+body.light-mode .portrait-card {
+  background: linear-gradient(180deg, rgba(23, 27, 58, .92), rgba(13, 16, 34, .94));
+  box-shadow: 0 34px 90px rgba(28, 33, 74, .28), 0 0 80px rgba(124,58,237,.18);
+}
+body.light-mode .tech-chip { background: rgba(255, 255, 255, .96); border-color: rgba(124, 58, 237, .3); }
+
+/* ── Fixed tints that need deepening on white ── */
+body.light-mode .p-featured {
+  color: #92400E;
+  background: rgba(245, 158, 11, .1);
+  border-color: rgba(245, 158, 11, .34);
+}
+body.light-mode .p-users { color: #047857; }
+body.light-mode .avail-badge { color: #047857; }
+body.light-mode .edu-active { color: #047857; }
+body.light-mode .avail-card strong { color: #047857; }
+body.light-mode .avail-card {
+  background: linear-gradient(120deg, rgba(16,185,129,.09), rgba(16,185,129,.02));
+}
+body.light-mode .avail-dot { background: #059669; }
+body.light-mode .avail-dot::before { background: rgba(5, 150, 105, .35); }
+body.light-mode .live-dot { background: #059669; }
+body.light-mode .project-card:hover .p-live { color: #047857; }
+body.light-mode .si-github { color: #1B1F37; background: rgba(79,86,150,.07); }
+body.light-mode .si-linkedin { color: #0A66C2; }
+body.light-mode .theme-toggle { box-shadow: 0 4px 14px rgba(28,33,74,.08), inset 0 1px 0 rgba(255,255,255,.7); }
+
+/* ── Footer link icons ── */
+body.light-mode .footer-note { color: var(--t4); }
+
+/* ── Cards: lighten hover glows & glass fills ── */
+body.light-mode .card::before {
+  background: radial-gradient(600px 220px at 85% -10%, rgba(124, 58, 237, .07), transparent 55%);
+}
+body.light-mode .card:hover {
+  box-shadow: var(--sh-md), inset 0 1px 0 rgba(255,255,255,.7);
+}
+body.light-mode .term-file { color: var(--t3); }
+body.light-mode .term-file .file-live,
+body.light-mode .code-pill { background: var(--surface); }
+
+/* ── Tech icons: dark glyphs should show their natural colour ── */
+body.light-mode .ic-invert { filter: none; opacity: .85; }
+body.light-mode .ic-sock { filter: none; opacity: .8; }
+body.light-mode .ic-django { filter: invert(42%) sepia(44%) saturate(560%) hue-rotate(112deg) brightness(.86); }
+body.light-mode .tech-card .t-ico { background: rgba(255,255,255,.9); }
+
+/* ── Contact form ── */
+body.light-mode .contact-input { background: rgba(79, 86, 150, .05); }
+body.light-mode .contact-input:hover { background: rgba(79, 86, 150, .03); }
+body.light-mode .contact-input:focus {
+  background: rgba(139, 92, 246, .05);
+  border-color: rgba(124, 58, 237, .55);
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, .1);
+}
+
+/* ── Gradient pill/CTA shadows adapt ── */
+body.light-mode .btn {
+  box-shadow: 0 8px 20px rgba(109, 40, 217, .22), inset 0 1px 0 rgba(255,255,255,.28);
+}
+body.light-mode .btn:hover {
+  box-shadow: 0 14px 32px rgba(109, 40, 217, .3), inset 0 1px 0 rgba(255,255,255,.3);
+}
+body.light-mode .btn-ghost,
+body.light-mode .btn-line { box-shadow: inset 0 1px 0 rgba(255,255,255,.6); }
+body.light-mode .btn-ghost:hover,
+body.light-mode .btn-line:hover { box-shadow: 0 10px 26px rgba(28,33,74,.12), inset 0 1px 0 rgba(255,255,255,.7); }
+body.light-mode .btn-resume { background: linear-gradient(120deg, #6D28D9, #4F46E5); }
+
+body.light-mode #back-to-top { box-shadow: 0 10px 26px rgba(124,58,237,.32), inset 0 1px 0 rgba(255,255,255,.3); }
+
+body.light-mode ::-webkit-scrollbar-track { background: var(--bg0); }
+@supports (scrollbar-color: red blue) {
+  body.light-mode * { scrollbar-color: rgba(124,58,237,.45) var(--bg0); }
+}
