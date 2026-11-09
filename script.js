@@ -226,10 +226,18 @@ window.closeMobileMenu = closeMobileMenu;
         b.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
       });
 
+      let visibleIdx = 0;
       projectCards.forEach((card) => {
         const id = card.getAttribute('data-project-id');
         const visible = matchedIds.has(id);
         card.classList.toggle('hidden', !visible);
+        if (visible) {
+          card.classList.remove('filter-anim-in');
+          card.style.setProperty('--filter-delay', `${visibleIdx * 55}ms`);
+          void card.offsetWidth;
+          card.classList.add('filter-anim-in');
+          visibleIdx++;
+        }
       });
 
       if (statusEl) {
@@ -495,13 +503,75 @@ window.closeMobileMenu = closeMobileMenu;
         b.setAttribute('aria-pressed', active ? 'true' : 'false');
       });
 
+      let visibleIdx = 0;
       techCards.forEach((card) => {
         const cardCat = card.getAttribute('data-tech-cat');
         const show = cat === 'all' || cardCat === cat;
         card.classList.toggle('hidden', !show);
+        if (show) {
+          card.classList.remove('filter-anim-in');
+          card.style.setProperty('--filter-delay', `${visibleIdx * 50}ms`);
+          void card.offsetWidth;
+          card.classList.add('filter-anim-in');
+          visibleIdx++;
+        }
       });
     });
   });
+})();
+
+/* ══════════════════════════════════════════════════════
+   6B. PREMIUM CARD SPOTLIGHT, 3D MICRO-TILT & STAGGERED REVEAL
+══════════════════════════════════════════════════════ */
+(function initPremiumCardAnimations() {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  // 1. Staggered Scroll-Reveal Observer
+  if (!prefersReduced && 'IntersectionObserver' in window) {
+    const revealEls = document.querySelectorAll('.project-card, .card, .sec-header-split, .filter-toolbar');
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('anim-in');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -24px 0px' }
+    );
+
+    revealEls.forEach((el, idx) => {
+      el.classList.add('reveal');
+      el.style.setProperty('--stagger-delay', `${(idx % 3) * 65}ms`);
+      io.observe(el);
+    });
+  }
+
+  // 2. Interactive Radial Spotlight & Subtle 3D Micro-Tilt on Cards
+  if (!prefersReduced && isFinePointer) {
+    const interactiveCards = document.querySelectorAll('.project-card, .card');
+    interactiveCards.forEach((card) => {
+      card.addEventListener('pointermove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+
+        const normX = (x / rect.width - 0.5) * 2;
+        const normY = (y / rect.height - 0.5) * 2;
+        card.style.setProperty('--rx', `${(-normY * 2.2).toFixed(2)}deg`);
+        card.style.setProperty('--ry', `${(normX * 2.2).toFixed(2)}deg`);
+      }, { passive: true });
+
+      card.addEventListener('pointerleave', () => {
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+      }, { passive: true });
+    });
+  }
 })();
 
 /* ══════════════════════════════════════════════════════

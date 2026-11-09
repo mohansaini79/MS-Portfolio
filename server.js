@@ -7,6 +7,7 @@
 
 import 'dotenv/config';
 import express from 'express';
+import fs      from 'fs';
 import path    from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
@@ -178,6 +179,16 @@ app.get(['/resume.pdf', '/Resume.pdf', '/Resume.PDF'], (req, res) => {
   }
   res.sendFile(resumeFilePath, (err) => {
     if (err && !res.headersSent) res.status(404).send('Resume not found');
+  });
+});
+
+// ── Portrait image route — supports both mohan2.png and mohan2.jpg seamlessly ──
+app.get(['/mohan2.png', '/mohan2.jpg', '/Mohan2.png', '/Mohan2.jpg'], (_req, res) => {
+  const pngPath = path.join(__dirname, 'mohan2.png');
+  const jpgPath = path.join(__dirname, 'mohan2.jpg');
+  const targetPath = fs.existsSync(pngPath) ? pngPath : jpgPath;
+  res.sendFile(targetPath, (err) => {
+    if (err && !res.headersSent) res.status(404).send('Portrait image not found');
   });
 });
 
