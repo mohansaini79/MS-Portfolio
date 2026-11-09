@@ -131,7 +131,7 @@ app.post('/api/contact', async (req, res) => {
           <a href="https://github.com/mohansaini79" style="display:inline-block;padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;border-radius:7px;font-size:13px;text-decoration:none">GitHub</a>
           <a href="https://www.linkedin.com/in/mohan-saini-2026ms/" style="display:inline-block;padding:8px 16px;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.2);color:#818CF8;border-radius:7px;font-size:13px;text-decoration:none">LinkedIn</a>
         </div>
-        <p style="color:#E2E8F0;font-size:14px;margin-top:28px;line-height:1.6">Best regards,<br/><strong style="color:#fff">Mohan Saini</strong><br/><span style="color:#818CF8;font-size:12px">Co-Founder &amp; CTO · The Rising Tribe</span></p>
+        <p style="color:#E2E8F0;font-size:14px;margin-top:28px;line-height:1.6">Best regards,<br/><strong style="color:#fff">Mohan Saini</strong><br/><span style="color:#FF5500;font-size:12px">Full Stack Developer · B.Tech CSE 2027</span></p>
       </div>
       <div style="padding:14px 32px;background:rgba(0,0,0,0.18);text-align:center;font-size:12px;color:#475569">
         © ${new Date().getFullYear()} Mohan Saini · mohansaini8772532@gmail.com
@@ -169,13 +169,14 @@ app.post('/api/contact', async (req, res) => {
 });
 
 // ── Resume download — case-insensitive fix for Linux (Railway) ──
-app.get('/resume.pdf', (_req, res) => {
-  res.download(path.join(__dirname, 'Resume.pdf'), 'Mohan_Saini_Resume.pdf', (err) => {
-    if (err && !res.headersSent) res.status(404).send('Resume not found');
-  });
-});
-app.get('/Resume.pdf', (_req, res) => {
-  res.download(path.join(__dirname, 'Resume.pdf'), 'Mohan_Saini_Resume.pdf', (err) => {
+const resumeFilePath = path.join(__dirname, 'Resume.PDF');
+app.get(['/resume.pdf', '/Resume.pdf', '/Resume.PDF'], (req, res) => {
+  if (req.query.download === '1') {
+    return res.download(resumeFilePath, 'Mohan_Saini_Resume.pdf', (err) => {
+      if (err && !res.headersSent) res.status(404).send('Resume not found');
+    });
+  }
+  res.sendFile(resumeFilePath, (err) => {
     if (err && !res.headersSent) res.status(404).send('Resume not found');
   });
 });

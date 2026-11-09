@@ -6,7 +6,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "build": "node --check server.js && node --check script.js && node --check portfolio-logic.js",
+    "lint": "node --check server.js && node --check script.js && node --check portfolio-logic.js",
+    "test": "node --test portfolio-logic.test.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
