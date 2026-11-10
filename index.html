@@ -23,12 +23,21 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="light-mode.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "/vendor/three/build/three.module.js",
+        "three/addons/": "/vendor/three/examples/jsm/"
+      }
+    }
+  </script>
 </head>
 
 <body>
 
   <!-- Subtle architectural ambient field -->
   <div class="ambient-canvas" aria-hidden="true">
+    <div id="three-ambient-mount" class="three-ambient-mount" aria-hidden="true"></div>
     <div class="ambient-glow ambient-glow-1"></div>
     <div class="ambient-glow ambient-glow-2"></div>
     <div class="architectural-grid"></div>
@@ -329,6 +338,53 @@
                 </a>
               </div>
             </figure>
+          </div>
+        </div>
+
+        <!-- Interactive Three.js 3D Developer Workstation Stage (100% Unobstructed Viewport + Collapsible Bottom Dock) -->
+        <div class="three-stage-card reveal" id="three-stage-card" role="region" aria-label="Interactive 3D Developer Workstation Stage">
+          <div class="three-stage-topbar">
+            <div class="tst-left">
+              <span class="mono-meta tst-badge">FIG. 02 — INTERACTIVE 3D DEVELOPER WORKSTATION · THREE.JS</span>
+              <span id="three-mode-status" class="tst-status">3D Developer Workstation · Python · React · JS · Node · MongoDB</span>
+            </div>
+            <button type="button" id="three-dock-toggle" class="tst-collapse-btn" aria-expanded="true" aria-controls="three-control-dock">
+              ▾ Hide Controls
+            </button>
+          </div>
+
+          <div class="three-stage-viewport-wrap">
+            <div
+              id="three-canvas-mount"
+              class="three-canvas-mount"
+              data-testid="three-canvas-mount"
+              data-scene-mode="workstation"
+            ></div>
+
+            <!-- Unified Collapsible Bottom Control Dock -->
+            <div class="three-control-dock" id="three-control-dock" role="toolbar" aria-label="3D workstation controls">
+              <div class="tcd-modes" role="group" aria-label="Select 3D workstation view">
+                <button type="button" class="tcd-btn active" data-three-mode="workstation" aria-pressed="true">Full-Stack IDE</button>
+                <button type="button" class="tcd-btn" data-three-mode="frontend" aria-pressed="false">React &amp; JS UI</button>
+                <button type="button" class="tcd-btn" data-three-mode="backend" aria-pressed="false">Python &amp; Node API</button>
+              </div>
+
+              <label class="tcd-slider-wrap" for="three-explode-slider">
+                <span class="tcd-slider-label">Icon Orbit</span>
+                <input
+                  id="three-explode-slider"
+                  class="tcd-slider"
+                  type="range"
+                  min="0.85"
+                  max="1.65"
+                  step="0.01"
+                  value="1.00"
+                  aria-label="Technology icon orbit separation"
+                />
+              </label>
+
+              <button type="button" id="three-pause-btn" class="tcd-pause" aria-pressed="false" aria-label="Pause or resume 3D animation">Pause 3D</button>
+            </div>
           </div>
         </div>
 

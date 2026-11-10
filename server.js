@@ -35,6 +35,7 @@ if (!EMAIL_USER || !BREVO_KEY) {
 // ── Middleware ──
 app.use(cors());
 app.use(express.json());
+app.use('/vendor/three', express.static(path.join(__dirname, 'node_modules/three')));
 app.use(express.static(path.join(__dirname)));
 
 // ══════════════════════════════════════════════════════

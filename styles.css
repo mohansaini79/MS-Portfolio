@@ -160,6 +160,48 @@ figure, figcaption { margin: 0; }
   overflow: hidden;
 }
 
+.three-ambient-mount {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.9;
+  transition: opacity 0.45s ease;
+}
+
+body.light-mode .three-ambient-mount {
+  opacity: 0.45;
+}
+
+.three-ambient-canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.three-canvas-mount {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.96;
+  transition: opacity 0.45s ease;
+}
+
+body.light-mode .three-canvas-mount {
+  opacity: 0.85;
+}
+
+.three-webgl-canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
 .ambient-glow {
   position: absolute;
   border-radius: 50%;
@@ -267,15 +309,13 @@ figure, figcaption { margin: 0; }
   left: 0;
   right: 0;
   z-index: 1200;
-  background: rgba(7, 8, 12, 0.80);
+  background: rgba(7, 8, 12, 0.92);
   border-bottom: 1px solid var(--line);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 #navbar.navbar-scrolled {
-  background: rgba(7, 8, 12, 0.94);
+  background: rgba(7, 8, 12, 0.97);
   border-bottom-color: rgba(226, 232, 240, 0.16);
 }
 
@@ -947,8 +987,187 @@ body.light-mode .theme-toggle .ic-moon { opacity: 0; transform: rotate(-45deg) s
 /* Right Column: Portrait Monolith */
 .hero-visual {
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* Dedicated Interactive Three.js 3D Architecture Stage Card */
+.three-stage-card {
+  width: 100%;
+  margin-bottom: 28px;
+  border-radius: var(--r-md);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--sh-md);
+  overflow: hidden;
+}
+
+.three-stage-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 18px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+.tst-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.tst-badge {
+  color: var(--brand-soft);
+}
+
+.tst-status {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--t2);
+}
+
+.tst-collapse-btn {
+  padding: 5px 10px;
+  border-radius: var(--r-xs);
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--t2);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.tst-collapse-btn:hover {
+  color: var(--t1);
+  border-color: var(--line-strong);
+}
+
+.three-stage-viewport-wrap {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  background: radial-gradient(circle at 50% 42%, #141824 0%, #07080c 100%);
+  overflow: hidden;
+  cursor: grab;
+}
+
+.three-stage-viewport-wrap:active {
+  cursor: grabbing;
+}
+
+body.light-mode .three-stage-viewport-wrap {
+  background: radial-gradient(circle at 50% 42%, #ffffff 0%, #efece6 100%);
+}
+
+.three-stage-viewport-wrap .three-canvas-mount {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  opacity: 1;
+}
+
+/* Unified Collapsible Bottom Control Dock (Zero Center Occlusion) */
+.three-control-dock {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  width: max-content;
+  max-width: min(860px, calc(100% - 24px));
+  padding: 8px 12px;
+  border-radius: var(--r-sm);
+  background: rgba(12, 14, 20, 0.92);
+  border: 1px solid var(--line);
+  box-shadow: var(--sh-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+}
+
+body.light-mode .three-control-dock {
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.three-control-dock.dock-collapsed {
+  transform: translate(-50%, calc(100% + 24px));
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tcd-modes {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tcd-slider-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 8px;
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+
+.tcd-slider-label {
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--t3);
+}
+
+.tcd-slider {
+  width: 88px;
+  accent-color: var(--brand);
+  cursor: pointer;
+}
+
+.tcd-btn,
+.tcd-pause {
+  padding: 6px 10px;
+  border-radius: var(--r-xs);
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--t2);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  transition:
+    background 0.22s ease,
+    color 0.22s ease,
+    border-color 0.22s ease,
+    transform 0.22s ease;
+}
+
+.tcd-btn:hover,
+.tcd-pause:hover {
+  color: var(--t1);
+  border-color: var(--line-strong);
+  transform: translateY(-1px);
+}
+
+.tcd-btn.active {
+  background: rgba(255, 85, 0, 0.16);
+  color: var(--t1);
+  border-color: var(--brand);
+}
+
+.tcd-pause[aria-pressed="true"] {
+  border-color: var(--cobalt);
+  color: var(--cobalt);
 }
 
 .portrait-monolith {
@@ -3027,12 +3246,23 @@ textarea.contact-input {
   }
 
   .hero-visual {
-    justify-content: center;
+    align-items: center;
   }
 
   .portrait-monolith {
     max-width: 420px;
     margin-inline: auto;
+  }
+
+  .three-stage-viewport-wrap {
+    height: 330px;
+  }
+
+  .three-control-dock {
+    width: calc(100% - 20px);
+    max-width: 680px;
+    padding: 8px 10px;
+    gap: 8px;
   }
 
   .portrait-media-frame {

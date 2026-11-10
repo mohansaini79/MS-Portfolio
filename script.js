@@ -11,6 +11,9 @@ import {
   resolveThemeState,
   generateContributionCalendar
 } from './portfolio-logic.js';
+import { initPortfolioThreeScene } from './three-scene.js';
+
+const threeSceneController = initPortfolioThreeScene();
 
 /* ══════════════════════════════════════════════════════
    1. THEME TOGGLE — Dark / Light Mode
@@ -26,6 +29,9 @@ import {
     document.body.classList.toggle('light-mode', isLight);
     btn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
     if (tooltipEl) tooltipEl.textContent = isLight ? 'Light Theme' : 'Dark Theme';
+    if (threeSceneController) {
+      threeSceneController.setTheme(theme);
+    }
   }
 
   const saved = localStorage.getItem(STORAGE_KEY);

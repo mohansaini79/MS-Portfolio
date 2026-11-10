@@ -430,3 +430,174 @@ export function generateContributionCalendar(period = 'last-year') {
   };
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   THREE.JS 3D SCENE KINEMATICS & THEME PALETTE LOGIC
+   Pure functions shared with three-scene.js and unit tests
+   ═══════════════════════════════════════════════════════════════════ */
+
+export const THREE_SCENE_MODES = {
+  workstation: {
+    id: 'workstation',
+    label: 'Full-Stack IDE',
+    subtitle: '3D Developer Workstation · Python · React · JS · Node · MongoDB',
+    explodeFactor: 1.0,
+    orbitSpeed: 1.0,
+    lidAngle: -0.28,
+    ringTiltX: 0.16,
+    ringTiltZ: 0.0,
+    cameraOffset: { x: 0.0, y: 0.72, z: 6.1 }
+  },
+  frontend: {
+    id: 'frontend',
+    label: 'React & JS UI',
+    subtitle: 'Frontend Architecture · React.js · JavaScript ES6+ · Tailwind',
+    explodeFactor: 1.28,
+    orbitSpeed: 1.35,
+    lidAngle: -0.18,
+    ringTiltX: 0.24,
+    ringTiltZ: 0.12,
+    cameraOffset: { x: -0.65, y: 0.82, z: 5.75 }
+  },
+  backend: {
+    id: 'backend',
+    label: 'Python & Node API',
+    subtitle: 'Backend & DB · Python · Node.js · MongoDB · FastAPI',
+    explodeFactor: 1.36,
+    orbitSpeed: 1.45,
+    lidAngle: -0.34,
+    ringTiltX: 0.12,
+    ringTiltZ: -0.14,
+    cameraOffset: { x: 0.68, y: 0.64, z: 5.85 }
+  },
+  // Legacy aliases mapped cleanly
+  core: {
+    id: 'workstation',
+    label: 'Full-Stack IDE',
+    subtitle: '3D Developer Workstation · Python · React · JS · Node · MongoDB',
+    explodeFactor: 1.0,
+    orbitSpeed: 1.0,
+    lidAngle: -0.28,
+    ringTiltX: 0.16,
+    ringTiltZ: 0.0,
+    cameraOffset: { x: 0.0, y: 0.72, z: 6.1 }
+  },
+  api: {
+    id: 'frontend',
+    label: 'React & JS UI',
+    subtitle: 'Frontend Architecture · React.js · JavaScript ES6+ · Tailwind',
+    explodeFactor: 1.28,
+    orbitSpeed: 1.35,
+    lidAngle: -0.18,
+    ringTiltX: 0.24,
+    ringTiltZ: 0.12,
+    cameraOffset: { x: -0.65, y: 0.82, z: 5.75 }
+  },
+  ai: {
+    id: 'backend',
+    label: 'Python & Node API',
+    subtitle: 'Backend & DB · Python · Node.js · MongoDB · FastAPI',
+    explodeFactor: 1.36,
+    orbitSpeed: 1.45,
+    lidAngle: -0.34,
+    ringTiltX: 0.12,
+    ringTiltZ: -0.14,
+    cameraOffset: { x: 0.68, y: 0.64, z: 5.85 }
+  }
+};
+
+export const RECOGNIZED_TECH_ICONS = [
+  { id: 'python', name: 'Python', primaryHex: '#3776AB', accentHex: '#FFD43B', side: 'left-top' },
+  { id: 'react', name: 'React', primaryHex: '#61DAFB', accentHex: '#00D8FF', side: 'left-bottom' },
+  { id: 'javascript', name: 'JavaScript', primaryHex: '#F7DF1E', accentHex: '#111318', side: 'top-center' },
+  { id: 'nodejs', name: 'Node.js', primaryHex: '#539E43', accentHex: '#83CD29', side: 'right-top' },
+  { id: 'mongodb', name: 'MongoDB', primaryHex: '#10AA50', accentHex: '#B8E986', side: 'right-bottom' }
+];
+
+/**
+ * Frame-rate independent exponential damping (THREE.MathUtils.damp equivalent)
+ */
+export function dampScalar(current, target, lambda = 6, dt = 0.016) {
+  const c = Number(current) || 0;
+  const t = Number(target) || 0;
+  const k = Math.max(0, Number(lambda) || 0);
+  const delta = Math.max(0, Number(dt) || 0);
+  return c + (t - c) * (1 - Math.exp(-k * delta));
+}
+
+/**
+ * Compute deterministic 3D workstation targets from active mode, scroll progress (0..1), and pointer (-1..1)
+ */
+export function computeThreeSceneKinematics({
+  mode = 'workstation',
+  scrollProgress = 0,
+  pointerX = 0,
+  pointerY = 0
+} = {}) {
+  const preset = THREE_SCENE_MODES[mode] || THREE_SCENE_MODES.workstation;
+  const clampedScroll = Math.min(Math.max(Number(scrollProgress) || 0, 0), 1);
+  const px = Math.min(Math.max(Number(pointerX) || 0, -1), 1);
+  const py = Math.min(Math.max(Number(pointerY) || 0, -1), 1);
+
+  const scrollTurn = clampedScroll * Math.PI * 0.55;
+  const targetCameraX = preset.cameraOffset.x + px * 0.52;
+  const targetCameraY = preset.cameraOffset.y + py * 0.34 + clampedScroll * 0.28;
+  const targetCameraZ = preset.cameraOffset.z - Math.sin(clampedScroll * Math.PI) * 0.35;
+
+  const targetGroupRotY = px * 0.32 - scrollTurn * 0.38;
+  const targetGroupRotX = preset.ringTiltX - py * 0.18 + clampedScroll * 0.16;
+  const targetExplode = preset.explodeFactor + Math.sin(clampedScroll * Math.PI) * 0.14;
+  const targetLidAngle = preset.lidAngle - clampedScroll * 0.18;
+
+  return {
+    mode: preset.id,
+    label: preset.label,
+    subtitle: preset.subtitle,
+    orbitSpeed: preset.orbitSpeed,
+    ringTiltX: preset.ringTiltX,
+    ringTiltZ: preset.ringTiltZ,
+    targetLidAngle: Number(targetLidAngle.toFixed(4)),
+    targetExplode: Number(targetExplode.toFixed(4)),
+    targetGroupRotX: Number(targetGroupRotX.toFixed(4)),
+    targetGroupRotY: Number(targetGroupRotY.toFixed(4)),
+    targetCamera: {
+      x: Number(targetCameraX.toFixed(4)),
+      y: Number(targetCameraY.toFixed(4)),
+      z: Number(targetCameraZ.toFixed(4))
+    }
+  };
+}
+
+/**
+ * Return calibrated 3D PBR material and cinematic orange lighting colors for Dark vs Light mode
+ */
+export function getThreeSceneThemePalette(theme = 'dark') {
+  const resolved = resolveThemeState(theme);
+  if (resolved === 'light') {
+    return {
+      theme: 'light',
+      fogColor: 0xf7f6f2,
+      fogDensity: 0.025,
+      coreMetalColor: 0x334155,
+      statorColor: 0x475569,
+      brandColor: 0xd9460f,
+      cobaltColor: 0x0284c7,
+      emeraldColor: 0x059669,
+      wireOpacity: 0.20,
+      keyLightIntensity: 2.9
+    };
+  }
+  return {
+    theme: 'dark',
+    fogColor: 0x07080c,
+    fogDensity: 0.028,
+    coreMetalColor: 0x1e2430,
+    statorColor: 0x12151e,
+    brandColor: 0xff5500,
+    cobaltColor: 0x38bdf8,
+    emeraldColor: 0x10b981,
+    wireOpacity: 0.28,
+    keyLightIntensity: 3.1
+  };
+}
+
+

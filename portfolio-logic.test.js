@@ -4,13 +4,18 @@ import {
   PROJECTS_DATA,
   TECH_CATEGORIES,
   TECH_DATA,
+  THREE_SCENE_MODES,
+  RECOGNIZED_TECH_ICONS,
   filterProjects,
   getProjectById,
   filterTechStack,
   validateContactForm,
   resolveThemeState,
   getContributionLevel,
-  generateContributionCalendar
+  generateContributionCalendar,
+  dampScalar,
+  computeThreeSceneKinematics,
+  getThreeSceneThemePalette
 } from './portfolio-logic.js';
 
 test('filterProjects returns all 6 projects when category is all', () => {
@@ -139,4 +144,44 @@ test('generateContributionCalendar builds 52 weeks x 7 days (364 days) with dist
   assert.equal(cal2025.days.length, 364);
   assert.notEqual(calLastYear.stats.totalContributions, cal2025.stats.totalContributions);
 });
+
+test('dampScalar smoothly interpolates toward target value using exponential decay', () => {
+  const step1 = dampScalar(0, 10, 6, 0.016);
+  assert.ok(step1 > 0 && step1 < 10);
+  const stepLargeDt = dampScalar(0, 10, 8, 5);
+  assert.ok(Math.abs(stepLargeDt - 10) < 0.001);
+});
+
+test('computeThreeSceneKinematics returns distinct camera, lidAngle, and explode targets across workstation modes and verifies 5 recognizable tech icons', () => {
+  assert.ok(THREE_SCENE_MODES.workstation);
+  assert.ok(THREE_SCENE_MODES.frontend);
+  assert.ok(THREE_SCENE_MODES.backend);
+  assert.equal(RECOGNIZED_TECH_ICONS.length, 5);
+  assert.deepEqual(
+    RECOGNIZED_TECH_ICONS.map((t) => t.name),
+    ['Python', 'React', 'JavaScript', 'Node.js', 'MongoDB']
+  );
+
+  const wsAtTop = computeThreeSceneKinematics({ mode: 'workstation', scrollProgress: 0, pointerX: 0, pointerY: 0 });
+  const feAtMid = computeThreeSceneKinematics({ mode: 'frontend', scrollProgress: 0.5, pointerX: 0.4, pointerY: -0.2 });
+  const beAtEnd = computeThreeSceneKinematics({ mode: 'backend', scrollProgress: 1.0, pointerX: -0.5, pointerY: 0.3 });
+
+  assert.equal(wsAtTop.mode, 'workstation');
+  assert.equal(feAtMid.mode, 'frontend');
+  assert.equal(beAtEnd.mode, 'backend');
+  assert.notEqual(wsAtTop.targetExplode, feAtMid.targetExplode);
+  assert.notEqual(wsAtTop.targetLidAngle, beAtEnd.targetLidAngle);
+  assert.notEqual(wsAtTop.targetCamera.x, feAtMid.targetCamera.x);
+});
+
+test('getThreeSceneThemePalette returns calibrated PBR hex colors for dark and light modes', () => {
+  const darkPalette = getThreeSceneThemePalette('dark');
+  const lightPalette = getThreeSceneThemePalette('light');
+  assert.equal(darkPalette.theme, 'dark');
+  assert.equal(lightPalette.theme, 'light');
+  assert.equal(darkPalette.brandColor, 0xff5500);
+  assert.equal(lightPalette.brandColor, 0xd9460f);
+  assert.notEqual(darkPalette.fogColor, lightPalette.fogColor);
+});
+
 
