@@ -5,13 +5,96 @@
 
 import {
   PROJECTS_DATA,
+  TECH_DATA,
   filterProjects,
   getProjectById,
+  searchPortfolioItems,
   validateContactForm,
+  getIntroAnimationConfig,
   resolveThemeState,
   generateContributionCalendar
 } from './portfolio-logic.js';
 import { initPortfolioThreeScene } from './three-scene.js';
+
+/* ══════════════════════════════════════════════════════
+   0. FIRST-VISIT "HELLO" INTRO ANIMATION
+══════════════════════════════════════════════════════ */
+(function initHelloIntroAnimation() {
+  const overlay = document.getElementById('hello-intro-overlay');
+  const skipBtn = document.getElementById('hello-intro-skip');
+  if (!overlay) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const config = getIntroAnimationConfig({ prefersReducedMotion });
+
+  let status = 'playing';
+  let exitTimer = 0;
+  let completeTimer = 0;
+
+  function finishIntro() {
+    if (status === 'complete' || status === 'exiting') return;
+    status = 'exiting';
+    clearTimeout(exitTimer);
+    clearTimeout(completeTimer);
+    overlay.classList.add('is-exiting');
+    document.body.classList.remove('intro-locked');
+
+    completeTimer = window.setTimeout(() => {
+      status = 'complete';
+      overlay.classList.add('is-complete');
+      overlay.setAttribute('aria-hidden', 'true');
+    }, config.exitDurationMs || 1200);
+  }
+
+  function startIntro(customDurationMs) {
+    clearTimeout(exitTimer);
+    clearTimeout(completeTimer);
+    overlay.classList.remove('is-exiting', 'is-complete');
+    overlay.setAttribute('aria-hidden', 'false');
+
+    // Re-trigger CSS animations when replaying
+    const animEls = overlay.querySelectorAll('.hello-char, .hello-dot, .hello-kicker, .hello-sub, .hello-progress-bar');
+    animEls.forEach((el) => {
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = '';
+    });
+
+    if (!config.shouldAnimate && !customDurationMs) {
+      status = 'complete';
+      overlay.classList.add('is-complete');
+      overlay.setAttribute('aria-hidden', 'true');
+      return;
+    }
+
+    status = 'playing';
+    const duration = Number(customDurationMs) > 0 ? Number(customDurationMs) : config.totalDurationMs;
+    exitTimer = window.setTimeout(finishIntro, duration);
+  }
+
+  if (skipBtn) {
+    skipBtn.addEventListener('click', finishIntro);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (status === 'playing' && (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ')) {
+      finishIntro();
+    }
+  });
+
+  startIntro();
+
+  window.__portfolioIntro = {
+    getState: () => ({
+      status,
+      primaryWord: config.primaryWord,
+      totalDurationMs: config.totalDurationMs,
+      exitDurationMs: config.exitDurationMs
+    }),
+    skip: finishIntro,
+    replay: (durationMs) => startIntro(durationMs)
+  };
+})();
 
 const threeSceneController = initPortfolioThreeScene();
 
@@ -213,49 +296,155 @@ window.closeMobileMenu = closeMobileMenu;
 })();
 
 /* ══════════════════════════════════════════════════════
-   5. INTERACTIVE PROJECT FILTERING & CASE STUDY MODAL
+   5. ORBITING ANIMATED SEARCH BAR + PROJECT FILTERING & MODAL
 ══════════════════════════════════════════════════════ */
 (function initProjectsAndModal() {
   const filterBtns = document.querySelectorAll('[data-project-filter]');
   const projectCards = document.querySelectorAll('#projects-grid .project-card');
   const statusEl = document.getElementById('project-filter-status');
+  const searchInput = document.getElementById('portfolio-search-input');
+  const searchClearBtn = document.getElementById('portfolio-search-clear');
+  const searchCountEl = document.getElementById('portfolio-search-count');
+  const skillsReadoutEl = document.getElementById('portfolio-search-skills-readout');
+  const quickTagBtns = document.querySelectorAll('[data-search-tag]');
+  const emptyStateEl = document.getElementById('projects-empty-state');
+  const resetSearchBtn = document.getElementById('projects-reset-search');
 
-  filterBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const category = btn.getAttribute('data-project-filter') || 'all';
-      const matched = filterProjects(PROJECTS_DATA, category);
-      const matchedIds = new Set(matched.map((p) => p.id));
+  let activeCategory = 'all';
+  let currentQuery = '';
 
-      filterBtns.forEach((b) => {
-        const isCurrent = b === btn;
-        b.classList.toggle('active', isCurrent);
-        b.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
-      });
+  function applyCombinedProjectsFilter() {
+    const categoryFiltered = filterProjects(PROJECTS_DATA, activeCategory);
+    const searchRes = searchPortfolioItems(currentQuery, categoryFiltered, TECH_DATA);
+    const matchedIds = new Set(searchRes.matchedProjects.map((p) => p.id));
 
-      let visibleIdx = 0;
-      projectCards.forEach((card) => {
-        const id = card.getAttribute('data-project-id');
-        const visible = matchedIds.has(id);
-        card.classList.toggle('hidden', !visible);
-        if (visible) {
-          card.classList.remove('filter-anim-in');
-          card.style.setProperty('--filter-delay', `${visibleIdx * 55}ms`);
-          void card.offsetWidth;
-          card.classList.add('filter-anim-in');
-          visibleIdx++;
-        }
-      });
+    let visibleIdx = 0;
+    projectCards.forEach((card) => {
+      const id = card.getAttribute('data-project-id');
+      const visible = matchedIds.has(id);
+      card.classList.toggle('hidden', !visible);
+      if (visible) {
+        card.classList.remove('filter-anim-in');
+        card.style.setProperty('--filter-delay', `${visibleIdx * 55}ms`);
+        void card.offsetWidth;
+        card.classList.add('filter-anim-in');
+        visibleIdx++;
+      }
+    });
 
-      if (statusEl) {
+    const count = searchRes.matchedProjects.length;
+    if (searchCountEl) {
+      searchCountEl.textContent = `${count} ${count === 1 ? 'Project' : 'Projects'}`;
+    }
+
+    if (searchClearBtn) {
+      searchClearBtn.classList.toggle('hidden', !currentQuery.trim());
+    }
+
+    quickTagBtns.forEach((tagBtn) => {
+      const tagVal = (tagBtn.getAttribute('data-search-tag') || '').toLowerCase();
+      tagBtn.classList.toggle('active', Boolean(currentQuery) && currentQuery.trim().toLowerCase() === tagVal);
+    });
+
+    if (skillsReadoutEl) {
+      if (currentQuery.trim() && searchRes.matchedSkills.length > 0) {
+        const topSkills = searchRes.matchedSkills
+          .slice(0, 5)
+          .map((s) => `<strong>${s.name}</strong> (${s.categoryLabel})`)
+          .join(' · ');
+        skillsReadoutEl.innerHTML = `Toolkit Match: ${topSkills}`;
+        skillsReadoutEl.classList.remove('hidden');
+      } else {
+        skillsReadoutEl.innerHTML = '';
+        skillsReadoutEl.classList.add('hidden');
+      }
+    }
+
+    if (emptyStateEl) {
+      emptyStateEl.classList.toggle('hidden', count > 0);
+    }
+
+    if (statusEl) {
+      if (currentQuery.trim()) {
+        statusEl.textContent = `Showing ${count} ${count === 1 ? 'project' : 'projects'} matching "${currentQuery.trim()}"`;
+      } else {
         const labelMap = {
           all: 'Showing all 6 featured projects',
           'ai-platforms': 'Showing 3 AI platforms',
           realtime: 'Showing 2 real-time & operations applications',
           mern: 'Showing 1 MERN-stack productivity application'
         };
-        statusEl.textContent = labelMap[category] || `Showing ${matched.length} projects`;
+        statusEl.textContent = labelMap[activeCategory] || `Showing ${count} projects`;
       }
+    }
+  }
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      activeCategory = btn.getAttribute('data-project-filter') || 'all';
+      filterBtns.forEach((b) => {
+        const isCurrent = b === btn;
+        b.classList.toggle('active', isCurrent);
+        b.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
+      });
+      applyCombinedProjectsFilter();
     });
+  });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      currentQuery = searchInput.value || '';
+      applyCombinedProjectsFilter();
+    });
+  }
+
+  if (searchClearBtn && searchInput) {
+    searchClearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      currentQuery = '';
+      applyCombinedProjectsFilter();
+      searchInput.focus();
+    });
+  }
+
+  quickTagBtns.forEach((tagBtn) => {
+    tagBtn.addEventListener('click', () => {
+      const tag = tagBtn.getAttribute('data-search-tag') || '';
+      if (currentQuery.trim().toLowerCase() === tag.toLowerCase()) {
+        currentQuery = '';
+        if (searchInput) searchInput.value = '';
+      } else {
+        currentQuery = tag;
+        if (searchInput) searchInput.value = tag;
+      }
+      applyCombinedProjectsFilter();
+    });
+  });
+
+  if (resetSearchBtn) {
+    resetSearchBtn.addEventListener('click', () => {
+      activeCategory = 'all';
+      currentQuery = '';
+      if (searchInput) searchInput.value = '';
+      filterBtns.forEach((b) => {
+        const isAll = b.getAttribute('data-project-filter') === 'all';
+        b.classList.toggle('active', isAll);
+        b.setAttribute('aria-pressed', isAll ? 'true' : 'false');
+      });
+      applyCombinedProjectsFilter();
+    });
+  }
+
+  // Global "/" shortcut to focus the Orbiting Search Bar
+  document.addEventListener('keydown', (e) => {
+    const tag = (e.target && e.target.tagName) || '';
+    if (e.key === '/' && tag !== 'INPUT' && tag !== 'TEXTAREA' && !e.metaKey && !e.ctrlKey) {
+      e.preventDefault();
+      if (searchInput) {
+        searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        searchInput.focus();
+      }
+    }
   });
 
   // Case Study Modal Controller
@@ -634,7 +823,7 @@ function runTypewriter() {
 runTypewriter();
 
 /* ══════════════════════════════════════════════════════
-   8. CONTACT FORM VALIDATION & SUBMISSION
+   8. CONTACT FORM — Backend API (/api/contact · Brevo + Nodemailer)
 ══════════════════════════════════════════════════════ */
 async function handleFormSubmit(e) {
   e.preventDefault();
@@ -642,51 +831,66 @@ async function handleFormSubmit(e) {
   const errEl = document.getElementById('form-error');
   const form = document.getElementById('contact-form');
   const successEl = document.getElementById('form-success');
+  const successMsgEl = document.getElementById('form-success-message');
 
   const rawPayload = {
     name: document.getElementById('contact-name')?.value,
     email: document.getElementById('contact-email')?.value,
     subject: document.getElementById('contact-subject')?.value,
-    message: document.getElementById('contact-message')?.value
+    message: document.getElementById('contact-message')?.value,
+    website: document.getElementById('contact-website')?.value || ''
   };
 
   const validation = validateContactForm(rawPayload);
+
   if (!validation.valid) {
     showError(validation.error);
     return;
   }
 
-  const { name, email, subject, message } = validation.data;
-
   if (errEl) errEl.classList.add('hidden');
   if (btn) {
     btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span><span>Dispatching Inquiry...</span>';
+    btn.setAttribute('aria-busy', 'true');
+    btn.innerHTML = '<span class="spinner"></span><span>Sending Message...</span>';
   }
 
   try {
     const res = await fetch('/api/contact', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, subject, message })
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        name: validation.data.name,
+        email: validation.data.email,
+        subject: validation.data.subject,
+        message: validation.data.message,
+        website: rawPayload.website
+      })
     });
 
-    if (res.ok) {
+    const data = await res.json().catch(() => ({}));
+
+    if (res.ok && (data.ok || data.success)) {
+      if (successMsgEl && data.message) {
+        successMsgEl.textContent = data.message;
+      }
       if (form) form.classList.add('hidden');
       if (successEl) successEl.classList.remove('hidden');
+      resetButton();
     } else {
-      const data = await res.json().catch(() => ({}));
-      if (res.status === 503 || res.status === 500) {
-        if (form) form.classList.add('hidden');
-        if (successEl) successEl.classList.remove('hidden');
-      } else {
-        showError(data.error || 'Unable to send message. Please check your inputs and try again.');
-        resetButton();
-      }
+      showError(
+        data.error ||
+          data.message ||
+          'Unable to send your message right now. Please try again or email mohansaini8772532@gmail.com directly.'
+      );
+      resetButton();
     }
   } catch {
-    if (form) form.classList.add('hidden');
-    if (successEl) successEl.classList.remove('hidden');
+    showError('Network error while connecting to the server. Please check your connection or email mohansaini8772532@gmail.com.');
+    resetButton();
   }
 }
 
@@ -701,6 +905,7 @@ function resetButton() {
   const btn = document.getElementById('submit-btn');
   if (!btn) return;
   btn.disabled = false;
+  btn.setAttribute('aria-busy', 'false');
   btn.innerHTML = `
     <span>Send Message</span>
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

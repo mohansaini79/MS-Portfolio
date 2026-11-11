@@ -35,6 +35,35 @@
 
 <body>
 
+  <!-- ══════════════════════════════════════════════
+       FIRST-VISIT "HELLO" INTRO ANIMATION OVERLAY
+  ══════════════════════════════════════════════ -->
+  <div id="hello-intro-overlay" class="hello-intro-overlay" role="dialog" aria-modal="true" aria-label="Welcome intro">
+    <div class="hello-intro-backdrop" aria-hidden="true">
+      <div class="hello-orbit-ring hello-orbit-ring-1"></div>
+      <div class="hello-orbit-ring hello-orbit-ring-2"></div>
+      <div class="hello-ambient-glow"></div>
+    </div>
+
+    <div class="hello-intro-center">
+      <p class="hello-kicker">PORTFOLIO EDITION · 2026</p>
+      <div class="hello-word-wrap" aria-label="Hello">
+        <span class="hello-word" id="hello-intro-word">
+          <span class="hello-char" style="--char-idx:0">H</span><span class="hello-char" style="--char-idx:1">e</span><span class="hello-char" style="--char-idx:2">l</span><span class="hello-char" style="--char-idx:3">l</span><span class="hello-char" style="--char-idx:4">o</span><span class="hello-dot" style="--char-idx:5">.</span>
+        </span>
+      </div>
+      <p class="hello-sub">Mohan Saini <span aria-hidden="true">·</span> Full Stack Developer</p>
+      <div class="hello-progress-track" aria-hidden="true">
+        <div id="hello-progress-bar" class="hello-progress-bar"></div>
+      </div>
+    </div>
+
+    <button type="button" id="hello-intro-skip" class="hello-skip-btn" aria-label="Skip intro animation">
+      <span>Enter Portfolio</span>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+    </button>
+  </div>
+
   <!-- Subtle architectural ambient field -->
   <div class="ambient-canvas" aria-hidden="true">
     <div id="three-ambient-mount" class="three-ambient-mount" aria-hidden="true"></div>
@@ -167,16 +196,20 @@
           <span class="mn-idx">03</span>
           <span class="mn-label">Technical Skills</span>
         </a>
-        <a href="#about" class="mobile-nav-link" onclick="closeMobileMenu()">
+        <a href="#services" class="mobile-nav-link" onclick="closeMobileMenu()">
           <span class="mn-idx">04</span>
+          <span class="mn-label">Engineering Services</span>
+        </a>
+        <a href="#about" class="mobile-nav-link" onclick="closeMobileMenu()">
+          <span class="mn-idx">05</span>
           <span class="mn-label">About &amp; Education</span>
         </a>
         <a href="#achievements" class="mobile-nav-link" onclick="closeMobileMenu()">
-          <span class="mn-idx">05</span>
+          <span class="mn-idx">06</span>
           <span class="mn-label">Certifications &amp; Hackathons</span>
         </a>
         <a href="#contact" class="mobile-nav-link" onclick="closeMobileMenu()">
-          <span class="mn-idx">06</span>
+          <span class="mn-idx">07</span>
           <span class="mn-label">Contact</span>
         </a>
       </nav>
@@ -454,6 +487,67 @@
           </p>
         </div>
 
+        <!-- Orbiting / Rotating Animated Search Bar + Segmented Category Filter -->
+        <div class="orbit-search-section reveal">
+          <div class="orbit-search-shell" id="portfolio-search-shell">
+            <!-- Rotating orbital halo rings & glowing satellite nodes -->
+            <div class="orbit-search-halo" aria-hidden="true">
+              <div class="orbit-track orbit-track-outer">
+                <span class="orbit-node orbit-node-orange"></span>
+              </div>
+              <div class="orbit-track orbit-track-inner">
+                <span class="orbit-node orbit-node-cobalt"></span>
+              </div>
+              <div class="orbit-conic-beam"></div>
+            </div>
+
+            <div class="orbit-search-inner">
+              <span class="orbit-search-icon" aria-hidden="true">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.3-4.3" />
+                </svg>
+              </span>
+
+              <input
+                id="portfolio-search-input"
+                type="search"
+                class="orbit-search-input"
+                placeholder="Search projects, tech stack, or architecture (e.g., FastAPI, React, MongoDB, WebSockets)..."
+                aria-label="Search projects and technical skills"
+                autocomplete="off"
+              />
+
+              <div class="orbit-search-meta">
+                <span id="portfolio-search-count" class="orbit-search-count">6 Projects</span>
+                <button
+                  type="button"
+                  id="portfolio-search-clear"
+                  class="orbit-search-clear hidden"
+                  aria-label="Clear search query"
+                >
+                  ✕
+                </button>
+                <kbd class="orbit-search-kbd" aria-hidden="true">/</kbd>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Search Tags & Matched Skills Readout -->
+          <div class="orbit-search-BarFooter">
+            <div class="orbit-quick-tags" role="group" aria-label="Quick search keywords">
+              <span class="oqt-label">Quick Filter:</span>
+              <button type="button" class="oqt-btn" data-search-tag="FastAPI">FastAPI</button>
+              <button type="button" class="oqt-btn" data-search-tag="React">React</button>
+              <button type="button" class="oqt-btn" data-search-tag="MongoDB">MongoDB</button>
+              <button type="button" class="oqt-btn" data-search-tag="Flask">Flask</button>
+              <button type="button" class="oqt-btn" data-search-tag="WebSockets">WebSockets</button>
+              <button type="button" class="oqt-btn" data-search-tag="JWT">JWT</button>
+            </div>
+            <p id="portfolio-search-skills-readout" class="orbit-skills-readout hidden" aria-live="polite"></p>
+          </div>
+        </div>
+
         <!-- Functional Segmented Filter Bar -->
         <div class="filter-toolbar reveal" role="toolbar" aria-label="Filter projects by category">
           <div class="filter-group">
@@ -471,6 +565,13 @@
             </button>
           </div>
           <p id="project-filter-status" class="filter-status" aria-live="polite">Showing all 6 featured projects</p>
+        </div>
+
+        <!-- Empty Search State -->
+        <div id="projects-empty-state" class="card projects-empty-state hidden" role="status" aria-live="polite">
+          <p class="pes-title">No projects matched your search query.</p>
+          <p class="pes-sub">Try searching for technologies like <strong>Python</strong>, <strong>React</strong>, <strong>FastAPI</strong>, <strong>MongoDB</strong>, or <strong>Flask</strong>.</p>
+          <button type="button" id="projects-reset-search" class="btn btn-ghost">Reset Search &amp; Filters</button>
         </div>
 
         <!-- Dynamic 3x2 Bento Grid (6 Projects Total) -->
@@ -1208,13 +1309,50 @@
     </section>
 
     <!-- ══════════════════════════════════════════════
+         03B. ENGINEERING SERVICES & CAPABILITIES
+    ══════════════════════════════════════════════ -->
+    <section id="services" class="section sec-topline">
+      <div class="container">
+        <div class="sec-header-split reveal">
+          <div>
+            <p class="sec-kicker-clean">04. ENGINEERING SERVICES</p>
+            <h2 class="section-h2">Full-Stack <span class="serif-italic">Capabilities</span> &amp; Architecture</h2>
+          </div>
+          <p class="sec-sub-right">
+            End-to-end software engineering across responsive frontend interfaces, low-latency REST &amp; WebSocket backends, database optimization, and AI-powered web platforms.
+          </p>
+        </div>
+
+        <div class="ach-grid services-grid">
+          <article class="card ach-card service-card reveal">
+            <span class="ach-idx">01 / FULL-STACK WEB SYSTEMS</span>
+            <h3 class="ach-title">MERN &amp; Next.js Application Engineering</h3>
+            <p class="ach-text">Production-ready web applications built with React.js, Next.js, TypeScript, and Tailwind CSS—designed for responsive performance across desktop, tablet, and mobile.</p>
+          </article>
+
+          <article class="card ach-card service-card reveal" data-delay=".05">
+            <span class="ach-idx">02 / API &amp; BACKEND ARCHITECTURE</span>
+            <h3 class="ach-title">Scalable REST APIs &amp; Authentication</h3>
+            <p class="ach-text">High-throughput backend services using Node.js, Express.js, Python Flask, and FastAPI with stateless JWT authentication, Google OAuth 2.0, and RBAC security.</p>
+          </article>
+
+          <article class="card ach-card service-card reveal" data-delay=".1">
+            <span class="ach-idx">03 / REAL-TIME &amp; DATA SYSTEMS</span>
+            <h3 class="ach-title">WebSockets &amp; Database Optimization</h3>
+            <p class="ach-text">Sub-100ms bidirectional event streaming with Socket.IO and WebSockets, backed by indexed MongoDB Atlas, PostgreSQL, and MySQL schemas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
          04. ABOUT, EDUCATION & CAREER TIMELINE
     ══════════════════════════════════════════════ -->
     <section id="about" class="section sec-topline">
       <div class="container">
         <div class="sec-header-split reveal">
           <div>
-            <p class="sec-kicker-clean">04. ABOUT &amp; EDUCATION</p>
+            <p class="sec-kicker-clean">05. ABOUT &amp; EDUCATION</p>
             <h2 class="section-h2">Engineering <span class="serif-italic">Background</span> &amp; Education</h2>
           </div>
           <p class="sec-sub-right">
@@ -1259,7 +1397,7 @@
           </article>
 
           <!-- Academic Ledger Card -->
-          <article class="card about-card reveal" data-delay=".1">
+          <article id="education" class="card about-card reveal" data-delay=".1">
             <div class="about-card-head">
               <span class="card-kicker-mono">ACADEMIC CREDENTIALS</span>
               <h3>Education</h3>
@@ -1464,7 +1602,7 @@
             </a>
           </div>
 
-          <!-- Right Column: Validated Inquiry Form -->
+          <!-- Right Column: Validated Backend Inquiry Form (POST /api/contact) -->
           <div class="reveal-right" data-delay=".1">
             <div class="card form-card">
               <div class="form-card-head">
@@ -1475,13 +1613,30 @@
               <!-- Confirmation State -->
               <div id="form-success" class="form-success hidden" role="status" aria-live="polite">
                 <div class="ok-badge">DISPATCH CONFIRMED</div>
-                <h4>Message Received</h4>
-                <p>Thank you for reaching out. Your inquiry has been logged and I will respond within 24–48 hours.</p>
+                <h4>Message Sent Successfully</h4>
+                <p id="form-success-message">Thank you for reaching out. Your inquiry has been delivered directly to Mohan Saini and I will respond within 24–48 hours.</p>
                 <button type="button" class="btn btn-ghost" onclick="resetForm()">Send Another Message</button>
               </div>
 
-              <!-- Form -->
-              <form id="contact-form" onsubmit="handleFormSubmit(event)" novalidate>
+              <!-- Backend Contact Form (POST /api/contact) -->
+              <form
+                id="contact-form"
+                action="/api/contact"
+                method="POST"
+                onsubmit="handleFormSubmit(event)"
+                novalidate
+              >
+                <!-- Honeypot field for automated spam protection -->
+                <input
+                  type="text"
+                  id="contact-website"
+                  name="website"
+                  class="hidden"
+                  style="display:none"
+                  tabindex="-1"
+                  autocomplete="off"
+                />
+
                 <div class="form-grid">
                   <div class="field">
                     <label for="contact-name">Your Name <em>*</em></label>

@@ -1,16 +1,29 @@
 // ═══════════════════════════════════════════════════
-//  server.js — Node.js + Express + Brevo HTTP API
-//  Contact form backend for Mohan Saini Portfolio
-//  Uses Brevo REST API (HTTPS port 443) — works on Railway
-//  Railway blocks ALL SMTP ports (465, 587) — HTTP API is the fix
+//  server.js — Node.js + Express Portfolio Server
+//  Serves Mohan Saini Portfolio static assets, Three.js vendor modules,
+//  Resume PDF, portrait image routes, and POST /api/contact
+//  powered by Nodemailer + Brevo SMTP.
 // ═══════════════════════════════════════════════════
 
 import 'dotenv/config';
+import dns from 'dns';
+import https from 'https';
 import express from 'express';
-import fs      from 'fs';
-import path    from 'path';
+import fs from 'fs';
+import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
+import nodemailer from 'nodemailer';
+import {
+  validateContactForm,
+  createBrevoSmtpConfig,
+  buildBrevoMailOptions
+} from './portfolio-logic.js';
+
+// Force IPv4 resolution first so Brevo never receives an unrecognized IPv6 (2600:1900:...) egress address
+if (typeof dns.setDefaultResultOrder === 'function') {
+  dns.setDefaultResultOrder('ipv4first');
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
@@ -18,159 +31,203 @@ const __dirname  = path.dirname(__filename);
 const app  = express();
 const PORT = process.env.PORT || 3000;
 
-// ── Credentials ──
-const EMAIL_USER = process.env.EMAIL_USER ? process.env.EMAIL_USER.trim() : undefined;
-const BREVO_KEY  = (process.env.BREVO_PASS || process.env.BREVO_KEY || '').trim(); // xsmtpsib-... key
+// ── Brevo + Nodemailer Configuration (using ONLY EMAIL_USER & BREVO_PASS) ──
+const initialSmtpConfig = createBrevoSmtpConfig(process.env);
 
-// ── Startup log ──
 console.log(`\n🚀  Portfolio server → http://0.0.0.0:${PORT}`);
-console.log(`    Gmail inbox : ${EMAIL_USER || '⚠️  NOT SET — add EMAIL_USER variable'}`);
-console.log(`    Brevo key   : ${BREVO_KEY  ? '✅ Set'  : '⚠️  NOT SET — add BREVO_PASS variable'}`);
-console.log(`    Email mode  : ${BREVO_KEY  ? '✅ Brevo HTTP API (Railway-compatible)' : '❌ Not configured'}\n`);
-
-if (!EMAIL_USER || !BREVO_KEY) {
-  console.warn('⚠️  Contact form disabled — add EMAIL_USER and BREVO_PASS in Railway Variables.\n');
-}
+console.log(
+  `    Email service: ${
+    initialSmtpConfig.isConfigured
+      ? `✅ Configured (${initialSmtpConfig.emailUser})`
+      : '⚠️ Missing EMAIL_USER or BREVO_PASS in environment'
+  }\n`
+);
 
 // ── Middleware ──
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '64kb' }));
+app.use(express.urlencoded({ extended: true, limit: '64kb' }));
 app.use('/vendor/three', express.static(path.join(__dirname, 'node_modules/three')));
 app.use(express.static(path.join(__dirname)));
 
-// ══════════════════════════════════════════════════════
-//  Brevo HTTP API email sender
-//  Uses HTTPS (port 443) — Railway NEVER blocks this
-//  BREVO_PASS (xsmtpsib-... key) works as the API key
-// ══════════════════════════════════════════════════════
-async function sendBrevoEmail({ to, toName, subject, html, replyTo }) {
-  const body = {
-    sender:      { name: 'Mohan Saini Portfolio', email: EMAIL_USER },
-    to:          [{ email: to, name: toName || to }],
-    replyTo:     replyTo ? { email: replyTo } : undefined,
-    subject,
-    htmlContent: html,
-  };
+// ── Simple Per-IP Rate Limiter for Spam Protection ──
+const rateLimitStore = new Map();
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+const RATE_LIMIT_MAX_REQUESTS = 6;
 
-  const res = await fetch('https://api.brevo.com/v3/smtp/email', {
-    method:  'POST',
-    headers: {
-      'accept':       'application/json',
-      'api-key':      BREVO_KEY,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || `Brevo API error ${res.status}`);
+function isRateLimited(ip) {
+  const now = Date.now();
+  const key = String(ip || 'unknown');
+  const timestamps = (rateLimitStore.get(key) || []).filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+  if (timestamps.length >= RATE_LIMIT_MAX_REQUESTS) {
+    rateLimitStore.set(key, timestamps);
+    return true;
   }
-  return res.json();
+  timestamps.push(now);
+  rateLimitStore.set(key, timestamps);
+  return false;
 }
 
-// ── Contact API route ──
-app.post('/api/contact', async (req, res) => {
-  if (!EMAIL_USER || !BREVO_KEY) {
-    return res.status(503).json({
-      error: 'Email service not configured. Contact directly at mohansaini8772532@gmail.com',
+// ── Send Email via Brevo using EMAIL_USER and BREVO_PASS (xkeysib-...) over IPv4 ──
+function sendBrevoEmail(contactData, smtpConfig, mailOptions) {
+  return new Promise((resolve, reject) => {
+    const payload = JSON.stringify({
+      sender: {
+        name: 'Mohan Saini Portfolio',
+        email: smtpConfig.emailUser
+      },
+      to: [{ email: smtpConfig.emailUser, name: 'Mohan Saini' }],
+      replyTo: {
+        email: contactData.email,
+        name: contactData.name
+      },
+      subject: mailOptions.subject,
+      htmlContent: mailOptions.html,
+      textContent: mailOptions.text
     });
-  }
 
-  const { name, email, subject, message } = req.body;
+    const req = https.request(
+      'https://api.brevo.com/v3/smtp/email',
+      {
+        method: 'POST',
+        family: 4, // Force IPv4 so Brevo never receives an IPv6 address
+        timeout: 12000,
+        headers: {
+          accept: 'application/json',
+          'content-type': 'application/json',
+          'content-length': Buffer.byteLength(payload),
+          'api-key': smtpConfig.brevoPass
+        }
+      },
+      (res) => {
+        let rawBody = '';
+        res.on('data', (chunk) => {
+          rawBody += chunk;
+        });
+        res.on('end', () => {
+          let parsed = {};
+          try {
+            parsed = JSON.parse(rawBody || '{}');
+          } catch {
+            parsed = {};
+          }
+          if (res.statusCode >= 200 && res.statusCode < 300) {
+            resolve(parsed);
+          } else {
+            const err = new Error(parsed.message || `Brevo responded with status ${res.statusCode}`);
+            err.statusCode = res.statusCode;
+            err.brevoCode = parsed.code || '';
+            reject(err);
+          }
+        });
+      }
+    );
 
-  // Validation
-  if (!name?.trim() || !email?.trim() || !subject?.trim() || !message?.trim()) {
-    return res.status(400).json({ error: 'All fields are required.' });
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return res.status(400).json({ error: 'Invalid email address.' });
-  }
-  if (message.trim().length < 10) {
-    return res.status(400).json({ error: 'Message is too short (min 10 chars).' });
-  }
+    req.on('error', (err) => reject(err));
+    req.on('timeout', () => {
+      req.destroy(new Error('Connection to Brevo timed out'));
+    });
+    req.write(payload);
+    req.end();
+  });
+}
 
-  // ── Email to owner (Mohan) ──
-  const ownerHtml = `
-    <div style="font-family:Inter,Arial,sans-serif;max-width:600px;margin:0 auto;background:#0F172A;color:#E2E8F0;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08)">
-      <div style="background:linear-gradient(135deg,#4F46E5,#7C3AED);padding:24px 32px">
-        <h1 style="margin:0;font-size:18px;font-weight:700;color:#fff">📬 New Portfolio Message</h1>
-      </div>
-      <div style="padding:28px 32px">
-        <table style="width:100%;border-collapse:collapse;margin-bottom:20px">
-          <tr><td style="padding:7px 0;color:#94A3B8;font-size:13px;width:75px;vertical-align:top">From</td><td style="padding:7px 0;font-weight:600;color:#fff;font-size:14px">${name}</td></tr>
-          <tr><td style="padding:7px 0;color:#94A3B8;font-size:13px;vertical-align:top">Email</td><td style="padding:7px 0;font-size:14px"><a href="mailto:${email}" style="color:#818CF8;text-decoration:none">${email}</a></td></tr>
-          <tr><td style="padding:7px 0;color:#94A3B8;font-size:13px;vertical-align:top">Subject</td><td style="padding:7px 0;color:#E2E8F0;font-size:14px">${subject}</td></tr>
-        </table>
-        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.07);margin-bottom:20px"/>
-        <p style="color:#94A3B8;font-size:12px;margin:0 0 10px;text-transform:uppercase;letter-spacing:.06em">Message</p>
-        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:18px;color:#E2E8F0;font-size:14px;line-height:1.75;white-space:pre-wrap">${message.trim()}</div>
-        <div style="margin-top:24px">
-          <a href="mailto:${email}?subject=Re: ${encodeURIComponent(subject)}"
-             style="display:inline-block;padding:10px 20px;background:linear-gradient(135deg,#4F46E5,#7C3AED);color:#fff;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none">Reply to ${name}</a>
-        </div>
-      </div>
-      <div style="padding:14px 32px;background:rgba(0,0,0,0.18);text-align:center;font-size:12px;color:#475569">
-        Sent from Mohan Saini's Portfolio
-      </div>
-    </div>
-  `;
-
-  // ── Auto-reply to sender ──
-  const autoHtml = `
-    <div style="font-family:Inter,Arial,sans-serif;max-width:600px;margin:0 auto;background:#0F172A;color:#E2E8F0;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08)">
-      <div style="background:linear-gradient(135deg,#4F46E5,#7C3AED);padding:24px 32px">
-        <h1 style="margin:0;font-size:18px;font-weight:700;color:#fff">Hey ${name}! 👋</h1>
-      </div>
-      <div style="padding:28px 32px">
-        <p style="color:#E2E8F0;font-size:15px;line-height:1.75;margin:0 0 18px">Thanks for reaching out through my portfolio. I've received your message and will get back to you within <strong style="color:#fff">24–48 hours</strong>.</p>
-        <div style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.18);border-radius:8px;padding:16px;margin-bottom:22px">
-          <p style="color:#94A3B8;font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px">Your message</p>
-          <p style="color:#C7D2FE;font-size:13px;line-height:1.65;margin:0;white-space:pre-wrap">${message.trim()}</p>
-        </div>
-        <p style="color:#64748B;font-size:13px;margin:0 0 14px">While you wait, feel free to explore my work:</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <a href="https://github.com/mohansaini79" style="display:inline-block;padding:8px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;border-radius:7px;font-size:13px;text-decoration:none">GitHub</a>
-          <a href="https://www.linkedin.com/in/mohan-saini-2026ms/" style="display:inline-block;padding:8px 16px;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.2);color:#818CF8;border-radius:7px;font-size:13px;text-decoration:none">LinkedIn</a>
-        </div>
-        <p style="color:#E2E8F0;font-size:14px;margin-top:28px;line-height:1.6">Best regards,<br/><strong style="color:#fff">Mohan Saini</strong><br/><span style="color:#FF5500;font-size:12px">Full Stack Developer · B.Tech CSE 2027</span></p>
-      </div>
-      <div style="padding:14px 32px;background:rgba(0,0,0,0.18);text-align:center;font-size:12px;color:#475569">
-        © ${new Date().getFullYear()} Mohan Saini · mohansaini8772532@gmail.com
-      </div>
-    </div>
-  `;
-
+// ── POST /api/contact — Contact Endpoint using ONLY EMAIL_USER and BREVO_PASS ──
+app.post('/api/contact', async (req, res) => {
   try {
-    // Send both emails in parallel via Brevo HTTP API
-    await Promise.all([
-      sendBrevoEmail({
-        to: EMAIL_USER,
-        toName: 'Mohan Saini',
-        subject: `[Portfolio] ${subject} — from ${name}`,
-        html: ownerHtml,
-        replyTo: email,
-      }),
-      sendBrevoEmail({
-        to: email,
-        toName: name,
-        subject: `Got your message, ${name}! I'll be in touch soon. 🤝`,
-        html: autoHtml,
-      }),
-    ]);
+    const clientIp =
+      req.headers['x-forwarded-for']?.toString().split(',')[0]?.trim() ||
+      req.socket?.remoteAddress ||
+      'unknown';
 
-    console.log(`✅ Emails sent via Brevo API — from ${name} <${email}>`);
-    res.json({ success: true });
+    if (isRateLimited(clientIp)) {
+      return res.status(429).json({
+        ok: false,
+        success: false,
+        error: 'Too many messages sent recently. Please wait a few minutes before trying again.'
+      });
+    }
 
+    const validation = validateContactForm(req.body || {});
+    if (!validation.valid) {
+      return res.status(400).json({
+        ok: false,
+        success: false,
+        error: validation.error
+      });
+    }
+
+    const smtpConfig = createBrevoSmtpConfig(process.env);
+    if (!smtpConfig.isConfigured) {
+      console.warn('⚠️ [POST /api/contact] Missing EMAIL_USER or BREVO_PASS in environment.');
+      return res.status(503).json({
+        ok: false,
+        success: false,
+        error: 'Email service is not configured on the server (missing EMAIL_USER or BREVO_PASS).'
+      });
+    }
+
+    const transporter = nodemailer.createTransport({
+      ...smtpConfig.transportOptions,
+      connectionTimeout: 10000,
+      greetingTimeout: 10000,
+      socketTimeout: 15000
+    });
+
+    const mailOptions = buildBrevoMailOptions(validation.data, smtpConfig);
+
+    // When BREVO_PASS starts with xkeysib- (as configured in Render with EMAIL_USER + BREVO_PASS),
+    // deliver via sendBrevoEmail first, with Nodemailer SMTP fallback
+    if (smtpConfig.isRestApiKey) {
+      try {
+        const apiResult = await sendBrevoEmail(validation.data, smtpConfig, mailOptions);
+        return res.status(200).json({
+          ok: true,
+          success: true,
+          messageId: apiResult.messageId || null,
+          message: 'Thank you! Your message has been sent directly to Mohan Saini.'
+        });
+      } catch (brevoErr) {
+        const msg = String(brevoErr.message || '');
+        console.warn('⚠️ [POST /api/contact] Brevo notice:', msg);
+        return res.status(502).json({
+          ok: false,
+          success: false,
+          error: msg.includes('authorised_ips')
+            ? `${msg} (Please authorize this IP or disable IP blocking at https://app.brevo.com/security/authorised_ips)`
+            : `Failed to send email via Brevo: ${msg}`
+        });
+      }
+    }
+
+    // Standard Nodemailer SMTP delivery (smtp-relay.brevo.com:587) using EMAIL_USER & BREVO_PASS
+    try {
+      const info = await transporter.sendMail(mailOptions);
+      return res.status(200).json({
+        ok: true,
+        success: true,
+        messageId: info.messageId,
+        message: 'Thank you! Your message has been sent directly to Mohan Saini.'
+      });
+    } catch (smtpError) {
+      console.warn('⚠️ [POST /api/contact] Brevo SMTP notice:', smtpError.message);
+      return res.status(502).json({
+        ok: false,
+        success: false,
+        error: `Failed to send email via Brevo SMTP: ${smtpError.message}`
+      });
+    }
   } catch (err) {
-    console.error('❌ Brevo API error:', err.message);
-    res.status(500).json({
-      error: 'Failed to send email. Please try again or email directly at mohansaini8772532@gmail.com',
+    console.warn('⚠️ [POST /api/contact] Unexpected error:', err.message);
+    return res.status(500).json({
+      ok: false,
+      success: false,
+      error: 'An unexpected server error occurred while sending your message. Please try again later.'
     });
   }
 });
 
-// ── Resume download — case-insensitive fix for Linux (Railway) ──
+// ── Resume download — case-insensitive fix for Linux (Railway / Render) ──
 const resumeFilePath = path.join(__dirname, 'Resume.PDF');
 app.get(['/resume.pdf', '/Resume.pdf', '/Resume.PDF'], (req, res) => {
   if (req.query.download === '1') {
@@ -211,3 +268,4 @@ server.on('error', (err) => {
     throw err;
   }
 });
+

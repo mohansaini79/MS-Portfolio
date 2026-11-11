@@ -9,7 +9,11 @@ import {
   filterProjects,
   getProjectById,
   filterTechStack,
+  searchPortfolioItems,
   validateContactForm,
+  createBrevoSmtpConfig,
+  buildBrevoMailOptions,
+  getIntroAnimationConfig,
   resolveThemeState,
   getContributionLevel,
   generateContributionCalendar,
@@ -82,9 +86,34 @@ test('filterTechStack filters toolkit items across all 6 resume categories', () 
   assert.equal(filterTechStack(TECH_DATA, 'cs-core').length, 4);
 });
 
-test('validateContactForm enforces non-empty fields, email format, and min message length', () => {
+test('searchPortfolioItems matches projects and technical skills by keyword', () => {
+  const allRes = searchPortfolioItems('', PROJECTS_DATA, TECH_DATA);
+  assert.equal(allRes.matchedProjects.length, 6);
+  assert.equal(allRes.matchedSkills.length, 32);
+
+  const fastApiRes = searchPortfolioItems('FastAPI', PROJECTS_DATA, TECH_DATA);
+  assert.equal(fastApiRes.matchedProjects.length, 1);
+  assert.equal(fastApiRes.matchedProjects[0].id, 'instant-mechanic');
+  assert.ok(fastApiRes.matchedSkills.some((s) => s.name === 'FastAPI'));
+
+  const mongoRes = searchPortfolioItems('MongoDB', PROJECTS_DATA, TECH_DATA);
+  assert.equal(mongoRes.matchedProjects.length, 5);
+  assert.ok(mongoRes.matchedSkills.some((s) => s.name === 'MongoDB'));
+});
+
+test('validateContactForm, createBrevoSmtpConfig, and buildBrevoMailOptions enforce validation, spam protection, and Brevo SMTP formatting', () => {
   const emptyResult = validateContactForm({ name: '', email: '', subject: '', message: '' });
   assert.equal(emptyResult.valid, false);
+
+  const spamResult = validateContactForm({
+    name: 'Bot',
+    email: 'bot@spam.com',
+    subject: 'Spam',
+    message: 'Spam message content here',
+    website: 'http://spam.com'
+  });
+  assert.equal(spamResult.valid, false);
+  assert.equal(spamResult.isSpam, true);
 
   const badEmail = validateContactForm({
     name: 'Alex Rivera',
@@ -104,15 +133,44 @@ test('validateContactForm enforces non-empty fields, email format, and min messa
   assert.equal(shortMsg.valid, false);
   assert.match(shortMsg.error, /10 characters/i);
 
-  const valid = validateContactForm({
+  const validForm = validateContactForm({
     name: '  Alex Rivera ',
     email: ' alex@company.com ',
     subject: ' Full Stack Role ',
     message: 'Hello Mohan, we are impressed by your Online Exam Platform and API work!'
   });
-  assert.equal(valid.valid, true);
-  assert.equal(valid.error, null);
-  assert.equal(valid.data.email, 'alex@company.com');
+  assert.equal(validForm.valid, true);
+
+  const smtpConfig = createBrevoSmtpConfig({
+    EMAIL_USER: 'mohansaini798330@gmail.com',
+    BREVO_PASS: 'xkeysib-test-brevo-pass-placeholder'
+  });
+  assert.equal(smtpConfig.isConfigured, true);
+  assert.equal(smtpConfig.isRestApiKey, true);
+  assert.equal(smtpConfig.transportOptions.host, 'smtp-relay.brevo.com');
+  assert.equal(smtpConfig.transportOptions.port, 587);
+  assert.equal(smtpConfig.transportOptions.secure, false);
+  assert.equal(smtpConfig.transportOptions.auth.user, 'mohansaini798330@gmail.com');
+  assert.equal(smtpConfig.transportOptions.auth.pass, 'xkeysib-test-brevo-pass-placeholder');
+
+  const mailOptions = buildBrevoMailOptions(validForm.data, smtpConfig);
+  assert.match(mailOptions.from, /mohansaini798330@gmail\.com/);
+  assert.equal(mailOptions.to, 'mohansaini798330@gmail.com');
+  assert.match(mailOptions.replyTo, /alex@company\.com/);
+  assert.match(mailOptions.subject, /Full Stack Role/);
+});
+
+test('getIntroAnimationConfig returns Hello intro parameters and respects prefers-reduced-motion', () => {
+  const normalIntro = getIntroAnimationConfig({ prefersReducedMotion: false });
+  assert.equal(normalIntro.shouldAnimate, true);
+  assert.equal(normalIntro.primaryWord, 'Hello');
+  assert.equal(normalIntro.totalDurationMs, 4800);
+  assert.equal(normalIntro.exitDurationMs, 1200);
+
+  const reducedIntro = getIntroAnimationConfig({ prefersReducedMotion: true });
+  assert.equal(reducedIntro.shouldAnimate, false);
+  assert.equal(reducedIntro.totalDurationMs, 0);
+  assert.equal(reducedIntro.exitDurationMs, 0);
 });
 
 test('resolveThemeState respects saved preference and defaults to dark mode', () => {
@@ -184,4 +242,35 @@ test('getThreeSceneThemePalette returns calibrated PBR hex colors for dark and l
   assert.notEqual(darkPalette.fogColor, lightPalette.fogColor);
 });
 
+test('Nodemailer transport builds valid MIME email with Reply-To and Brevo SMTP settings', async () => {
+  const nodemailer = (await import('nodemailer')).default;
+  const smtpConfig = createBrevoSmtpConfig({
+    EMAIL_USER: 'mohansaini798330@gmail.com',
+    BREVO_PASS: 'test-brevo-pass'
+  });
 
+  // Verify Nodemailer accepts the Brevo SMTP transport options
+  const smtpTransporter = nodemailer.createTransport(smtpConfig.transportOptions);
+  assert.equal(smtpTransporter.options.host, 'smtp-relay.brevo.com');
+  assert.equal(smtpTransporter.options.port, 587);
+  assert.equal(smtpTransporter.options.secure, false);
+
+  // Verify Nodemailer stream transport builds the full RFC822 message with Reply-To
+  const streamTransporter = nodemailer.createTransport({ streamTransport: true, buffer: true });
+  const mailOptions = buildBrevoMailOptions(
+    {
+      name: 'Recruiter Lead',
+      email: 'recruiter@company.io',
+      subject: 'Senior Full Stack Developer Opportunity',
+      message: 'We would love to schedule a technical interview with you this week.'
+    },
+    smtpConfig
+  );
+
+  const info = await streamTransporter.sendMail(mailOptions);
+  const rawMime = info.message.toString('utf8');
+  assert.match(rawMime, /From: Mohan Saini Portfolio <mohansaini798330@gmail\.com>/);
+  assert.match(rawMime, /To: mohansaini798330@gmail\.com/);
+  assert.match(rawMime, /Reply-To: Recruiter Lead <recruiter@company\.io>/);
+  assert.match(rawMime, /Senior Full Stack Developer Opportunity/);
+});

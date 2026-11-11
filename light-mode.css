@@ -169,3 +169,18 @@ body.light-mode .gh-cell.active-cell {
   stroke: #111318;
 }
 
+/* Orbiting Search Bar in Light Mode */
+body.light-mode .orbit-search-shell {
+  background: rgba(15, 23, 42, 0.10);
+  box-shadow: var(--sh-sm);
+}
+
+body.light-mode .orbit-search-inner {
+  background: rgba(255, 255, 255, 0.96);
+}
+
+body.light-mode .oqt-btn {
+  background: #FFFFFF;
+}
+
+

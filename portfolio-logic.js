@@ -247,29 +247,94 @@ export function filterTechStack(techList, category = 'all') {
 }
 
 /**
- * Validate contact form payload before submission
+ * Search projects and technical skills by keyword query (used by the Orbiting Animated Search Bar)
  */
-export function validateContactForm({ name, email, subject, message } = {}) {
+export function searchPortfolioItems(query = '', projects = PROJECTS_DATA, techList = TECH_DATA) {
+  const cleanQuery = String(query || '').trim().toLowerCase();
+  if (!cleanQuery) {
+    return {
+      query: '',
+      matchedProjects: projects,
+      matchedSkills: techList,
+      totalMatches: projects.length + techList.length
+    };
+  }
+
+  const tokens = cleanQuery.split(/\s+/).filter(Boolean);
+
+  const matchedProjects = (Array.isArray(projects) ? projects : []).filter((p) => {
+    const haystack = [
+      p.title,
+      p.shortTitle,
+      p.categoryLabel,
+      p.summary,
+      p.architecture,
+      p.metrics,
+      ...(Array.isArray(p.stack) ? p.stack : []),
+      ...(Array.isArray(p.highlights) ? p.highlights : [])
+    ]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase();
+
+    return tokens.every((tok) => haystack.includes(tok));
+  });
+
+  const matchedSkills = (Array.isArray(techList) ? techList : []).filter((item) => {
+    const haystack = `${item.name} ${item.categoryLabel} ${item.category}`.toLowerCase();
+    return tokens.every((tok) => haystack.includes(tok));
+  });
+
+  return {
+    query: cleanQuery,
+    matchedProjects,
+    matchedSkills,
+    totalMatches: matchedProjects.length + matchedSkills.length
+  };
+}
+
+/**
+ * Validate contact form payload before submission (used by both frontend and POST /api/contact)
+ */
+export function validateContactForm({ name, email, subject, message, website, botcheck } = {}) {
+  // Honeypot spam protection: if hidden bot field is filled, flag as spam
+  if ((website && String(website).trim().length > 0) || (botcheck && String(botcheck).trim().length > 0)) {
+    return { valid: false, isSpam: true, error: 'Spam submission rejected.' };
+  }
+
   const cleanName = String(name || '').trim();
   const cleanEmail = String(email || '').trim();
   const cleanSubject = String(subject || '').trim();
   const cleanMessage = String(message || '').trim();
 
   if (!cleanName || !cleanEmail || !cleanSubject || !cleanMessage) {
-    return { valid: false, error: 'Please complete all required fields (Name, Email, Subject, and Message).' };
+    return { valid: false, isSpam: false, error: 'Please complete all required fields (Name, Email, Subject, and Message).' };
+  }
+
+  if (cleanName.length > 120) {
+    return { valid: false, isSpam: false, error: 'Name must be 120 characters or fewer.' };
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(cleanEmail)) {
-    return { valid: false, error: 'Please enter a valid email address (e.g., alex@company.com).' };
+  if (!emailRegex.test(cleanEmail) || cleanEmail.length > 180) {
+    return { valid: false, isSpam: false, error: 'Please enter a valid email address (e.g., alex@company.com).' };
+  }
+
+  if (cleanSubject.length > 200) {
+    return { valid: false, isSpam: false, error: 'Subject must be 200 characters or fewer.' };
   }
 
   if (cleanMessage.length < 10) {
-    return { valid: false, error: 'Message is too short — please share at least 10 characters about your project or inquiry.' };
+    return { valid: false, isSpam: false, error: 'Message is too short — please share at least 10 characters about your project or inquiry.' };
+  }
+
+  if (cleanMessage.length > 5000) {
+    return { valid: false, isSpam: false, error: 'Message must be 5,000 characters or fewer.' };
   }
 
   return {
     valid: true,
+    isSpam: false,
     error: null,
     data: {
       name: cleanName,
@@ -277,6 +342,130 @@ export function validateContactForm({ name, email, subject, message } = {}) {
       subject: cleanSubject,
       message: cleanMessage
     }
+  };
+}
+
+/**
+ * Build Brevo configuration for Nodemailer & Brevo using ONLY Render environment variables:
+ * - BREVO_PASS
+ * - EMAIL_USER
+ */
+export function createBrevoSmtpConfig(env = {}) {
+  const emailUser = String(env.EMAIL_USER || '').trim();
+  const brevoPass = String(env.BREVO_PASS || '').trim();
+
+  return {
+    isConfigured: Boolean(emailUser && brevoPass),
+    isRestApiKey: brevoPass.startsWith('xkeysib-'),
+    emailUser,
+    brevoPass,
+    transportOptions: {
+      host: 'smtp-relay.brevo.com',
+      port: 587,
+      secure: false,
+      family: 4,
+      auth: {
+        user: emailUser,
+        pass: brevoPass
+      }
+    }
+  };
+}
+
+/**
+ * Escape HTML special characters for safe email body rendering
+ */
+function escapeHtml(str = '') {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+/**
+ * Build Nodemailer message payload with visitor email set as replyTo using EMAIL_USER
+ */
+export function buildBrevoMailOptions(contactData, smtpConfig) {
+  const { name, email, subject, message } = contactData;
+  const emailUser = smtpConfig.emailUser;
+  const safeName = escapeHtml(name);
+  const safeEmail = escapeHtml(email);
+  const safeSubject = escapeHtml(subject);
+  const safeMessage = escapeHtml(message).replace(/\n/g, '<br/>');
+
+  return {
+    from: `"Mohan Saini Portfolio" <${emailUser}>`,
+    to: emailUser,
+    replyTo: `"${name.replace(/"/g, '')}" <${email}>`,
+    subject: `[Portfolio Contact] ${subject} — from ${name}`,
+    text: [
+      `New Portfolio Contact Message`,
+      `─────────────────────────────`,
+      `Name    : ${name}`,
+      `Email   : ${email}`,
+      `Subject : ${subject}`,
+      ``,
+      `Message :`,
+      message,
+      ``,
+      `─────────────────────────────`,
+      `Reply directly to this email to respond to ${name} <${email}>.`
+    ].join('\n'),
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; background: #0b0d13; color: #f4f4f6; border: 1px solid #232838; border-radius: 12px; overflow: hidden;">
+        <div style="background: linear-gradient(90deg, #ff5500, #ff7833); padding: 18px 24px;">
+          <p style="margin: 0; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; font-weight: 700;">MS-PORTFOLIO · CONTACT INQUIRY</p>
+          <h2 style="margin: 6px 0 0; font-size: 20px; color: #ffffff;">${safeSubject}</h2>
+        </div>
+        <div style="padding: 24px;">
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+            <tr>
+              <td style="padding: 8px 0; color: #8e96aa; font-size: 13px; width: 90px;">From</td>
+              <td style="padding: 8px 0; color: #f4f4f6; font-size: 14px; font-weight: 600;">${safeName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #8e96aa; font-size: 13px;">Reply-To</td>
+              <td style="padding: 8px 0; font-size: 14px;"><a href="mailto:${safeEmail}" style="color: #ff7833; text-decoration: none;">${safeEmail}</a></td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #8e96aa; font-size: 13px;">Subject</td>
+              <td style="padding: 8px 0; color: #f4f4f6; font-size: 14px;">${safeSubject}</td>
+            </tr>
+          </table>
+          <div style="background: #121622; border: 1px solid #232838; border-radius: 8px; padding: 16px; color: #e2e8f0; font-size: 14px; line-height: 1.65;">
+            ${safeMessage}
+          </div>
+          <p style="margin: 18px 0 0; font-size: 12px; color: #8e96aa;">
+            Hit <strong>Reply</strong> in your mail client to respond directly to ${safeName} (${safeEmail}).
+          </p>
+        </div>
+      </div>
+    `
+  };
+}
+
+
+/**
+ * Determine First-Visit "Hello" Intro Animation configuration
+ */
+export function getIntroAnimationConfig({ prefersReducedMotion = false } = {}) {
+  if (prefersReducedMotion) {
+    return {
+      shouldAnimate: false,
+      totalDurationMs: 0,
+      exitDurationMs: 0,
+      primaryWord: 'Hello',
+      subtext: 'Mohan Saini · Full Stack Developer'
+    };
+  }
+  return {
+    shouldAnimate: true,
+    totalDurationMs: 4800,
+    exitDurationMs: 1200,
+    primaryWord: 'Hello',
+    subtext: 'Mohan Saini · Full Stack Developer'
   };
 }
 
